@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4277322332924944065}
   - component: {fileID: -3310010473294485514}
   - component: {fileID: -6148688406107109651}
+  - component: {fileID: 4613160234341829834}
+  - component: {fileID: 8822634288828575400}
   m_Layer: 0
   m_Name: Customer
   m_TagString: Customer
@@ -28,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2285698892836534935}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.7416344, y: 0.22850393, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -148,3 +150,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4613160234341829834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2285698892836534935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7f1d072e4b5bc41947264144026772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customerManager: {fileID: 3170842516885089000, guid: 29418c15ba643114bb826c722be3bd24, type: 3}
+  movementSpeed: 80
+--- !u!114 &8822634288828575400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2285698892836534935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ce2df4902e0f546af7ab35f107fe4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SellInteraction : MonoBehaviour
 {
+    [SerializeField]
+    private CustomerManager customerManager;
+
     private Rigidbody2D rb;
     private GameObject customer = null;
     private bool isPlayer = false;
@@ -17,16 +20,17 @@ public class SellInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPlayer && customer && Input.GetKey(KeyCode.E))
+        if (isPlayer && customer && Input.GetKeyDown(KeyCode.E))
         {
             // open dialog
-            Destroy(customer);
+            GetComponent<OpenTradeUI>().OpenTrade(customer.GetComponent<CustomerTastes>().ProductDesired);
+            //customer = null;
+            //customerManager.ExitStore();
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("OnCollisionEnter2D");
         if (customer == null && collision.gameObject.CompareTag("Customer"))
         {
             customer = collision.gameObject;
@@ -39,7 +43,6 @@ public class SellInteraction : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("OnCollisionExit2D");
         if (collision.gameObject == customer)
         {
             customer = null;
