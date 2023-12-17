@@ -4,8 +4,12 @@ using UnityEngine;
 
 public enum ProductType
 {
-    LEGAL,
-    NOT_LEGAL
+    LEGAL_1,
+    LEGAL_2,
+    LEGAL_3,
+    NOT_LEGAL_1,
+    NOT_LEGAL_2,
+    NOT_LEGAL_3
 }
 
 public class Product : MonoBehaviour
@@ -19,8 +23,8 @@ public class Product : MonoBehaviour
     private float maxSoldPrice = 0.1f;
 
     [SerializeField]
-    [Range(0.1f, 100f)]
-    private float karma = 0.1f;
+    [Range(-100f, 100f)]
+    private float karma = 0f;
 
     [SerializeField] 
     private ProductType productType;

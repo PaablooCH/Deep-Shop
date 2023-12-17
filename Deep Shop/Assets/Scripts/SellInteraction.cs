@@ -6,6 +6,8 @@ public class SellInteraction : MonoBehaviour
 {
     [SerializeField]
     private CustomerManager customerManager;
+    [SerializeField]
+    private TradeUIManager tradeUIManager;
 
     private Rigidbody2D rb;
     private GameObject customer = null;
@@ -23,7 +25,7 @@ public class SellInteraction : MonoBehaviour
         if (isPlayer && customer && Input.GetKeyDown(KeyCode.E))
         {
             // open dialog
-            GetComponent<OpenTradeUI>().OpenTrade(customer.GetComponent<CustomerTastes>().ProductDesired);
+            tradeUIManager.OpenTrade(customer.GetComponent<CustomerTastes>().ProductDesired);
             //customer = null;
             //customerManager.ExitStore();
         }

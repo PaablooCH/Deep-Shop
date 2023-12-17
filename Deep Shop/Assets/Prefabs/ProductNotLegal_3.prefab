@@ -100,4 +100,4 @@ MonoBehaviour:
   buyPrice: 79.9
   maxSoldPrice: 30
   karma: 15
-  productType: 1
+  productType: 5

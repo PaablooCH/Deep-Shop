@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5407064055071840924}
   - component: {fileID: 5913742237286915256}
   - component: {fileID: 556728719192525891}
-  - component: {fileID: -8853568855595756012}
   m_Layer: 0
   m_Name: InteractionWithCustomer
   m_TagString: Untagged
@@ -92,16 +91,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customerManager: {fileID: 3170842516885089000, guid: 29418c15ba643114bb826c722be3bd24, type: 3}
---- !u!114 &-8853568855595756012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4308305236378638118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 992599213626ca9458e149e51f6fe896, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tradeUI: {fileID: 4026241452662621434, guid: fa71c1519cafedd448bd00fa6d4886dc, type: 3}
