@@ -33,4 +33,32 @@ public class Product : MonoBehaviour
     public float MaxSoldPrice { get => maxSoldPrice; }
     public float Karma { get => karma; }
     public ProductType ProductType { get => productType; }
+
+    public float CalculateKarma(float priceUnit)
+    {
+        float percentatge = CalculatePercentatgeBuy(priceUnit);
+        if (priceUnit < buyPrice) // example 0.75
+        {
+            percentatge -= 1; // 0.25
+            return karma * (1 + percentatge); // karma * 1.25
+        }
+        if (priceUnit <= buyPrice + maxSoldPrice)
+        {
+            return karma;
+        }
+        if (percentatge < 2) // example 1.4
+        {
+            percentatge = 1 - (percentatge - (int) percentatge); // 1 - 0.4 -> 0.6
+            return karma * percentatge; // karma * 0.6
+        }
+        else
+        {
+            return -karma * 1.5f;
+        }
+    }
+
+    public float CalculatePercentatgeBuy(float priceTrade)
+    {
+        return priceTrade / buyPrice;
+    }
 }

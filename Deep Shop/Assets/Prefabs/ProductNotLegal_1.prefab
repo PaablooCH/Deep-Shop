@@ -99,5 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buyPrice: 19.9
   maxSoldPrice: 10
-  karma: 5
+  karma: -5
   productType: 3

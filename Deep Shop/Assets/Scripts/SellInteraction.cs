@@ -26,9 +26,13 @@ public class SellInteraction : MonoBehaviour
         {
             // open dialog
             tradeUIManager.OpenTrade(customer.GetComponent<CustomerTastes>().ProductDesired);
-            //customer = null;
-            //customerManager.ExitStore();
         }
+    }
+
+    public void EndTrade()
+    {
+        customer = null;
+        customerManager.ExitStore();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -6,40 +6,25 @@ public class PlayerStats : MonoBehaviour
 {
     [SerializeField]
     private float money = 100f;
-
     [SerializeField]
-    [Tooltip("Legal Product 1 inventory")]
-    [Min(0)]
-    private int lp1Inventory = 5;
-    [SerializeField]
-    [Tooltip("Legal Product 2 inventory")]
-    [Min(0)]
-    private int lp2Inventory = 5;
-    [SerializeField]
-    [Tooltip("Legal Product 3 inventory")]
-    [Min(0)]
-    private int lp3Inventory = 2;
-    [SerializeField]
-    [Tooltip("Not Legal Product 1 inventory")]
-    [Min(0)]
-    private int nlp1Inventory = 3;
-    [SerializeField]
-    [Tooltip("Not Legal Product 2 inventory")]
-    [Min(0)]
-    private int nlp2Inventory = 1;
-    [SerializeField]
-    [Tooltip("Not Legal Product 3 inventory")]
-    [Min(0)]
-    private int nlp3Inventory = 1;
-
+    [Range(-100f, 100f)]
     private float karma = 0f;
 
+    private Dictionary<ProductType, int> inventory;
+
     public float Karma { get => karma; set => karma = value; }
+    public Dictionary<ProductType, int> Inventory { get => inventory; set => inventory = value; }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        inventory = new Dictionary<ProductType, int>();
+        inventory[ProductType.LEGAL_1] = 5;
+        inventory[ProductType.LEGAL_2] = 5;
+        inventory[ProductType.LEGAL_3] = 2;
+        inventory[ProductType.NOT_LEGAL_1] = 3;
+        inventory[ProductType.NOT_LEGAL_2] = 1;
+        inventory[ProductType.NOT_LEGAL_3] = 1;
     }
 
     // Update is called once per frame
@@ -48,23 +33,29 @@ public class PlayerStats : MonoBehaviour
 
     }
 
-    public int GetInventory(Product product)
+    public int GetInventory(ProductType productType)
     {
-        switch (product.ProductType)
+        return inventory[productType];
+    }
+
+    public void Trade(Product product, int n, float price)
+    {
+        ModifyInventory(product.ProductType, -n);
+        karma += product.CalculateKarma(price);
+        if (product.CalculatePercentatgeBuy(price) < 2.5f)
         {
-            case ProductType.LEGAL_1:
-                return lp1Inventory;
-            case ProductType.LEGAL_2:
-                return lp2Inventory;
-            case ProductType.LEGAL_3:
-                return lp3Inventory;
-            case ProductType.NOT_LEGAL_1:
-                return nlp1Inventory;
-            case ProductType.NOT_LEGAL_2:
-                return nlp2Inventory;
-            case ProductType.NOT_LEGAL_3:
-                return nlp3Inventory;
+            money += price;
         }
-        return -1;
+    }
+
+    // n can be negative (substract) or positive (sum)
+    private void ModifyInventory(ProductType type, int n)
+    {
+        if (inventory[type] + n < 0)
+        {
+            Debug.LogError("Attempt to leave a negative value in the inventory");
+            return;
+        }
+        inventory[type] += n;
     }
 }

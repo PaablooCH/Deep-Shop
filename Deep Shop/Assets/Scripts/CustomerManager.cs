@@ -71,8 +71,11 @@ public class CustomerManager : MonoBehaviour
 
     public void ExitStore()
     {
-        GameObject customerServed = customers.Dequeue();
-        customerServed.GetComponent<CustomerBehaviour>().ExitStore(positionExit.transform);
+        if (customers.Count > 0)
+        {
+            GameObject customerServed = customers.Dequeue();
+            customerServed.GetComponent<CustomerBehaviour>().ExitStore(positionExit.transform);
+        }
         if (customers.Count > 0)
         {
             GameObject customerToAttend = customers.Peek();
