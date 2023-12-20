@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
+    [SerializeField]
+    private Slider evilSlider;
+    [SerializeField]
+    private Slider goodSlider;
+
     [SerializeField]
     private float money = 100f;
     [SerializeField]
@@ -12,7 +18,14 @@ public class PlayerStats : MonoBehaviour
 
     private Dictionary<ProductType, int> inventory;
 
-    public float Karma { get => karma; set => karma = value; }
+    public float Karma { get => karma; 
+        set 
+        {
+            UpdateKarmaSliders(value);            
+            karma = value; 
+        } 
+    }
+
     public Dictionary<ProductType, int> Inventory { get => inventory; set => inventory = value; }
 
     // Start is called before the first frame update
@@ -38,10 +51,10 @@ public class PlayerStats : MonoBehaviour
         return inventory[productType];
     }
 
-    public void Trade(Product product, int n, float price)
+    public void Trade(ProductInfo product, int n, float price)
     {
-        ModifyInventory(product.ProductType, -n);
-        karma += product.CalculateKarma(price);
+        ModifyInventory(product.Product.productType, -n);
+        Karma += product.CalculateKarma(price);
         if (product.CalculatePercentatgeBuy(price) < 2.5f)
         {
             money += price;
@@ -57,5 +70,33 @@ public class PlayerStats : MonoBehaviour
             return;
         }
         inventory[type] += n;
+    }
+
+    private void UpdateKarmaSliders(float value)
+    {
+        if (evilSlider != null && goodSlider != null)
+        {
+            if (value == 0)
+            {
+                evilSlider.value = 0;
+                goodSlider.value = 0;
+            }
+            if (value > 0)
+            {
+                if (karma < 0)
+                {
+                    evilSlider.value = 0; // Reset old predominant Slider
+                }
+                goodSlider.value = value;
+            }
+            else
+            {
+                if (karma > 0)
+                {
+                    goodSlider.value = 0; // Reset old predominant Slider
+                }
+                evilSlider.value = -value;
+            }
+        }
     }
 }

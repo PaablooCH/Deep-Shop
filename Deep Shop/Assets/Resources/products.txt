@@ -1,0 +1,82 @@
+{
+  "products": [
+    {
+      "buyPrice": 19.9,
+      "maxSoldPrice": 10,
+      "karma": 5,
+      "productType": 0,
+      "spritePath": "Sprites/Product",
+      "color": {
+        "r": 38,
+        "g": 255,
+        "b": 35,
+        "a": 255
+      }
+    },
+    {
+      "buyPrice": 49.9,
+      "maxSoldPrice": 20,
+      "karma": 10,
+      "productType": 1,
+      "spritePath": "Sprites/Product",
+      "color": {
+        "r": 29,
+        "g": 171,
+        "b": 21,
+        "a": 255
+      }
+    },
+    {
+      "buyPrice": 79.9,
+      "maxSoldPrice": 30,
+      "karma": 15,
+      "productType": 2,
+      "spritePath": "Sprites/Product",
+      "color": {
+        "r": 24,
+        "g": 123,
+        "b": 23,
+        "a": 255
+      }
+    },
+    {
+      "buyPrice": 19.9,
+      "maxSoldPrice": 10,
+      "karma": -5,
+      "productType": 3,
+      "spritePath": "Sprites/Product",
+      "color": {
+        "r": 255,
+        "g": 35,
+        "b": 50,
+        "a": 255
+      }
+    },
+    {
+      "buyPrice": 49.9,
+      "maxSoldPrice": 20,
+      "karma": -10,
+      "productType": 4,
+      "spritePath": "Sprites/Product",
+      "color": {
+        "r": 171,
+        "g": 27,
+        "b": 34,
+        "a": 255
+      }
+    },
+    {
+      "buyPrice": 79.9,
+      "maxSoldPrice": 30,
+      "karma": -15,
+      "productType": 5,
+      "spritePath": "Sprites/Product",
+      "color": {
+        "r": 123,
+        "g": 23,
+        "b": 34,
+        "a": 255
+      }
+    }
+  ]
+}

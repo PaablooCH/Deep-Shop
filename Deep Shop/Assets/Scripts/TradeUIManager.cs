@@ -22,7 +22,7 @@ public class TradeUIManager : MonoBehaviour
     [SerializeField]
     private SellInteraction sellInteraction;
 
-    private Product actualProduct;
+    private ProductInfo actualProduct;
 
     private void Start()
     {
@@ -38,7 +38,7 @@ public class TradeUIManager : MonoBehaviour
         {
             pauseManager.Pause();
             SpriteRenderer spriteProduct = product.GetComponent<SpriteRenderer>();
-            Product productInfo = product.GetComponent<Product>();
+            ProductInfo productInfo = product.GetComponent<ProductInfo>();
             actualProduct = productInfo;
 
             tradeUI.SetActive(true);
@@ -49,13 +49,13 @@ public class TradeUIManager : MonoBehaviour
 
             // Slider initial value
             Slider tradeUISlider = sliderAndText.transform.Find("Slider").gameObject.GetComponent<Slider>();
-            tradeUISlider.value = productInfo.BuyPrice;
+            tradeUISlider.value = productInfo.Product.buyPrice;
 
             TextMeshProUGUI text = sliderAndText.transform.Find("Slider Info").gameObject.GetComponent<TextMeshProUGUI>();
-            text.text = productInfo.BuyPrice.ToString("0.0") + " G";
+            text.text = productInfo.Product.buyPrice.ToString("0.0") + " G";
 
             // InputField init
-            int inventory = playerStats.GetInventory(productInfo.ProductType);
+            int inventory = playerStats.GetInventory(productInfo.Product.productType);
             TMP_InputField tMP_InputField = inputText.GetComponent<TMP_InputField>();
             tMP_InputField.text = inventory > 0 ? "1" : "0";
             inputText.GetComponent<InputNumberInteraction>().AmountProduct = inventory;
@@ -85,7 +85,7 @@ public class TradeUIManager : MonoBehaviour
 
     public void Reject()
     {
-        playerStats.Karma -= actualProduct.Karma;
+        playerStats.Karma -= actualProduct.Product.karma;
         sellInteraction.EndTrade();
         pauseManager.Restart();
         tradeUI.SetActive(false);

@@ -18,17 +18,7 @@ public class CustomerManager : MonoBehaviour
     private GameObject circleCostumer;
 
     [SerializeField]
-    private GameObject productLegal1;
-    [SerializeField]
-    private GameObject productLegal2;
-    [SerializeField]
-    private GameObject productLegal3;
-    [SerializeField]
-    private GameObject productNotLegal1;
-    [SerializeField]
-    private GameObject productNotLegal2;
-    [SerializeField]
-    private GameObject productNotLegal3;
+    private ProductsManager productsManager;
 
     private Queue<GameObject> customers = new Queue<GameObject>();
     private float spawnCounter = 0f;
@@ -36,6 +26,7 @@ public class CustomerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         InstantiateCustomer();
     }
 
@@ -106,27 +97,27 @@ public class CustomerManager : MonoBehaviour
         int random = Random.Range(0, 100); // [0, 100)
         if (random < 35) // 35%
         {
-            return productLegal1;
+            return productsManager.SearchProduct(ProductType.LEGAL_1);
         }
         else if (random < 60) // 25%
         {
-            return productLegal2;
+            return productsManager.SearchProduct(ProductType.LEGAL_2);
         }
         else if (random < 75) // 15%
         {
-            return productLegal3;
+            return productsManager.SearchProduct(ProductType.LEGAL_3);
         }
         else if (random < 87) // 12%
         {
-            return productNotLegal1;
+            return productsManager.SearchProduct(ProductType.NOT_LEGAL_1);
         }
         else if (random < 95) // 8%
         {
-            return productNotLegal2;
+            return productsManager.SearchProduct(ProductType.NOT_LEGAL_2);
         }
         else // 4%
         {
-            return productNotLegal3;
+            return productsManager.SearchProduct(ProductType.NOT_LEGAL_3);
         }
     }
 }
