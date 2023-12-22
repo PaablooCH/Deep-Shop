@@ -42,8 +42,9 @@ public class TradeUIManager : MonoBehaviour
             tradeUI.SetActive(true);
 
             // Update Product Color
-            RawImage rawImage = tradeUI.transform.Find("Product Image").gameObject.GetComponent<RawImage>();
-            rawImage.color = spriteProduct.color;
+            Image image = tradeUI.transform.Find("Product Image").gameObject.GetComponent<Image>();
+            image.sprite = spriteProduct.sprite;
+            image.color = spriteProduct.color;
 
             // Slider initial value
             Slider tradeUISlider = sliderAndText.transform.Find("Slider").gameObject.GetComponent<Slider>();
