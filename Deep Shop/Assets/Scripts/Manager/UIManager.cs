@@ -28,22 +28,25 @@ public class UIManager : MonoBehaviour
     private class MyUI
     {
         GameObject uiGameObject;
+        UIType type;
         bool activeBackUp;
 
-        public MyUI(GameObject go)
+        public MyUI(GameObject go, UIType type)
         {
             uiGameObject = go;
+            this.type = type;
             activeBackUp = false;
         }
 
         public GameObject UiGameObject { get => uiGameObject; set => uiGameObject = value; }
         public bool ActiveBackUp { get => activeBackUp; set => activeBackUp = value; }
+        public UIType Type { get => type; set => type = value; }
     }
 
     [SerializeField]
     private GameObject inventoryAndKarma;
 
-    private Dictionary<UIType, MyUI> uis = new();
+    private List<MyUI> uis = new(); // small number of UI and I can search iteratively
 
     private bool backUp = false;
 
@@ -71,19 +74,19 @@ public class UIManager : MonoBehaviour
 
     public void AddUI(UIType ui, GameObject gameObjectUI)
     {
-        uis[ui] = new MyUI(gameObjectUI);
+        uis.Add(new MyUI(gameObjectUI, ui));
     }
 
     public void ActiveTradeUI()
     {
         PauseManager.instance.Pause();
-        uis[UIType.TRADE].UiGameObject.SetActive(true);
+        SearchByType(UIType.TRADE).UiGameObject.SetActive(true);
     }
 
     private void ActiveInventory()
     {
         CreateBackUp();
-        uis[UIType.INVENTORY_KARMA].UiGameObject.SetActive(true);
+        SearchByType(UIType.INVENTORY_KARMA).UiGameObject.SetActive(true);
     }
 
     public void ActiveShop()
@@ -91,12 +94,25 @@ public class UIManager : MonoBehaviour
         // TODO
     }
 
-    public void FreeUI(UIType ui)
+    public void FreeUI(UIType type)
     {
         PauseManager.instance.Restart();
-        uis[ui].UiGameObject.SetActive(false);
-        uis[ui].ActiveBackUp = false;
+        MyUI ui = SearchByType(type);
+        ui.UiGameObject.SetActive(false);
+        ui.ActiveBackUp = false;
         RestoreBackUp();
+    }
+
+    private MyUI SearchByType(UIType type)
+    {
+        foreach(MyUI ui in uis)
+        {
+            if (ui.Type == type)
+            {
+                return ui;
+            }
+        }
+        return null;
     }
 
     private void CreateBackUp()
@@ -106,7 +122,7 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        foreach (MyUI myUI in uis.Values)
+        foreach (MyUI myUI in uis)
         {
             myUI.ActiveBackUp = myUI.UiGameObject.activeInHierarchy;
             myUI.UiGameObject.SetActive(false);
@@ -116,7 +132,7 @@ public class UIManager : MonoBehaviour
 
     private void RestoreBackUp()
     {
-        foreach(MyUI myUI in uis.Values)
+        foreach(MyUI myUI in uis)
         {
             myUI.UiGameObject.SetActive(myUI.ActiveBackUp);
             myUI.ActiveBackUp = false;
@@ -126,7 +142,7 @@ public class UIManager : MonoBehaviour
 
     private void ClearBackUp()
     {
-        foreach (MyUI myUI in uis.Values)
+        foreach (MyUI myUI in uis)
         {
             myUI.ActiveBackUp = false;
         }
