@@ -4,8 +4,22 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
+    #region Singleton
+    public static PauseManager instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("Singleton fails.");
+            return;
+        }
+        instance = this;
+    }
+    #endregion
+
     //public GameObject menuPause;
-    //private bool paused = false;
+    private bool paused = false;
 
     void Update()
     {
@@ -24,11 +38,19 @@ public class PauseManager : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = 0f; // Pause
+        if (!paused)
+        {
+            Time.timeScale = 0f;
+            paused = true;
+        }
     }
 
     public void Restart()
     {
-        Time.timeScale = 1f; // Resume
+        if (paused)
+        {
+            Time.timeScale = 1f;
+            paused = false;
+        }
     }
 }

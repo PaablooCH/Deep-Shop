@@ -1293,7 +1293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1051279327}
   - component: {fileID: 1051279326}
-  - component: {fileID: 1051279325}
+  - component: {fileID: 1051279328}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1301,18 +1301,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1051279325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1051279324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eb46d3e81ca5354aab92e46d2f303ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1051279326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1342,6 +1330,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1051279328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051279324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5873899f01a6674990a1b19ea921a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1113054130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1521,7 +1521,6 @@ MonoBehaviour:
   tradeUI: {fileID: 1549943023}
   sliderAndText: {fileID: 1986688382}
   inputText: {fileID: 823144857}
-  pauseManager: {fileID: 1113054131}
   sellInteraction: {fileID: 729135427}
 --- !u!114 &1696124516
 MonoBehaviour:
