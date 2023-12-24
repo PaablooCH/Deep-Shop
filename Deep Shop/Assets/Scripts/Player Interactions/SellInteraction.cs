@@ -5,7 +5,7 @@ using UnityEngine;
 public class SellInteraction : MonoBehaviour
 {
     [SerializeField]
-    private TradeUIManager tradeUIManager;
+    private TradeUI tradeUIManager;
 
     private Rigidbody2D rb;
     private GameObject customer = null;

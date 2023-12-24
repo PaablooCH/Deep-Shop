@@ -6,7 +6,8 @@ public enum UIType
 {
     INVENTORY_KARMA,
     TRADE,
-    SHOP
+    PANEL_SHOP,
+    BUTTON_SHOP
 }
 
 public class UIManager : MonoBehaviour
@@ -80,6 +81,7 @@ public class UIManager : MonoBehaviour
     public void ActiveTradeUI()
     {
         PauseManager.instance.Pause();
+        CreateBackUp();
         SearchByType(UIType.TRADE).UiGameObject.SetActive(true);
     }
 
@@ -89,9 +91,17 @@ public class UIManager : MonoBehaviour
         SearchByType(UIType.INVENTORY_KARMA).UiGameObject.SetActive(true);
     }
 
-    public void ActiveShop()
+    public void ActivePanelShop()
     {
-        // TODO
+        PauseManager.instance.Pause();
+        CreateBackUp();
+        SearchByType(UIType.PANEL_SHOP).UiGameObject.SetActive(true);
+        SearchByType(UIType.BUTTON_SHOP).UiGameObject.SetActive(false);
+    }
+
+    public void ActiveButtonShop()
+    {
+        SearchByType(UIType.BUTTON_SHOP).UiGameObject.SetActive(true);
     }
 
     public void FreeUI(UIType type)

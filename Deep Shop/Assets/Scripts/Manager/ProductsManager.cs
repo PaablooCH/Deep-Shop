@@ -65,7 +65,7 @@ public class ProductsManager : MonoBehaviour
                                     product.color.g / 255f, 
                                     product.color.b / 255f, 
                                     product.color.a / 255f);
-                
+
                 // Set product info
                 ProductInfo productInfo = newPrefab.GetComponent<ProductInfo>();
                 productInfo.Product = product;

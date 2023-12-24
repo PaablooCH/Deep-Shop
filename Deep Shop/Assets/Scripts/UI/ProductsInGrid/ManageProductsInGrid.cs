@@ -41,4 +41,13 @@ public class ManageProductsInGrid : MonoBehaviour
         Destroy(gridTransform.GetChild(index));
         productsInGrid.Remove(removedItem);
     }
+
+    public ProductType GetProductTypeFromChild(int siblingPosition)
+    {
+        if (siblingPosition < gridTransform.childCount)
+        {
+            return productsInGrid[siblingPosition];
+        }
+        return ProductType.NONE;
+    }
 }

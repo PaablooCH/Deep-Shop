@@ -9,7 +9,8 @@ public enum ProductType
     LEGAL_3,
     NOT_LEGAL_1,
     NOT_LEGAL_2,
-    NOT_LEGAL_3
+    NOT_LEGAL_3,
+    NONE
 }
 
 [System.Serializable]
