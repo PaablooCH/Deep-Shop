@@ -6,27 +6,27 @@ public class ShopUI : MonoBehaviour
 {
     // UI elements
     [SerializeField]
-    private GameObject panelShop;
+    private GameObject _panelShop;
     [SerializeField]
-    private GameObject buttonShop;
+    private GameObject _buttonShop;
 
     private void Start()
     {
-        if (panelShop != null)
+        if (_panelShop != null)
         {
-            panelShop.SetActive(false);
-            UIManager.instance.AddUI(UIType.PANEL_SHOP, panelShop);
+            _panelShop.SetActive(false);
+            UIManager.instance.AddUI(UIType.PANEL_SHOP, _panelShop);
         }
-        if (buttonShop != null)
+        if (_buttonShop != null)
         {
-            panelShop.SetActive(false);
-            UIManager.instance.AddUI(UIType.BUTTON_SHOP, buttonShop);
+            _panelShop.SetActive(false);
+            UIManager.instance.AddUI(UIType.BUTTON_SHOP, _buttonShop);
         }
     }
 
     public void ClickShopButton()
     {
-        if (panelShop != null)
+        if (_panelShop != null)
         {
             UIManager.instance.ActivePanelShop();
         }
@@ -34,7 +34,7 @@ public class ShopUI : MonoBehaviour
 
     public void Exit()
     {
-        if (buttonShop != null)
+        if (_buttonShop != null)
         {
             UIManager.instance.FreeUI(UIType.PANEL_SHOP);
         }

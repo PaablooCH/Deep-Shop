@@ -10,7 +10,7 @@ public class InventorySlot : ManageProductsInGrid
         InventoryManager.instance.StartItems();
     }
 
-    private void ModifyQuantity(ProductType modifiedItem, int amount)
+    private void ModifyQuantity(int modifiedItem, int amount)
     {
         int index = productsInGrid.FindIndex((productType) => productType == modifiedItem);
         TextMeshProUGUI text = gridTransform.GetChild(index).GetComponentInChildren<TextMeshProUGUI>();

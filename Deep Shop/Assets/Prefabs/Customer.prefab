@@ -162,8 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7f1d072e4b5bc41947264144026772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerManager: {fileID: 3170842516885089000, guid: 29418c15ba643114bb826c722be3bd24, type: 3}
-  movementSpeed: 80
+  _movementSpeed: 50
 --- !u!114 &8822634288828575400
 MonoBehaviour:
   m_ObjectHideFlags: 0

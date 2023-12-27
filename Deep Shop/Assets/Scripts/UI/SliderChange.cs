@@ -7,15 +7,15 @@ using TMPro;
 public class SliderChange : MonoBehaviour
 {
     [SerializeField]
-    private Slider slider;
+    private Slider _slider;
     [SerializeField]
-    private TextMeshProUGUI textMeshPro;
+    private TextMeshProUGUI _textMeshPro;
 
     private void Start()
     {
-        slider.onValueChanged.AddListener((v) =>
+        _slider.onValueChanged.AddListener((v) =>
         {
-            textMeshPro.text = slider.value.ToString("0.0") + " G";
+            _textMeshPro.text = _slider.value.ToString("0.0") + " G";
         });
     }
 }

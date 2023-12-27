@@ -103,8 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49d4d458930971419901b086230bb08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 1729734475127080332}
-  textMeshPro: {fileID: 2388077071006708852}
+  _slider: {fileID: 1729734475127080332}
+  _textMeshPro: {fileID: 2388077071006708852}
 --- !u!1 &3035218537185905359
 GameObject:
   m_ObjectHideFlags: 0

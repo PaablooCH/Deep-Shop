@@ -5,55 +5,55 @@ using UnityEngine;
 public class SellInteraction : MonoBehaviour
 {
     [SerializeField]
-    private TradeUI tradeUIManager;
+    private TradeUI _tradeUIManager;
 
-    private Rigidbody2D rb;
-    private GameObject customer = null;
-    private bool isPlayer = false;
+    private Rigidbody2D _rb;
+    private GameObject _customer = null;
+    private bool _isPlayer = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isPlayer && customer && Input.GetKeyDown(KeyCode.E))
+        if (_isPlayer && _customer && Input.GetKeyDown(KeyCode.E))
         {
             // open dialog
-            tradeUIManager.OpenTrade(customer.GetComponent<CustomerTastes>().ProductDesired);
+            _tradeUIManager.OpenTrade(_customer.GetComponent<CustomerTastes>().ProductDesired);
         }
     }
 
     public void EndTrade()
     {
-        customer = null;
+        _customer = null;
         CustomerManager.instance.ExitStore();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (customer == null && collision.gameObject.CompareTag("Customer"))
+        if (_customer == null && collision.gameObject.CompareTag("Customer"))
         {
-            customer = collision.gameObject;
+            _customer = collision.gameObject;
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
-            isPlayer = true;
+            _isPlayer = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject == customer)
+        if (collision.gameObject == _customer)
         {
-            customer = null;
+            _customer = null;
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
-            isPlayer = false;
+            _isPlayer = false;
         }
     }
 }

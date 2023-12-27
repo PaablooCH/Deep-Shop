@@ -45,18 +45,18 @@ public class UIManager : MonoBehaviour
     }
 
     [SerializeField]
-    private GameObject inventoryAndKarma;
+    private GameObject _inventoryAndKarma;
 
-    private List<MyUI> uis = new(); // small number of UI and I can search iteratively
+    private List<MyUI> _uis = new(); // small number of UI and I can search iteratively
 
-    private bool backUp = false;
+    private bool _backUp = false;
 
     private void Start()
     {
-        if (inventoryAndKarma != null)
+        if (_inventoryAndKarma != null)
         {
-            inventoryAndKarma.SetActive(false);
-            AddUI(UIType.INVENTORY_KARMA, inventoryAndKarma);
+            _inventoryAndKarma.SetActive(false);
+            AddUI(UIType.INVENTORY_KARMA, _inventoryAndKarma);
         }
     }
 
@@ -75,7 +75,7 @@ public class UIManager : MonoBehaviour
 
     public void AddUI(UIType ui, GameObject gameObjectUI)
     {
-        uis.Add(new MyUI(gameObjectUI, ui));
+        _uis.Add(new MyUI(gameObjectUI, ui));
     }
 
     public void ActiveTradeUI()
@@ -115,7 +115,7 @@ public class UIManager : MonoBehaviour
 
     private MyUI SearchByType(UIType type)
     {
-        foreach(MyUI ui in uis)
+        foreach(MyUI ui in _uis)
         {
             if (ui.Type == type)
             {
@@ -127,32 +127,32 @@ public class UIManager : MonoBehaviour
 
     private void CreateBackUp()
     {
-        if (backUp)
+        if (_backUp)
         {
             return;
         }
 
-        foreach (MyUI myUI in uis)
+        foreach (MyUI myUI in _uis)
         {
             myUI.ActiveBackUp = myUI.UiGameObject.activeInHierarchy;
             myUI.UiGameObject.SetActive(false);
         }
-        backUp = true;
+        _backUp = true;
     }
 
     private void RestoreBackUp()
     {
-        foreach(MyUI myUI in uis)
+        foreach(MyUI myUI in _uis)
         {
             myUI.UiGameObject.SetActive(myUI.ActiveBackUp);
             myUI.ActiveBackUp = false;
         }
-        backUp = false;
+        _backUp = false;
     }
 
     private void ClearBackUp()
     {
-        foreach (MyUI myUI in uis)
+        foreach (MyUI myUI in _uis)
         {
             myUI.ActiveBackUp = false;
         }

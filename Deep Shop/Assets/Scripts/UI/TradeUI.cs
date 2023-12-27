@@ -6,78 +6,78 @@ public class TradeUI : MonoBehaviour
 {
     // UI elements
     [SerializeField]
-    private GameObject tradeUI;
+    private GameObject _tradeUI;
     [SerializeField]
-    private GameObject sliderAndText;
+    private GameObject _sliderAndText;
     [SerializeField]
-    private GameObject inputText;
+    private GameObject _inputField;
 
     [SerializeField]
-    private SellInteraction sellInteraction;
+    private SellInteraction _sellInteraction;
 
-    private ProductInfo actualProduct;
+    private ProductInfo _actualProduct;
 
     private void Start()
     {
-        if (tradeUI != null)
+        if (_tradeUI != null)
         {
-            tradeUI.SetActive(false);
-            UIManager.instance.AddUI(UIType.TRADE, tradeUI);
+            _tradeUI.SetActive(false);
+            UIManager.instance.AddUI(UIType.TRADE, _tradeUI);
         }
     }
 
     public void OpenTrade(GameObject product)
     {
-        if (tradeUI != null)
+        if (_tradeUI != null)
         {
             UIManager.instance.ActiveTradeUI();
             SpriteRenderer spriteProduct = product.GetComponent<SpriteRenderer>();
             ProductInfo productInfo = product.GetComponent<ProductInfo>();
-            actualProduct = productInfo;
+            _actualProduct = productInfo;
 
             // Update Product Color
-            Image image = tradeUI.transform.Find("Product Image").gameObject.GetComponent<Image>();
+            Image image = _tradeUI.transform.Find("Product Image").gameObject.GetComponent<Image>();
             image.sprite = spriteProduct.sprite;
             image.color = spriteProduct.color;
 
             // Slider initial value
-            Slider tradeUISlider = sliderAndText.transform.Find("Slider").gameObject.GetComponent<Slider>();
-            tradeUISlider.value = productInfo.Product.buyPrice;
+            Slider tradeUISlider = _sliderAndText.transform.Find("Slider").gameObject.GetComponent<Slider>();
+            tradeUISlider.value = productInfo.product.buyPrice;
 
-            TextMeshProUGUI text = sliderAndText.transform.Find("Slider Info").gameObject.GetComponent<TextMeshProUGUI>();
-            text.text = productInfo.Product.buyPrice.ToString("0.0") + " G";
+            TextMeshProUGUI text = _sliderAndText.transform.Find("Slider Info").gameObject.GetComponent<TextMeshProUGUI>();
+            text.text = productInfo.product.buyPrice.ToString("0.0") + " G";
 
             // InputField init
-            int inventory = InventoryManager.instance.GetInventory(productInfo.Product.productType);
-            TMP_InputField tMP_InputField = inputText.GetComponent<TMP_InputField>();
+            int inventory = InventoryManager.instance.GetInventory(productInfo.product.id);
+            TMP_InputField tMP_InputField = _inputField.GetComponent<TMP_InputField>();
             tMP_InputField.text = inventory > 0 ? "1" : "0";
-            inputText.GetComponent<InputNumberInteraction>().AmountProduct = inventory;
+            _inputField.GetComponent<InputNumberInteraction>().AmountProduct = inventory;
         }
     }
 
     public void Exit()
     { 
-        if (tradeUI != null)
+        if (_tradeUI != null)
         {
             UIManager.instance.FreeUI(UIType.TRADE);
-            actualProduct = null;
+            _actualProduct = null;
         }
     }
 
     public void Confirm()
     {
-        TMP_InputField tMP_InputField = inputText.GetComponent<TMP_InputField>();
-        Slider tradeUISlider = sliderAndText.transform.Find("Slider").gameObject.GetComponent<Slider>();
-        PlayerStats.instance.Trade(actualProduct, int.Parse(tMP_InputField.text), tradeUISlider.value);
-        actualProduct = null;
-        sellInteraction.EndTrade();
+        TMP_InputField tMP_InputField = _inputField.GetComponent<TMP_InputField>();
+        Slider tradeUISlider = _sliderAndText.transform.Find("Slider").gameObject.GetComponent<Slider>();
+        PlayerStats.instance.Trade(_actualProduct, int.Parse(tMP_InputField.text), tradeUISlider.value);
+        _actualProduct = null;
+        _sellInteraction.EndTrade();
         UIManager.instance.FreeUI(UIType.TRADE);
     }
 
     public void Reject()
     {
-        PlayerStats.instance.Karma -= actualProduct.Product.karma;
-        sellInteraction.EndTrade();
+        PlayerStats.instance.Karma -= _actualProduct.product.karma;
+        _sellInteraction.EndTrade();
         UIManager.instance.FreeUI(UIType.TRADE);
     }
 }

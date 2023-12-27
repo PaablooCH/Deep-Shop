@@ -4,9 +4,9 @@ using UnityEngine.UI;
 public class KarmaSliders : MonoBehaviour
 {
     [SerializeField]
-    private Slider evilSlider;
+    private Slider _evilSlider;
     [SerializeField]
-    private Slider goodSlider;
+    private Slider _goodSlider;
 
     void Start()
     {
@@ -15,28 +15,28 @@ public class KarmaSliders : MonoBehaviour
 
     private void UpdateKarmaSliders(float newKarma, float oldKarma)
     {
-        if (evilSlider != null && goodSlider != null)
+        if (_evilSlider != null && _goodSlider != null)
         {
             if (newKarma == 0)
             {
-                evilSlider.value = 0;
-                goodSlider.value = 0;
+                _evilSlider.value = 0;
+                _goodSlider.value = 0;
             }
             if (newKarma > 0)
             {
                 if (oldKarma < 0)
                 {
-                    evilSlider.value = 0; // Reset old predominant Slider
+                    _evilSlider.value = 0; // Reset old predominant Slider
                 }
-                goodSlider.value = newKarma;
+                _goodSlider.value = newKarma;
             }
             else
             {
                 if (oldKarma > 0)
                 {
-                    goodSlider.value = 0; // Reset old predominant Slider
+                    _goodSlider.value = 0; // Reset old predominant Slider
                 }
-                evilSlider.value = -newKarma;
+                _evilSlider.value = -newKarma;
             }
         }
     }

@@ -17,12 +17,13 @@ public class ManageProductsInGrid : MonoBehaviour
     [SerializeField]
     protected GameObject basePrefab;
 
-    protected List<ProductType> productsInGrid = new(); // the index in the list is a reference of child position
-                                                        // in transform
+    protected List<int> productsInGrid = new();     // I store the idPRoduct,
+                                                    // the index in the list is a reference of child position
+                                                    // in transform
 
     protected void AddItem(GameObject newItem)
     {
-        ProductType newType = newItem.GetComponent<ProductInfo>().Product.productType;
+        int newType = newItem.GetComponent<ProductInfo>().product.id;
         if (!productsInGrid.Contains(newType))
         {
             productsInGrid.Add(newType);
@@ -35,19 +36,19 @@ public class ManageProductsInGrid : MonoBehaviour
         }
     }
 
-    protected void RemoveItem(ProductType removedItem)
+    protected void RemoveItem(int removedItem)
     {
         int index = productsInGrid.FindIndex((productType) => productType == removedItem);
         Destroy(gridTransform.GetChild(index));
         productsInGrid.Remove(removedItem);
     }
 
-    public ProductType GetProductTypeFromChild(int siblingPosition)
+    public int GetIdProductFromChild(int siblingPosition)
     {
         if (siblingPosition < gridTransform.childCount)
         {
             return productsInGrid[siblingPosition];
         }
-        return ProductType.NONE;
+        return -1;
     }
 }

@@ -19,7 +19,7 @@ public class PauseManager : MonoBehaviour
     #endregion
 
     //public GameObject menuPause;
-    private bool paused = false;
+    private bool _paused = false;
 
     void Update()
     {
@@ -38,19 +38,19 @@ public class PauseManager : MonoBehaviour
 
     public void Pause()
     {
-        if (!paused)
+        if (!_paused)
         {
             Time.timeScale = 0f;
-            paused = true;
+            _paused = true;
         }
     }
 
     public void Restart()
     {
-        if (paused)
+        if (_paused)
         {
             Time.timeScale = 1f;
-            paused = false;
+            _paused = false;
         }
     }
 }

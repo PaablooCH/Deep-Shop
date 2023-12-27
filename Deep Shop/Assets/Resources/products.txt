@@ -1,10 +1,12 @@
 {
   "products": [
     {
+      "id": 0,
+      "name": "Green pill",
       "buyPrice": 19.9,
       "maxSoldPrice": 10,
       "karma": 5,
-      "productType": 0,
+      "weightSpawn": 35,
       "spritePath": "Sprites/Product",
       "color": {
         "r": 38,
@@ -14,10 +16,12 @@
       }
     },
     {
+      "id": 1,
+      "name": "Green 2 pill",
       "buyPrice": 49.9,
       "maxSoldPrice": 20,
       "karma": 10,
-      "productType": 1,
+      "weightSpawn": 25,
       "spritePath": "Sprites/Product",
       "color": {
         "r": 29,
@@ -27,10 +31,12 @@
       }
     },
     {
+      "id": 2,
+      "name": "Green 3 pill",
       "buyPrice": 79.9,
       "maxSoldPrice": 30,
       "karma": 15,
-      "productType": 2,
+      "weightSpawn": 15,
       "spritePath": "Sprites/Product",
       "color": {
         "r": 24,
@@ -40,10 +46,12 @@
       }
     },
     {
+      "id": 3,
+      "name": "Red pill",
       "buyPrice": 19.9,
       "maxSoldPrice": 10,
       "karma": -5,
-      "productType": 3,
+      "weightSpawn": 12,
       "spritePath": "Sprites/Product",
       "color": {
         "r": 255,
@@ -53,10 +61,12 @@
       }
     },
     {
+      "id": 4,
+      "name": "Red 2 pill",
       "buyPrice": 49.9,
       "maxSoldPrice": 20,
       "karma": -10,
-      "productType": 4,
+      "weightSpawn": 8,
       "spritePath": "Sprites/Product",
       "color": {
         "r": 171,
@@ -66,10 +76,12 @@
       }
     },
     {
+      "id": 5,
+      "name": "Red 3 pill",
       "buyPrice": 79.9,
       "maxSoldPrice": 30,
       "karma": -15,
-      "productType": 5,
+      "weightSpawn": 4,
       "spritePath": "Sprites/Product",
       "color": {
         "r": 123,

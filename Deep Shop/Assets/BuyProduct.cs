@@ -5,24 +5,24 @@ using UnityEngine;
 public class BuyProduct : MonoBehaviour
 {
     [SerializeField]
-    private GameObject shopGameObject;
+    private GameObject _shopGameObject;
     
-    private ShopSlot shop;
+    private ShopSlot _shop;
 
     private void Start()
     {
-        shop = shopGameObject.GetComponentInChildren<ShopSlot>();
+        _shop = _shopGameObject.GetComponentInChildren<ShopSlot>();
     }
 
     public void ModifyCart(bool state)
     {
         if (state)
         {
-            shop.AddToCart(shop.GetProductTypeFromChild(transform.GetSiblingIndex()));
+            _shop.AddToCart(_shop.GetIdProductFromChild(transform.GetSiblingIndex()));
         }
         else
         {
-            shop.DeleteFromCart(shop.GetProductTypeFromChild(transform.GetSiblingIndex()));
+            _shop.DeleteFromCart(_shop.GetIdProductFromChild(transform.GetSiblingIndex()));
         }
     }
 }

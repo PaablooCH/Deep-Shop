@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 public class ShopSlot : ManageProductsInGrid
 {
-    private List<ProductType> cart = new();
+    private readonly List<int> _cart = new();
 
-    public void AddToCart(ProductType newProduct)
+    public void AddToCart(int idProduct)
     {
-        if (!cart.Contains(newProduct) && newProduct != ProductType.NONE)
+        if (!_cart.Contains(idProduct))
         {
-            cart.Add(newProduct);
+            _cart.Add(idProduct);
         }
     }
 
-    public void DeleteFromCart(ProductType deleteProduct)
+    public void DeleteFromCart(int deleteProduct)
     {
-        cart.Remove(deleteProduct);
+        _cart.Remove(deleteProduct);
     }
 }

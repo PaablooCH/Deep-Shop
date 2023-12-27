@@ -12,39 +12,39 @@ public enum CustomerState
 public class CustomerBehaviour : MonoBehaviour
 {
     [SerializeField]
-    private float movementSpeed = 25f;
+    private float _movementSpeed = 25f;
 
-    private float timer = 2f;
-    private CustomerState customerState = CustomerState.NONE;
-    private Transform travelPoint;
-    private Rigidbody2D rb;
+    private float _timer = 2f;
+    private CustomerState _customerState = CustomerState.NONE;
+    private Transform _travelPoint;
+    private Rigidbody2D _rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (travelPoint == null)
+        if (_travelPoint == null)
         {
             return;
         }
-        if (Vector2.Distance(transform.position, travelPoint.position) < 0.5f) // wait in the position
+        if (Vector2.Distance(transform.position, _travelPoint.position) < 0.5f) // wait in the position
         {
-            if (rb.velocity != Vector2.zero)
+            if (_rb.velocity != Vector2.zero)
             {
-                rb.velocity = Vector2.zero;
+                _rb.velocity = Vector2.zero;
             }
-            switch (customerState)
+            switch (_customerState)
             {
                 case CustomerState.PATROLLING: // demand next point
-                    timer -= Time.deltaTime;
-                    if (timer <= 0f)
+                    _timer -= Time.deltaTime;
+                    if (_timer <= 0f)
                     {
-                        timer = 2f;
+                        _timer = 2f;
                         RequestTravelPoint();
                     }
                     break;
@@ -52,7 +52,7 @@ public class CustomerBehaviour : MonoBehaviour
                     Destroy(gameObject);
                     break;
                 case CustomerState.NONE:
-                    travelPoint = null;
+                    _travelPoint = null;
                     break;
                 default:
                     break;
@@ -60,35 +60,35 @@ public class CustomerBehaviour : MonoBehaviour
         }
         else // go to the nextPoint
         {
-            Vector2 movement = (travelPoint.position - transform.position).normalized;
-            rb.MovePosition(rb.position + movement * movementSpeed * Time.deltaTime);
+            Vector2 movement = (_travelPoint.position - transform.position).normalized;
+            _rb.MovePosition(_rb.position + movement * _movementSpeed * Time.deltaTime);
         }
     }
 
     public void ExitStore(Transform outside)
     {
         SetTravelPoint(outside);
-        customerState = CustomerState.EXIT;
+        _customerState = CustomerState.EXIT;
         GetComponent<CircleCollider2D>().enabled = false;
     }
 
     public CustomerState GetCustomerState()
     {
-        return customerState;
+        return _customerState;
     }
 
     public void SetPatrolling()
     {
-        customerState = CustomerState.PATROLLING;
+        _customerState = CustomerState.PATROLLING;
     }
 
     public void SetTravelPoint(Transform travelPoint)
     {
-        this.travelPoint = travelPoint;
+        this._travelPoint = travelPoint;
     }
 
     private void RequestTravelPoint()
     {
-        travelPoint = CustomerManager.instance.NextPosition(travelPoint);
+        _travelPoint = CustomerManager.instance.NextPosition(_travelPoint);
     }
 }

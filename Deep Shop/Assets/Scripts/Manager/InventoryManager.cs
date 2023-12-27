@@ -22,14 +22,14 @@ public class InventoryManager : MonoBehaviour
     public delegate void OnAddItem(GameObject newItem);
     public OnAddItem onAddItem;
 
-    public delegate void OnModifyQuantity(ProductType modifiedItem, int amount);
+    public delegate void OnModifyQuantity(int idModifiedItem, int amount);
     public OnModifyQuantity onModifyQuantity;
 
-    public delegate void OnRemoveItem(ProductType removedItem);
+    public delegate void OnRemoveItem(int idRemovedItem);
     public OnRemoveItem onRemoveItem;
     #endregion
 
-    private Dictionary<ProductType, int> inventory = new();
+    private Dictionary<int, int> inventory = new(); // key -> product id, value -> ammount
 
     void Start()
     {
@@ -39,40 +39,43 @@ public class InventoryManager : MonoBehaviour
 
     public void StartItems()
     {
-        ModifyInventory(ProductType.LEGAL_1, 5);
-        ModifyInventory(ProductType.LEGAL_2, 5);
-        ModifyInventory(ProductType.LEGAL_3, 2);
-        ModifyInventory(ProductType.NOT_LEGAL_1, 3);
-        ModifyInventory(ProductType.NOT_LEGAL_2, 1);
-        ModifyInventory(ProductType.NOT_LEGAL_3, 1);
+        TextAsset jsonAsset = Resources.Load<TextAsset>("startInventory");
+        if (jsonAsset != null)
+        {
+            StartInventoryArray dataPrefab = JsonUtility.FromJson<StartInventoryArray>(jsonAsset.text);
+            foreach (StartInventoryInfo startInventory in dataPrefab.startInventory)
+            {
+                ModifyInventory(startInventory.productID, startInventory.amount);
+            }
+        }
     }
 
-    public int GetInventory(ProductType productType)
+    public int GetInventory(int id)
     {
-        return inventory[productType];
+        return inventory[id];
     }
 
     // n can be negative (substract) or positive (sum)
-    public void ModifyInventory(ProductType type, int n)
+    public void ModifyInventory(int id, int n)
     {
-        if (!inventory.ContainsKey(type) && onAddItem != null)
+        if (!inventory.ContainsKey(id) && onAddItem != null)
         {
-            onAddItem(ProductsManager.instance.SearchProduct(type));
-            inventory[type] = 0;
+            onAddItem(ProductsManager.instance.SearchProductByID(id));
+            inventory[id] = 0;
         }
-        if (inventory[type] + n < 0)
+        if (inventory[id] + n < 0)
         {
             Debug.LogError("Attempt to leave a negative value in the inventory");
             return;
         }
-        inventory[type] += n;
-        if (inventory[type] > 0 && onModifyQuantity != null)
+        inventory[id] += n;
+        if (inventory[id] > 0 && onModifyQuantity != null)
         {
-            onModifyQuantity(type, n);
+            onModifyQuantity(id, n);
         }
-        else if (inventory[type] == 0 && onRemoveItem != null)
+        else if (inventory[id] == 0 && onRemoveItem != null)
         {
-            onRemoveItem(type);
+            onRemoveItem(id);
         }
     }
 }

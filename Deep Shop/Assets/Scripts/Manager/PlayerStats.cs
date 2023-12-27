@@ -40,7 +40,7 @@ public class PlayerStats : MonoBehaviour
 
     public void Trade(ProductInfo product, int n, float price)
     {
-        InventoryManager.instance.ModifyInventory(product.Product.productType, -n);
+        InventoryManager.instance.ModifyInventory(product.product.id, -n);
         Karma += product.CalculateKarma(price);
         if (product.CalculatePercentatgeBuy(price) < 2.5f)
         {

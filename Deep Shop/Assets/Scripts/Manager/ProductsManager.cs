@@ -26,17 +26,19 @@ public class ProductsManager : MonoBehaviour
     #endregion
 
     [SerializeField]
-    private GameObject basePrefab;
+    private GameObject _basePrefab;
     [SerializeField]
-    private GameObject[] products;
+    private GameObject[] _products;
+    private int _totalWeightSpawn = 0;
 
-    public GameObject[] Products { get => products; set => products = value; }
+    public GameObject[] Products { get => _products; set => _products = value; }
+    public int TotalWeightSpawn { get => _totalWeightSpawn; set => _totalWeightSpawn = value; }
 
-    public GameObject SearchProduct(ProductType productType)
+    public GameObject SearchProductByID(int id)
     {
-        foreach(GameObject go in products)
+        foreach(GameObject go in _products)
         {
-            if (go.GetComponent<ProductInfo>().Product.productType == productType)
+            if (go.GetComponent<ProductInfo>().product.id == id)
             {
                 return go;
             }
@@ -44,18 +46,49 @@ public class ProductsManager : MonoBehaviour
         return null;
     }
 
+    public GameObject SearchProductByName(string name)
+    {
+        foreach (GameObject go in _products)
+        {
+            if (go.GetComponent<ProductInfo>().product.name == name)
+            {
+                return go;
+            }
+        }
+        return null;
+    }
+
+    public GameObject RandomProduct()
+    {
+        int randomWeight = Random.Range(1, _totalWeightSpawn + 1);
+
+        int actualWeight = 0;
+        foreach (GameObject product in _products)
+        {
+            int productWeight = product.GetComponent<ProductInfo>().product.weightSpawn;
+            actualWeight += productWeight;
+            if (randomWeight <= actualWeight)
+            {
+                return product;
+            }
+        }
+
+        // If we don't find anything, we return the last product.
+        return _products[_products.Length - 1];
+    }
+
     private void ReadJSON()
     {
         TextAsset jsonAsset = Resources.Load<TextAsset>("products");
         if (jsonAsset != null)
         {
-            ProductArray datosPrefab = JsonUtility.FromJson<ProductArray>(jsonAsset.text);
-            products = new GameObject[datosPrefab.products.Length];
+            ProductArray dataPrefab = JsonUtility.FromJson<ProductArray>(jsonAsset.text);
+            _products = new GameObject[dataPrefab.products.Length];
 
             int i = 0;
-            foreach (Product product in datosPrefab.products)
+            foreach (Product product in dataPrefab.products)
             {
-                GameObject newPrefab = Instantiate(basePrefab, transform);
+                GameObject newPrefab = Instantiate(_basePrefab, transform);
 
                 // Set Sprite
                 SpriteRenderer sprite = newPrefab.GetComponent<SpriteRenderer>();
@@ -68,10 +101,12 @@ public class ProductsManager : MonoBehaviour
 
                 // Set product info
                 ProductInfo productInfo = newPrefab.GetComponent<ProductInfo>();
-                productInfo.Product = product;
+                productInfo.product = product;
+
+                _totalWeightSpawn += product.weightSpawn;
 
                 newPrefab.SetActive(false);
-                products[i] = newPrefab;
+                _products[i] = newPrefab;
 
                 i++;
             }

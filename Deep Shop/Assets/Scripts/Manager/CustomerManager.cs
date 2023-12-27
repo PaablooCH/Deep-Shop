@@ -19,20 +19,20 @@ public class CustomerManager : MonoBehaviour
     #endregion
 
     [SerializeField]
-    private float spawnTime = 5f;
+    private float _spawnTime = 5f;
     
     [SerializeField]
-    private GameObject positionCorner; // probably only need transform
+    private GameObject _positionCorner; // probably only need transform
     [SerializeField]
-    private GameObject positionStart; // probably only need transform
+    private GameObject _positionStart; // probably only need transform
     [SerializeField]
-    private GameObject positionExit; // probably only need transform
+    private GameObject _positionExit; // probably only need transform
 
     [SerializeField]
-    private GameObject basePrefabCostumer;
+    private GameObject _basePrefabCostumer;
 
-    private Queue<GameObject> customers = new Queue<GameObject>();
-    private float spawnCounter = 0f;
+    private Queue<GameObject> _customers = new Queue<GameObject>();
+    private float _spawnCounter = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -43,25 +43,25 @@ public class CustomerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (customers.Count < 4)
+        if (_customers.Count < 4)
         {
-            spawnCounter += Time.deltaTime;
-            if (spawnTime <= spawnCounter)
+            _spawnCounter += Time.deltaTime;
+            if (_spawnTime <= _spawnCounter)
             {
                 InstantiateCustomer();
-                spawnCounter = 0f;
+                _spawnCounter = 0f;
             }
         }
     }
 
     public GameObject GetPositionCorner()
     {
-        return positionCorner;
+        return _positionCorner;
     }
 
     public GameObject GetPositionStart()
     {
-        return positionStart;
+        return _positionStart;
     }
 
     public Transform NextPosition(Transform currentPosition)
@@ -72,62 +72,33 @@ public class CustomerManager : MonoBehaviour
 
     public void ExitStore()
     {
-        if (customers.Count > 0)
+        if (_customers.Count > 0)
         {
-            GameObject customerServed = customers.Dequeue();
-            customerServed.GetComponent<CustomerBehaviour>().ExitStore(positionExit.transform);
+            GameObject customerServed = _customers.Dequeue();
+            customerServed.GetComponent<CustomerBehaviour>().ExitStore(_positionExit.transform);
         }
-        if (customers.Count > 0)
+        if (_customers.Count > 0)
         {
-            GameObject customerToAttend = customers.Peek();
+            GameObject customerToAttend = _customers.Peek();
             customerToAttend.SetActive(true);
-            customerToAttend.GetComponent<CustomerBehaviour>().SetTravelPoint(positionCorner.transform);
+            customerToAttend.GetComponent<CustomerBehaviour>().SetTravelPoint(_positionCorner.transform);
         }
     }
 
     private void InstantiateCustomer()
     {
-        GameObject go = Instantiate(basePrefabCostumer, positionStart.transform.position, basePrefabCostumer.transform.rotation);
+        GameObject go = Instantiate(_basePrefabCostumer, _positionStart.transform.position, _basePrefabCostumer.transform.rotation);
         CustomerTastes tastes = go.GetComponent<CustomerTastes>();
-        tastes.ProductDesired = RandomProduct();
-        customers.Enqueue(go);
-        if (customers.Count == 1)
+        tastes.ProductDesired = ProductsManager.instance.RandomProduct();
+        _customers.Enqueue(go);
+        if (_customers.Count == 1)
         {
             CustomerBehaviour cb = go.GetComponent<CustomerBehaviour>();
-            cb.SetTravelPoint(positionCorner.transform);
+            cb.SetTravelPoint(_positionCorner.transform);
         }
         else
         {
             go.SetActive(false);
-        }
-    }
-
-    private GameObject RandomProduct()
-    {
-        int random = Random.Range(0, 100); // [0, 100)
-        if (random < 35) // 35%
-        {
-            return ProductsManager.instance.SearchProduct(ProductType.LEGAL_1);
-        }
-        else if (random < 60) // 25%
-        {
-            return ProductsManager.instance.SearchProduct(ProductType.LEGAL_2);
-        }
-        else if (random < 75) // 15%
-        {
-            return ProductsManager.instance.SearchProduct(ProductType.LEGAL_3);
-        }
-        else if (random < 87) // 12%
-        {
-            return ProductsManager.instance.SearchProduct(ProductType.NOT_LEGAL_1);
-        }
-        else if (random < 95) // 8%
-        {
-            return ProductsManager.instance.SearchProduct(ProductType.NOT_LEGAL_2);
-        }
-        else // 4%
-        {
-            return ProductsManager.instance.SearchProduct(ProductType.NOT_LEGAL_3);
         }
     }
 }
