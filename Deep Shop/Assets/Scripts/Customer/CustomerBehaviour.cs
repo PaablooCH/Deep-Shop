@@ -12,17 +12,20 @@ public enum CustomerState
 public class CustomerBehaviour : MonoBehaviour
 {
     [SerializeField]
-    private float _movementSpeed = 25f;
+    private float _movementSpeed = 30f;
 
     private float _timer = 2f;
     private CustomerState _customerState = CustomerState.NONE;
     private Transform _travelPoint;
+    
     private Rigidbody2D _rb;
+    private Animator _animator;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -32,12 +35,10 @@ public class CustomerBehaviour : MonoBehaviour
         {
             return;
         }
-        if (Vector2.Distance(transform.position, _travelPoint.position) < 0.5f) // wait in the position
+        if (Vector2.Distance(transform.position, _travelPoint.position) < 0.1f) // wait in the position
         {
-            if (_rb.velocity != Vector2.zero)
-            {
-                _rb.velocity = Vector2.zero;
-            }
+            _animator.SetBool("IsWalking", false);
+
             switch (_customerState)
             {
                 case CustomerState.PATROLLING: // demand next point
@@ -62,6 +63,11 @@ public class CustomerBehaviour : MonoBehaviour
         {
             Vector2 movement = (_travelPoint.position - transform.position).normalized;
             _rb.MovePosition(_rb.position + movement * _movementSpeed * Time.deltaTime);
+
+            _animator.SetFloat("X", movement.x);
+            _animator.SetFloat("Y", movement.y);
+
+            _animator.SetBool("IsWalking", true);
         }
     }
 

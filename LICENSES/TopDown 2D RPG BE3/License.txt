@@ -1,0 +1,14 @@
+탑다운 RPG (Top-Down RPG)
+탑 뷰 시점으로 상하좌우 움직이며 NPC와
+대화하면서 스토리를 진행하는 장르입니다.
+
+골드메탈 기초 강좌 BE3 진행에 필요한 에셋
+팩으로 캐릭터와 각종 지형 타일 스프라이트를
+포함하고 있습니다.
+BE3 강좌 재생목록 -> https://www.youtube.com/playlist?list=PLO-mt5Iu5TeYfyXsi6kzHK8kfjPvadC5u
+
+골드메탈 출저만 표기하는 전제 하에 자유롭게
+사용 가능합니다. (상용 가능)
+골드메탈 스튜디오 -> https://goldmetal.co.kr
+
+Copyright ⓒ 2021 Goldmetal

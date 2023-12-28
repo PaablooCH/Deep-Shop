@@ -6,16 +6,16 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     private float _movementSpeed = 5f;
-    [SerializeField]
-    private float _rotationSpeed = 350f;
 
     private Rigidbody2D _rb;
+    private Animator _animator;
     private Vector2 _movement;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -23,16 +23,25 @@ public class PlayerMovement : MonoBehaviour
     {
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
+
+        if (_movement.x != 0 || _movement.y != 0)
+        {
+            _animator.SetFloat("X", _movement.x);
+            _animator.SetFloat("Y", _movement.y);
+
+            _animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            _animator.SetBool("IsMoving", false);
+        }
     }
 
     private void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + _movement * _movementSpeed * Time.fixedDeltaTime);
-
         if (_movement != Vector2.zero)
         {
-            Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, _movement);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, _rotationSpeed * Time.fixedDeltaTime);
+            _rb.MovePosition(_rb.position + _movement * _movementSpeed * Time.fixedDeltaTime);
         }
     }
 }

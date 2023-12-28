@@ -71,7 +71,7 @@ public class InventoryManager : MonoBehaviour
         inventory[id] += n;
         if (inventory[id] > 0 && onModifyQuantity != null)
         {
-            onModifyQuantity(id, n);
+            onModifyQuantity(id, inventory[id]);
         }
         else if (inventory[id] == 0 && onRemoveItem != null)
         {
