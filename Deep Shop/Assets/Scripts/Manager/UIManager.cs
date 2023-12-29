@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +5,7 @@ public enum UIType
 {
     INVENTORY_KARMA,
     TRADE,
-    PANEL_SHOP,
-    BUTTON_SHOP
+    PANEL_SHOP
 }
 
 public class UIManager : MonoBehaviour
@@ -81,7 +79,6 @@ public class UIManager : MonoBehaviour
     public void ActiveTradeUI()
     {
         PauseManager.instance.Pause();
-        CreateBackUp();
         SearchByType(UIType.TRADE).UiGameObject.SetActive(true);
     }
 
@@ -96,12 +93,6 @@ public class UIManager : MonoBehaviour
         PauseManager.instance.Pause();
         CreateBackUp();
         SearchByType(UIType.PANEL_SHOP).UiGameObject.SetActive(true);
-        SearchByType(UIType.BUTTON_SHOP).UiGameObject.SetActive(false);
-    }
-
-    public void ActiveButtonShop()
-    {
-        SearchByType(UIType.BUTTON_SHOP).UiGameObject.SetActive(true);
     }
 
     public void FreeUI(UIType type)

@@ -2,91 +2,91 @@
   "products": [
     {
       "id": 0,
-      "name": "Green pill",
+      "name": "Apple",
       "buyPrice": 19.9,
       "maxSoldPrice": 10,
       "karma": 5,
       "weightSpawn": 35,
-      "spritePath": "Sprites/Product",
+      "spritePath": "Sprites/Pixel Adventure 1/Fruits/Single Apple",
       "color": {
-        "r": 38,
+        "r": 255,
         "g": 255,
-        "b": 35,
+        "b": 255,
         "a": 255
       }
     },
     {
       "id": 1,
-      "name": "Green 2 pill",
+      "name": "Bananas",
       "buyPrice": 49.9,
       "maxSoldPrice": 20,
       "karma": 10,
       "weightSpawn": 25,
-      "spritePath": "Sprites/Product",
+      "spritePath": "Sprites/Pixel Adventure 1/Fruits/Single Bananas",
       "color": {
-        "r": 29,
-        "g": 171,
-        "b": 21,
+        "r": 255,
+        "g": 255,
+        "b": 255,
         "a": 255
       }
     },
     {
       "id": 2,
-      "name": "Green 3 pill",
+      "name": "Melon",
       "buyPrice": 79.9,
       "maxSoldPrice": 30,
       "karma": 15,
       "weightSpawn": 15,
-      "spritePath": "Sprites/Product",
+      "spritePath": "Sprites/Pixel Adventure 1/Fruits/Single Melon",
       "color": {
-        "r": 24,
-        "g": 123,
-        "b": 23,
+        "r": 255,
+        "g": 255,
+        "b": 255,
         "a": 255
       }
     },
     {
       "id": 3,
-      "name": "Red pill",
+      "name": "Stone Head",
       "buyPrice": 19.9,
       "maxSoldPrice": 10,
       "karma": -5,
       "weightSpawn": 12,
-      "spritePath": "Sprites/Product",
+      "spritePath": "Sprites/Pixel Adventure 1/Traps/Stone Head",
       "color": {
         "r": 255,
-        "g": 35,
-        "b": 50,
+        "g": 255,
+        "b": 255,
         "a": 255
       }
     },
     {
       "id": 4,
-      "name": "Red 2 pill",
+      "name": "Spiked Ball",
       "buyPrice": 49.9,
       "maxSoldPrice": 20,
       "karma": -10,
       "weightSpawn": 8,
-      "spritePath": "Sprites/Product",
+      "spritePath": "Sprites/Pixel Adventure 1/Traps/Spiked Ball",
       "color": {
-        "r": 171,
-        "g": 27,
-        "b": 34,
+        "r": 255,
+        "g": 255,
+        "b": 255,
         "a": 255
       }
     },
     {
       "id": 5,
-      "name": "Red 3 pill",
+      "name": "Spike Head",
       "buyPrice": 79.9,
       "maxSoldPrice": 30,
       "karma": -15,
       "weightSpawn": 4,
-      "spritePath": "Sprites/Product",
+      "spritePath": "Sprites/Pixel Adventure 1/Traps/Spike Head",
       "color": {
-        "r": 123,
-        "g": 23,
-        "b": 34,
+        "r": 255,
+        "g": 255,
+        "b": 255,
         "a": 255
       }
     }

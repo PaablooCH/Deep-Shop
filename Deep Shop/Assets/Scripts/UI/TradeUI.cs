@@ -13,7 +13,7 @@ public class TradeUI : MonoBehaviour
     private GameObject _inputField;
 
     [SerializeField]
-    private SellInteraction _sellInteraction;
+    private BuyInteraction _sellInteraction;
 
     private ProductInfo _actualProduct;
 

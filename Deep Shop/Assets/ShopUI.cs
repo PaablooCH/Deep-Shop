@@ -17,19 +17,6 @@ public class ShopUI : MonoBehaviour
             _panelShop.SetActive(false);
             UIManager.instance.AddUI(UIType.PANEL_SHOP, _panelShop);
         }
-        if (_buttonShop != null)
-        {
-            _panelShop.SetActive(false);
-            UIManager.instance.AddUI(UIType.BUTTON_SHOP, _buttonShop);
-        }
-    }
-
-    public void ClickShopButton()
-    {
-        if (_panelShop != null)
-        {
-            UIManager.instance.ActivePanelShop();
-        }
     }
 
     public void Exit()
@@ -43,7 +30,6 @@ public class ShopUI : MonoBehaviour
     public void Confirm()
     {
         UIManager.instance.FreeUI(UIType.PANEL_SHOP);
-        UIManager.instance.FreeUI(UIType.BUTTON_SHOP);
 
         // Trade money and add the new items in the inventory
     }
