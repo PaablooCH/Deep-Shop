@@ -38,7 +38,7 @@ public class ProductsManager : MonoBehaviour
     {
         foreach(GameObject go in _products)
         {
-            if (go.GetComponent<ProductInfo>().product.id == id)
+            if (go.GetComponent<ProductInfo>().Product.id == id)
             {
                 return go;
             }
@@ -50,12 +50,17 @@ public class ProductsManager : MonoBehaviour
     {
         foreach (GameObject go in _products)
         {
-            if (go.GetComponent<ProductInfo>().product.name == name)
+            if (go.GetComponent<ProductInfo>().Product.productName == name)
             {
                 return go;
             }
         }
         return null;
+    }
+
+    public int RandomProductID()
+    {
+        return RandomProduct().GetComponent<ProductInfo>().Product.id;
     }
 
     public GameObject RandomProduct()
@@ -65,7 +70,7 @@ public class ProductsManager : MonoBehaviour
         int actualWeight = 0;
         foreach (GameObject product in _products)
         {
-            int productWeight = product.GetComponent<ProductInfo>().product.weightSpawn;
+            int productWeight = product.GetComponent<ProductInfo>().Product.weightSpawn;
             actualWeight += productWeight;
             if (randomWeight <= actualWeight)
             {
@@ -101,7 +106,7 @@ public class ProductsManager : MonoBehaviour
 
                 // Set product info
                 ProductInfo productInfo = newPrefab.GetComponent<ProductInfo>();
-                productInfo.product = product;
+                productInfo.Product = product;
 
                 _totalWeightSpawn += product.weightSpawn;
 

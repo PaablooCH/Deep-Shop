@@ -1,5 +1,3 @@
-using TMPro;
-
 public class InventorySlot : ManageProductsInGrid
 {
     private void Start()
@@ -8,12 +6,5 @@ public class InventorySlot : ManageProductsInGrid
         InventoryManager.instance.onModifyQuantity += ModifyQuantity;
         InventoryManager.instance.onRemoveItem += RemoveItem;
         InventoryManager.instance.StartItems();
-    }
-
-    private void ModifyQuantity(int modifiedItem, int amount)
-    {
-        int index = productsInGrid.FindIndex((productType) => productType == modifiedItem);
-        TextMeshProUGUI text = gridTransform.GetChild(index).GetComponentInChildren<TextMeshProUGUI>();
-        text.text = amount.ToString();
     }
 }

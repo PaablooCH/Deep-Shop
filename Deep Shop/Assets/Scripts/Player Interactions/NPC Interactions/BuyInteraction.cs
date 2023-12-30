@@ -15,10 +15,10 @@ public class BuyInteraction : PlayerNPCInteraction
     // Update is called once per frame
     void Update()
     {
-        if (_isPlayer && _npc && Input.GetKeyDown(KeyCode.E))
+        if (_isPlayer && Input.GetKeyDown(KeyCode.E))
         {
             // open dialog
-            //_shopUI.OpenTrade(_npc.GetComponent<CustomerTastes>().ProductDesired);
+            _shopUI.OpenTrade();
         }
     }
 

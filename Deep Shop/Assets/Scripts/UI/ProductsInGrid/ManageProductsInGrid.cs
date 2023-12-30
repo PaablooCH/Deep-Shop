@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ManageProductsInGrid : MonoBehaviour
 {
@@ -21,12 +22,12 @@ public class ManageProductsInGrid : MonoBehaviour
                                                     // the index in the list is a reference of child position
                                                     // in transform
 
-    protected void AddItem(GameObject newItem)
+    public void AddItem(GameObject newItem)
     {
-        int newType = newItem.GetComponent<ProductInfo>().product.id;
-        if (!productsInGrid.Contains(newType))
+        int newId = newItem.GetComponent<ProductInfo>().Product.id;
+        if (!productsInGrid.Contains(newId))
         {
-            productsInGrid.Add(newType);
+            productsInGrid.Add(newId);
             GameObject gridObject = Instantiate(basePrefab, gridTransform);
             SpriteRenderer spriteRenderer = newItem.GetComponent<SpriteRenderer>();
             Image image = gridObject.transform.Find("Product Image").GetComponent<Image>();
@@ -34,6 +35,13 @@ public class ManageProductsInGrid : MonoBehaviour
             image.color = spriteRenderer.color;
             image.enabled = true;
         }
+    }
+
+    public void ModifyQuantity(int modifiedItem, int amount)
+    {
+        int index = productsInGrid.FindIndex((idProduct) => idProduct == modifiedItem);
+        TextMeshProUGUI text = gridTransform.GetChild(index).transform.Find("Quantity").GetComponent<TextMeshProUGUI>();
+        text.text = amount.ToString();
     }
 
     protected void RemoveItem(int removedItem)

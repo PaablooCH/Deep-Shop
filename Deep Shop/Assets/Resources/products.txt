@@ -2,7 +2,7 @@
   "products": [
     {
       "id": 0,
-      "name": "Apple",
+      "productName": "Apple",
       "buyPrice": 19.9,
       "maxSoldPrice": 10,
       "karma": 5,
@@ -17,7 +17,7 @@
     },
     {
       "id": 1,
-      "name": "Bananas",
+      "productName": "Bananas",
       "buyPrice": 49.9,
       "maxSoldPrice": 20,
       "karma": 10,
@@ -32,7 +32,7 @@
     },
     {
       "id": 2,
-      "name": "Melon",
+      "productName": "Melon",
       "buyPrice": 79.9,
       "maxSoldPrice": 30,
       "karma": 15,
@@ -47,7 +47,7 @@
     },
     {
       "id": 3,
-      "name": "Stone Head",
+      "productName": "Stone Head",
       "buyPrice": 19.9,
       "maxSoldPrice": 10,
       "karma": -5,
@@ -62,7 +62,7 @@
     },
     {
       "id": 4,
-      "name": "Spiked Ball",
+      "productName": "Spiked Ball",
       "buyPrice": 49.9,
       "maxSoldPrice": 20,
       "karma": -10,
@@ -77,7 +77,7 @@
     },
     {
       "id": 5,
-      "name": "Spike Head",
+      "productName": "Spike Head",
       "buyPrice": 79.9,
       "maxSoldPrice": 30,
       "karma": -15,

@@ -31,7 +31,7 @@ public class CustomerManager : MonoBehaviour
     [SerializeField]
     private GameObject _basePrefabCostumer;
 
-    private Queue<GameObject> _customers = new Queue<GameObject>();
+    private Queue<GameObject> _customers = new();
     private float _spawnCounter = 0f;
 
     // Start is called before the first frame update

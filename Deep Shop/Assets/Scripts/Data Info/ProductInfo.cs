@@ -6,7 +6,7 @@ using UnityEngine;
 public class Product
 {
     public int id;
-    public string name;
+    public string productName;
     public float buyPrice;
     public float maxSoldPrice;
     public float karma;
@@ -19,7 +19,7 @@ public class ProductInfo : MonoBehaviour
 {
     private Product _product;
 
-    public Product product { get => _product; set => _product = value; }
+    public Product Product { get => _product; set => _product = value; }
 
     public float CalculateKarma(float priceUnit)
     {

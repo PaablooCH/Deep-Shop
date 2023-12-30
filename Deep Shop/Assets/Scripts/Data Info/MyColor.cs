@@ -5,8 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class MyColor
 {
-    public float r;
-    public float g;
-    public float b;
-    public float a;
+    [Range(0, 255)]
+    public int r = 255;
+    [Range(0, 255)]
+    public int g = 255;
+    [Range(0, 255)]
+    public int b = 255;
+    [Range(0, 255)]
+    public int a = 255;
 }

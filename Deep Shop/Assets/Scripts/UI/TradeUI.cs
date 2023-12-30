@@ -42,13 +42,13 @@ public class TradeUI : MonoBehaviour
 
             // Slider initial value
             Slider tradeUISlider = _sliderAndText.transform.Find("Slider").gameObject.GetComponent<Slider>();
-            tradeUISlider.value = productInfo.product.buyPrice;
+            tradeUISlider.value = productInfo.Product.buyPrice;
 
             TextMeshProUGUI text = _sliderAndText.transform.Find("Slider Info").gameObject.GetComponent<TextMeshProUGUI>();
-            text.text = productInfo.product.buyPrice.ToString("0.0") + " G";
+            text.text = productInfo.Product.buyPrice.ToString("0.0") + " G";
 
             // InputField init
-            int inventory = InventoryManager.instance.GetInventory(productInfo.product.id);
+            int inventory = InventoryManager.instance.GetInventory(productInfo.Product.id);
             TMP_InputField tMP_InputField = _inputField.GetComponent<TMP_InputField>();
             tMP_InputField.text = inventory > 0 ? "1" : "0";
             _inputField.GetComponent<InputNumberInteraction>().AmountProduct = inventory;
@@ -76,7 +76,7 @@ public class TradeUI : MonoBehaviour
 
     public void Reject()
     {
-        PlayerStats.instance.Karma -= _actualProduct.product.karma;
+        PlayerStats.instance.Karma -= _actualProduct.Product.karma;
         _sellInteraction.EndTrade();
         UIManager.instance.FreeUI(UIType.TRADE);
     }
