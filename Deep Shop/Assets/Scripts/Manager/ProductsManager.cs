@@ -46,6 +46,16 @@ public class ProductsManager : MonoBehaviour
         return null;
     }
 
+    public ProductInfo GetProductInfo(int id)
+    {
+        GameObject obj = SearchProductByID(id);
+        if (obj != null)
+        {
+            return obj.GetComponent<ProductInfo>();
+        }
+        return null;
+    }
+
     public GameObject SearchProductByName(string name)
     {
         foreach (GameObject go in _products)

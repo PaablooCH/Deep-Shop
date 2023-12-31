@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour
     #endregion
 
     #region Listeners
-    public delegate void OnAddItem(GameObject newItem);
+    public delegate GameObject OnAddItem(GameObject newItem);
     public OnAddItem onAddItem;
 
     public delegate void OnModifyQuantity(int idModifiedItem, int amount);
@@ -30,12 +30,6 @@ public class InventoryManager : MonoBehaviour
     #endregion
 
     private Dictionary<int, int> inventory = new(); // key -> product id, value -> ammount
-
-    void Start()
-    {
-        // Start items
-        
-    }
 
     public void StartItems()
     {
@@ -58,10 +52,10 @@ public class InventoryManager : MonoBehaviour
     // n can be negative (substract) or positive (sum)
     public void ModifyInventory(int id, int n)
     {
-        if (!inventory.ContainsKey(id) && onAddItem != null)
+        if (!inventory.ContainsKey(id))
         {
-            onAddItem(ProductsManager.instance.SearchProductByID(id));
             inventory[id] = 0;
+            onAddItem?.Invoke(ProductsManager.instance.SearchProductByID(id));
         }
         if (inventory[id] + n < 0)
         {

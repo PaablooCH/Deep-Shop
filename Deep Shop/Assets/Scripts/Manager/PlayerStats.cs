@@ -19,22 +19,31 @@ public class PlayerStats : MonoBehaviour
     #region Listeners
     public delegate void OnKarmaChanged(float newKarma, float oldKarma);
     public OnKarmaChanged onKarmaChanged;
+
+    public delegate void OnMoneyChanged(float newMoney);
+    public OnMoneyChanged onMoneyChanged;
     #endregion
 
     [SerializeField]
-    private float money = 100f;
+    [Range(0f, float.MaxValue)]
+    private float _money = 100f;
     [SerializeField]
     [Range(-100f, 100f)]
-    private float karma = 0f;
+    private float _karma = 0f;
 
-    public float Karma { get => karma; 
+    public float Karma { get => _karma; 
         set 
         {
-            if (onKarmaChanged != null)
-            {
-                onKarmaChanged(value, karma);
-            }
-            karma = value; 
+            onKarmaChanged?.Invoke(value, _karma);
+            _karma = value; 
+        }
+    }
+
+    public float Money { get => _money;
+        set
+        {
+            onMoneyChanged?.Invoke(value);
+            _money = value;
         }
     }
 
@@ -44,7 +53,7 @@ public class PlayerStats : MonoBehaviour
         Karma += product.CalculateKarma(price);
         if (product.CalculatePercentatgeBuy(price) < 2.5f)
         {
-            money += price;
+            Money += price;
         }
     }
 }

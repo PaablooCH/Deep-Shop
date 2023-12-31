@@ -14,48 +14,66 @@ public class ManageProductsInGrid : MonoBehaviour
 #pragma warning restore 0414
 
     [SerializeField]
-    protected Transform gridTransform;
+    protected Transform _gridTransform;
     [SerializeField]
-    protected GameObject basePrefab;
+    protected GameObject _slotPrefab;
 
-    protected List<int> productsInGrid = new();     // I store the idPRoduct,
+    protected List<int> _productsInGrid = new();    // I store the idPRoduct,
                                                     // the index in the list is a reference of child position
                                                     // in transform
 
-    public void AddItem(GameObject newItem)
+    public virtual GameObject AddItem(GameObject newItem)
     {
         int newId = newItem.GetComponent<ProductInfo>().Product.id;
-        if (!productsInGrid.Contains(newId))
+        if (!_productsInGrid.Contains(newId))
         {
-            productsInGrid.Add(newId);
-            GameObject gridObject = Instantiate(basePrefab, gridTransform);
+            _productsInGrid.Add(newId);
+            GameObject gridObject = Instantiate(_slotPrefab, _gridTransform);
             SpriteRenderer spriteRenderer = newItem.GetComponent<SpriteRenderer>();
             Image image = gridObject.transform.Find("Product Image").GetComponent<Image>();
             image.sprite = spriteRenderer.sprite;
             image.color = spriteRenderer.color;
             image.enabled = true;
+            return gridObject;
         }
+        int index = _productsInGrid.FindIndex((idProduct) => idProduct == newId);
+        return _gridTransform.GetChild(index).gameObject;
     }
 
     public void ModifyQuantity(int modifiedItem, int amount)
     {
-        int index = productsInGrid.FindIndex((idProduct) => idProduct == modifiedItem);
-        TextMeshProUGUI text = gridTransform.GetChild(index).transform.Find("Quantity").GetComponent<TextMeshProUGUI>();
+        int index = _productsInGrid.FindIndex((idProduct) => idProduct == modifiedItem);
+        TextMeshProUGUI text = _gridTransform.GetChild(index).Find("Quantity").GetComponent<TextMeshProUGUI>();
         text.text = amount.ToString();
     }
 
     protected void RemoveItem(int removedItem)
     {
-        int index = productsInGrid.FindIndex((productType) => productType == removedItem);
-        Destroy(gridTransform.GetChild(index));
-        productsInGrid.Remove(removedItem);
+        int index = _productsInGrid.FindIndex((id) => id == removedItem);
+        if (index != -1)
+        {
+            Destroy(_gridTransform.GetChild(index));
+            _productsInGrid.RemoveAt(index);
+        }
+    }
+
+    public virtual void CleanGrid()
+    {
+        _productsInGrid.Clear();
+        for (int i = _gridTransform.childCount - 1; i >= 0; i--)
+        {
+            Transform child = _gridTransform.GetChild(i);
+
+            Debug.Log(_gridTransform.GetChild(0).name + " deleted");
+            Destroy(child.gameObject);
+        }
     }
 
     public int GetIdProductFromChild(int siblingPosition)
     {
-        if (siblingPosition < gridTransform.childCount)
+        if (siblingPosition < _gridTransform.childCount)
         {
-            return productsInGrid[siblingPosition];
+            return _productsInGrid[siblingPosition];
         }
         return -1;
     }

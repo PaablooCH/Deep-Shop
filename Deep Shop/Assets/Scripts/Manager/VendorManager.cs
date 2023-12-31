@@ -55,7 +55,7 @@ public class VendorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _vendorItems = new VendorItem[] { new VendorItem(1, 2) };
+        _vendorItems = new VendorItem[] { new VendorItem(1, 2), new VendorItem(2, 2) };
         //InstantiateCustomer();
     }
 
@@ -68,6 +68,18 @@ public class VendorManager : MonoBehaviour
         //    InstantiateCustomer();
         //    _spawnCounter = 0f;
         //}
+    }
+
+    public VendorItem SearchVendorItem(int id)
+    {
+        foreach (VendorItem item in _vendorItems)
+        {
+            if (item.idProduct == id)
+            {
+                return item;
+            }
+        }
+        return null;
     }
 
     public GameObject GetPositionCorner()
