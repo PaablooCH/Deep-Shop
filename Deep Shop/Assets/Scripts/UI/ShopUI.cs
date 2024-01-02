@@ -1,43 +1,59 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-public class ShopUI : MonoBehaviour
+public class ShopUI : MonoBehaviour, IUIConfirmation, IUIReject
 {
     // UI elements
     [SerializeField]
     private ManageShopGrid _manageShopGrid;
+    [SerializeField]
+    private TextMeshProUGUI _cost;
+    [SerializeField]
+    private Button _button;
 
+    [SerializeField]
+    private BuyInteraction _buyInteraction;
+
+    VendorProductsToSell _actualVendorProducts;
     private readonly List<int> _cart = new();
 
     private float _moneyInCart = 0f;
 
+
     private void Start()
     {
         gameObject.SetActive(false);
-        UIManager.instance.AddUI(UIType.PANEL_SHOP, gameObject);
+        CanvasManager.instance.AddUI(UIType.SHOP, gameObject);
     }
 
-    public void OpenTrade()
+    public void OpenUI(GameObject vendor)
     {
-        UIManager.instance.ActivePanelShop();
-        foreach(VendorItem vendorProduct in VendorManager.instance.VendorItems)
+        _actualVendorProducts = vendor.GetComponent<VendorProductsToSell>();
+        if (_actualVendorProducts)
         {
-            GameObject product = ProductsManager.instance.SearchProductByID(vendorProduct.idProduct);
-            ProductInfo productInfo = product.GetComponent<ProductInfo>();
-            GameObject shopSlot = _manageShopGrid.AddItem(product);
-            
-            shopSlot.GetComponentInChildren<SelectedProduct>().ShopUI = this; // this implementation avoids
-                                                                              // ManageShopGrid to know anything about
-                                                                              // this class
-            
-            _manageShopGrid.ModifyQuantity(vendorProduct.idProduct, vendorProduct.quantity);
-            _manageShopGrid.ModifyPrice(productInfo.Product.id, productInfo.Product.buyPrice);
+            CanvasManager.instance.ActivePanelShop();
+
+            foreach (VendorProduct vendorProduct in _actualVendorProducts.VendorProducts)
+            {
+                GameObject product = ProductsManager.instance.SearchProductByID(vendorProduct.idProduct);
+                ProductInfo productInfo = product.GetComponent<ProductInfo>();
+                GameObject shopSlot = _manageShopGrid.AddItem(product);
+
+                shopSlot.GetComponentInChildren<SelectedProduct>().ShopUI = this; // this implementation avoids
+                                                                                  // ManageShopGrid to know anything about
+                                                                                  // this class
+
+                _manageShopGrid.ModifyQuantity(vendorProduct.idProduct, vendorProduct.quantity);
+                _manageShopGrid.ModifyPrice(productInfo.Product.id, productInfo.Product.buyPrice);
+            }
         }
     }
 
     public void Exit()
     {
-        UIManager.instance.FreeUI(UIType.PANEL_SHOP);
+        CanvasManager.instance.FreeUI(UIType.SHOP);
         _cart.Clear();
         _manageShopGrid.CleanGrid();
     }
@@ -47,13 +63,20 @@ public class ShopUI : MonoBehaviour
         // Trade money and add the new items in the inventory
         foreach (int productId in _cart)
         {
-            int quantity = VendorManager.instance.SearchVendorItem(productId).quantity;
+            int quantity = _actualVendorProducts.SearchVendorProduct(productId).quantity;
             InventoryManager.instance.ModifyInventory(productId, quantity); // TODO use a timer to get it at some point
         }
-        PlayerStats.instance.Money += _moneyInCart;
+        PlayerStats.instance.Money -= _moneyInCart;
         _cart.Clear();
         _manageShopGrid.CleanGrid();
-        UIManager.instance.FreeUI(UIType.PANEL_SHOP);
+        _buyInteraction.EndInteraction();
+        CanvasManager.instance.FreeUI(UIType.SHOP);
+    }
+
+    public void Reject()
+    {
+        _buyInteraction.EndInteraction();
+        CanvasManager.instance.FreeUI(UIType.SHOP);
     }
 
     public void AddToCart(int idProduct)
@@ -62,6 +85,7 @@ public class ShopUI : MonoBehaviour
         {
             Debug.Log("Added " + idProduct);
             _moneyInCart += ProductsManager.instance.GetProductInfo(idProduct).Product.buyPrice;
+            UpdateCostDependencies();
             Debug.Log("Money " + _moneyInCart);
             _cart.Add(idProduct);
         }
@@ -69,12 +93,28 @@ public class ShopUI : MonoBehaviour
 
     public void DeleteFromCart(int deleteProduct)
     {
-        if (!_cart.Contains(deleteProduct))
+        if (_cart.Contains(deleteProduct))
         {
             Debug.Log("Remove " + deleteProduct);
             _moneyInCart -= ProductsManager.instance.GetProductInfo(deleteProduct).Product.buyPrice;
+            UpdateCostDependencies();
             Debug.Log("Money " + _moneyInCart);
             _cart.Remove(deleteProduct);
+        }
+    }
+
+    private void UpdateCostDependencies()
+    {
+        _cost.text = _moneyInCart.ToString("0.00") + " G";
+        if (_moneyInCart > PlayerStats.instance.Money)
+        {
+            _button.interactable = false;
+            _cost.color = Color.red;
+        }
+        else
+        {
+            _cost.color = Color.green;
+            _button.interactable = true;
         }
     }
 }

@@ -54,16 +54,6 @@ public class CustomerManager : MonoBehaviour
         }
     }
 
-    public GameObject GetPositionCorner()
-    {
-        return _positionCorner;
-    }
-
-    public GameObject GetPositionStart()
-    {
-        return _positionStart;
-    }
-
     public Transform NextPosition(Transform currentPosition)
     {
         // TODO return a new position different from the current
@@ -75,13 +65,13 @@ public class CustomerManager : MonoBehaviour
         if (_customers.Count > 0)
         {
             GameObject customerServed = _customers.Dequeue();
-            customerServed.GetComponent<CustomerBehaviour>().ExitStore(_positionExit.transform);
+            customerServed.GetComponent<NPCBehaviour>().ExitStore(_positionExit.transform);
         }
         if (_customers.Count > 0)
         {
             GameObject customerToAttend = _customers.Peek();
             customerToAttend.SetActive(true);
-            customerToAttend.GetComponent<CustomerBehaviour>().SetTravelPoint(_positionCorner.transform);
+            customerToAttend.GetComponent<NPCBehaviour>().TravelPoint = _positionCorner.transform;
         }
     }
 
@@ -93,8 +83,15 @@ public class CustomerManager : MonoBehaviour
         _customers.Enqueue(go);
         if (_customers.Count == 1)
         {
-            CustomerBehaviour cb = go.GetComponent<CustomerBehaviour>();
-            cb.SetTravelPoint(_positionCorner.transform);
+            NPCBehaviour npcBehaviour = go.GetComponent<NPCBehaviour>();
+            if (npcBehaviour)
+            {
+                npcBehaviour.GoToPoint(_positionCorner.transform);
+            }
+            else
+            {
+                Debug.LogWarning("NPCBehaviour doesn't exist in the gameObject");
+            }
         }
         else
         {

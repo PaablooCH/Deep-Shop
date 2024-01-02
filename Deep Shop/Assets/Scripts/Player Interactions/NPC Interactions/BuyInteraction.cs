@@ -15,17 +15,17 @@ public class BuyInteraction : PlayerNPCInteraction
     // Update is called once per frame
     void Update()
     {
-        if (_isPlayer && Input.GetKeyDown(KeyCode.E))
+        if (_isPlayer && _npc && Input.GetKeyDown(KeyCode.E))
         {
             // open dialog
-            _shopUI.OpenTrade();
+            _shopUI.OpenUI(_npc);
         }
     }
 
-    public void EndTrade()
+    public override void EndInteraction()
     {
-        _npc = null;
-        CustomerManager.instance.ExitStore();
+        base.EndInteraction();
+        VendorManager.instance.ExitStore();
     }
 
     protected override void NeededByInheritClasses(GameObject npc)

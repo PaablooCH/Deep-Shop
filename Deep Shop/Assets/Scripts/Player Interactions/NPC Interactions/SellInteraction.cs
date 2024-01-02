@@ -18,13 +18,13 @@ public class SellInteraction : PlayerNPCInteraction
         if (_isPlayer && _npc && Input.GetKeyDown(KeyCode.E))
         {
             // open dialog
-            _tradeUIManager.OpenTrade(_npc.GetComponent<CustomerTastes>().ProductDesired);
+            _tradeUIManager.OpenUI(_npc.GetComponent<CustomerTastes>().ProductDesired);
         }
     }
 
-    public void EndTrade()
+    public override void EndInteraction()
     {
-        _npc = null;
+        base.EndInteraction();
         CustomerManager.instance.ExitStore();
     }
 
