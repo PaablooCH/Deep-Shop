@@ -23,9 +23,9 @@ public class TradeUI : MonoBehaviour, IUIConfirmation, IUIReject
 
     public void OpenUI(GameObject product)
     {
-        _actualProduct = product.GetComponent<ProductInfo>();
-        if (_actualProduct)
+        if (product.TryGetComponent(out ProductInfo component))
         {
+            _actualProduct = component;
             CanvasManager.instance.ActiveTradeUI();
             SpriteRenderer spriteProduct = _actualProduct.GetComponent<SpriteRenderer>();
 

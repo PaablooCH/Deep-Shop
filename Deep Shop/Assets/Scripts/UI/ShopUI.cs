@@ -30,14 +30,14 @@ public class ShopUI : MonoBehaviour, IUIConfirmation, IUIReject
 
     public void OpenUI(GameObject vendor)
     {
-        _actualVendorProducts = vendor.GetComponent<VendorProductsToSell>();
-        if (_actualVendorProducts)
+        if (vendor.TryGetComponent(out VendorProductsToSell component))
         {
+            _actualVendorProducts = component;
             CanvasManager.instance.ActivePanelShop();
 
-            foreach (VendorProduct vendorProduct in _actualVendorProducts.VendorProducts)
+            foreach (ProductQuantity vendorProduct in _actualVendorProducts.VendorProducts)
             {
-                GameObject product = ProductsManager.instance.SearchProductByID(vendorProduct.idProduct);
+                GameObject product = ProductsManager.instance.SearchProductByID(vendorProduct.IdProduct);
                 ProductInfo productInfo = product.GetComponent<ProductInfo>();
                 GameObject shopSlot = _manageShopGrid.AddItem(product);
 
@@ -45,7 +45,7 @@ public class ShopUI : MonoBehaviour, IUIConfirmation, IUIReject
                                                                                   // ManageShopGrid to know anything about
                                                                                   // this class
 
-                _manageShopGrid.ModifyQuantity(vendorProduct.idProduct, vendorProduct.quantity);
+                _manageShopGrid.ModifyQuantity(vendorProduct.IdProduct, vendorProduct.Quantity);
                 _manageShopGrid.ModifyPrice(productInfo.Product.id, productInfo.Product.buyPrice);
             }
         }
@@ -60,11 +60,12 @@ public class ShopUI : MonoBehaviour, IUIConfirmation, IUIReject
 
     public void Confirm()
     {
-        // Trade money and add the new items in the inventory
+        // Trade money and add the new items to the deliverManager
         foreach (int productId in _cart)
         {
-            int quantity = _actualVendorProducts.SearchVendorProduct(productId).quantity;
-            InventoryManager.instance.ModifyInventory(productId, quantity); // TODO use a timer to get it at some point
+            int quantity = _actualVendorProducts.SearchVendorProduct(productId).Quantity;
+            DeliverManager.instance.Packages.Add(new DeliverObject(10, new ProductQuantity(productId, quantity)));
+            //InventoryManager.instance.ModifyInventory(productId, quantity); // TODO use a timer to get it at some point
         }
         PlayerStats.instance.Money -= _moneyInCart;
         _cart.Clear();
@@ -83,11 +84,13 @@ public class ShopUI : MonoBehaviour, IUIConfirmation, IUIReject
     {
         if (!_cart.Contains(idProduct))
         {
-            Debug.Log("Added " + idProduct);
             _moneyInCart += ProductsManager.instance.GetProductInfo(idProduct).Product.buyPrice;
             UpdateCostDependencies();
-            Debug.Log("Money " + _moneyInCart);
             _cart.Add(idProduct);
+            if (_button.interactable == false)
+            {
+                _button.interactable = true;
+            }
         }
     }
 
@@ -100,6 +103,10 @@ public class ShopUI : MonoBehaviour, IUIConfirmation, IUIReject
             UpdateCostDependencies();
             Debug.Log("Money " + _moneyInCart);
             _cart.Remove(deleteProduct);
+            if (_cart.Count == 0)
+            {
+                _button.interactable = false;
+            }
         }
     }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class ManageShopGrid : ManageProductsInGrid
+public class ManageShopGrid : ManageSlotsInGrid
 {
     public override GameObject AddItem(GameObject newItem)
     {

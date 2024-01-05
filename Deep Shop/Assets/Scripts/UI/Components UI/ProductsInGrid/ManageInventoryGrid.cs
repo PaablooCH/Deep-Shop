@@ -1,4 +1,4 @@
-public class ManageInventoryGrid : ManageProductsInGrid
+public class ManageInventoryGrid : ManageSlotsInGrid
 {
     private void Start()
     {

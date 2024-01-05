@@ -5,7 +5,8 @@ public enum UIType
 {
     INVENTORY,
     TRADE,
-    SHOP
+    SHOP,
+    ITEMS_ACQUIRED
 }
 
 public class CanvasManager : MonoBehaviour
@@ -75,6 +76,14 @@ public class CanvasManager : MonoBehaviour
     {
         PauseManager.instance.Pause();
         MyUI myUI = SearchByType(UIType.SHOP);
+        myUI.UiGameObject.SetActive(true);
+        myUI.GamePaused = true;
+    }
+
+    public void ActivePanelItemsAquired()
+    {
+        PauseManager.instance.Pause();
+        MyUI myUI = SearchByType(UIType.ITEMS_ACQUIRED);
         myUI.UiGameObject.SetActive(true);
         myUI.GamePaused = true;
     }

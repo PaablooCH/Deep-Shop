@@ -18,8 +18,6 @@ public class VendorManager : MonoBehaviour
     }
     #endregion
 
-    //TODO do the class
-
     [SerializeField]
     private float _spawnTime = 5f;
     [SerializeField]
@@ -104,11 +102,11 @@ public class VendorManager : MonoBehaviour
                 }
             }
 
-            VendorProduct[] vendorProducts = new VendorProduct[howMany];
+            ProductQuantity[] vendorProducts = new ProductQuantity[howMany];
             for (i = 0; i < howMany; i++)
             {
                 int quantity = UtilsNumberGenerator.GenerateNumberWithWeight(1, 5, 3, 1);
-                vendorProducts[i] = new VendorProduct(products[i], quantity);
+                vendorProducts[i] = new ProductQuantity(products[i], quantity);
             }
             productsToSell.VendorProducts = vendorProducts;
         }
