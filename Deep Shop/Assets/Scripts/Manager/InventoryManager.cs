@@ -33,7 +33,7 @@ public class InventoryManager : MonoBehaviour
 
     public void StartItems()
     {
-        TextAsset jsonAsset = Resources.Load<TextAsset>("startInventory");
+        TextAsset jsonAsset = Resources.Load<TextAsset>("JSONs/startInventory");
         if (jsonAsset != null)
         {
             StartInventoryArray dataPrefab = JsonUtility.FromJson<StartInventoryArray>(jsonAsset.text);

@@ -94,7 +94,7 @@ public class ProductsManager : MonoBehaviour
 
     private void ReadJSON()
     {
-        TextAsset jsonAsset = Resources.Load<TextAsset>("products");
+        TextAsset jsonAsset = Resources.Load<TextAsset>("JSONs/products");
         if (jsonAsset != null)
         {
             ProductArray dataPrefab = JsonUtility.FromJson<ProductArray>(jsonAsset.text);

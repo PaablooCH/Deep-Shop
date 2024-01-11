@@ -8,7 +8,7 @@ public class ManageShopGrid : ManageSlotsInGrid
         GameObject shopSlot = base.AddItem(newItem);
 
         // Don't need comprobation 100% the item is inside
-        SelectedProduct selectedProduct =  shopSlot.GetComponentInChildren<SelectedProduct>();
+        SelectedShopProduct selectedProduct =  shopSlot.GetComponentInChildren<SelectedShopProduct>();
         selectedProduct.ManageShopGrid = this;
         return shopSlot;
     }

@@ -12,7 +12,7 @@ public class VendorProductsToSell : MonoBehaviour
     {
         foreach (ProductQuantity item in _vendorProducts)
         {
-            if (item.IdProduct == id)
+            if (item.idProduct == id)
             {
                 return item;
             }

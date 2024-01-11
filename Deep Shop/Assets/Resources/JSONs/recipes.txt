@@ -1,0 +1,40 @@
+{
+  "recipes": [
+    {
+      "id": 0,
+      "productResult": {
+            "idProduct": 2,
+            "quantity": 1
+      },
+      "productsNeeded": [
+        {
+            "idProduct": 0,
+            "quantity": 1
+        },
+        {
+            "idProduct": 1,
+            "quantity": 1
+        }
+      ],
+      "money": 0
+    },
+    {
+      "id": 1,
+      "productResult": {
+            "idProduct": 5,
+            "quantity": 1
+      },
+      "productsNeeded": [
+        {
+            "idProduct": 3,
+            "quantity": 1
+        },
+        {
+            "idProduct": 4,
+            "quantity": 1
+        }
+      ],
+      "money": 0
+    }
+  ]
+}

@@ -6,7 +6,8 @@ public enum UIType
     INVENTORY,
     TRADE,
     SHOP,
-    ITEMS_ACQUIRED
+    ITEMS_ACQUIRED,
+    CRAFT
 }
 
 public class CanvasManager : MonoBehaviour
@@ -55,35 +56,22 @@ public class CanvasManager : MonoBehaviour
         _uis.Add(new MyUI(gameObjectUI, ui));
     }
 
-    public void ActiveTradeUI()
+    private void Update()
     {
-        PauseManager.instance.Pause();
-        MyUI myUI = SearchByType(UIType.TRADE);
-        myUI.UiGameObject.SetActive(true);
-        myUI.GamePaused = true;
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ActiveUI(UIType.CRAFT);
+        }
     }
 
-    public void ActiveInventory()
+    public void ActiveUI(UIType type)
     {
-        CreateBackUp();
+        if (type == UIType.INVENTORY)
+        {
+            CreateBackUp();
+        }
         PauseManager.instance.Pause();
-        MyUI myUI = SearchByType(UIType.INVENTORY);
-        myUI.UiGameObject.SetActive(true);
-        myUI.GamePaused = true;
-    }
-
-    public void ActivePanelShop()
-    {
-        PauseManager.instance.Pause();
-        MyUI myUI = SearchByType(UIType.SHOP);
-        myUI.UiGameObject.SetActive(true);
-        myUI.GamePaused = true;
-    }
-
-    public void ActivePanelItemsAquired()
-    {
-        PauseManager.instance.Pause();
-        MyUI myUI = SearchByType(UIType.ITEMS_ACQUIRED);
+        MyUI myUI = SearchByType(type);
         myUI.UiGameObject.SetActive(true);
         myUI.GamePaused = true;
     }

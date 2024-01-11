@@ -721,7 +721,6 @@ GameObject:
   - component: {fileID: 6927450689429453694}
   - component: {fileID: 2728234572721092454}
   - component: {fileID: 5506170467834880514}
-  - component: {fileID: 1861099320574930842}
   m_Layer: 5
   m_Name: Sliding with buttons
   m_TagString: Untagged
@@ -790,21 +789,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1861099320574930842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7151519103101343751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f2d0c3121da37749b8df9c76e01adf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  remember: Remember to use the correct derived class
-  _gridTransform: {fileID: 0}
-  _slotPrefab: {fileID: 0}
 --- !u!1001 &3463643643105787112
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ public class Product
 {
     public int id;
     public string productName;
+    public string description;
     public float buyPrice;
     public float maxSoldPrice;
     public float karma;
