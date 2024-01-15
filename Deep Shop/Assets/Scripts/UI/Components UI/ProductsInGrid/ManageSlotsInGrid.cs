@@ -53,7 +53,7 @@ public class ManageSlotsInGrid : MonoBehaviour
         if (index != -1)
         {
             Destroy(_gridTransform.GetChild(index).gameObject);
-            _productsInGrid.RemoveAt(index);
+            _productsInGrid[index] = -1;
         }
     }
 
