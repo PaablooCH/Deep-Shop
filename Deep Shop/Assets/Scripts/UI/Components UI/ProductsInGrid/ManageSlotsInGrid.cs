@@ -52,7 +52,7 @@ public class ManageSlotsInGrid : MonoBehaviour
         int index = _productsInGrid.FindIndex((id) => id == removedItem);
         if (index != -1)
         {
-            Destroy(_gridTransform.GetChild(index));
+            Destroy(_gridTransform.GetChild(index).gameObject);
             _productsInGrid.RemoveAt(index);
         }
     }
