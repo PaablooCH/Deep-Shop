@@ -18,42 +18,39 @@ public class ManageSlotsInGrid : MonoBehaviour
     [SerializeField]
     protected GameObject _slotPrefab;
 
-    protected List<int> _productsInGrid = new();    // I store the idPRoduct,
-                                                    // the index in the list is a reference of child position
-                                                    // in transform
+    protected Dictionary<int, GameObject> _productsInGrid = new(); // key -> productID; value -> slot
 
     public virtual GameObject AddItem(GameObject newItem)
     {
         int newId = newItem.GetComponent<ProductInfo>().Product.id;
-        if (!_productsInGrid.Contains(newId))
+        if (!_productsInGrid.ContainsKey(newId))
         {
-            _productsInGrid.Add(newId);
             GameObject gridObject = Instantiate(_slotPrefab, _gridTransform);
             SpriteRenderer spriteRenderer = newItem.GetComponent<SpriteRenderer>();
             Image image = gridObject.transform.Find("Product Image").GetComponent<Image>();
             image.sprite = spriteRenderer.sprite;
             image.color = spriteRenderer.color;
             image.enabled = true;
+            _productsInGrid.Add(newId, gridObject);
             return gridObject;
         }
-        int index = _productsInGrid.FindIndex((idProduct) => idProduct == newId);
-        return _gridTransform.GetChild(index).gameObject;
+        return _productsInGrid[newId];
     }
 
     public void ModifyQuantity(int modifiedItem, int amount)
     {
-        int index = _productsInGrid.FindIndex((idProduct) => idProduct == modifiedItem);
-        TextMeshProUGUI text = _gridTransform.GetChild(index).Find("Quantity").GetComponent<TextMeshProUGUI>();
-        text.text = amount.ToString();
+        if (_productsInGrid.TryGetValue(modifiedItem, out GameObject slot))
+        {
+            TextMeshProUGUI text = slot.transform.Find("Quantity").GetComponent<TextMeshProUGUI>();
+            text.text = amount.ToString();
+        }
     }
 
     protected void RemoveItem(int removedItem)
     {
-        int index = _productsInGrid.FindIndex((id) => id == removedItem);
-        if (index != -1)
+        if (_productsInGrid.TryGetValue(removedItem, out GameObject slot))
         {
-            Destroy(_gridTransform.GetChild(index).gameObject);
-            _productsInGrid[index] = -1;
+            Destroy(slot);
         }
     }
 
@@ -65,14 +62,5 @@ public class ManageSlotsInGrid : MonoBehaviour
             Transform child = _gridTransform.GetChild(i);
             Destroy(child.gameObject);
         }
-    }
-
-    public int GetIdProductFromChild(int siblingPosition)
-    {
-        if (siblingPosition < _gridTransform.childCount)
-        {
-            return _productsInGrid[siblingPosition];
-        }
-        return -1;
     }
 }

@@ -6,21 +6,22 @@ public class SelectedShopProduct : MonoBehaviour
     private ManageShopGrid _manageShopGrid;
 
     private bool _addedToCart = false;
+    private int _productId;
 
     public ShopUI ShopUI { get => _shopUI; set => _shopUI = value; }
     public ManageShopGrid ManageShopGrid { get => _manageShopGrid; set => _manageShopGrid = value; }
+    public int ProductId { get => _productId; set => _productId = value; }
 
     public void ModifyCart()
     {
         _addedToCart = !_addedToCart;
         if (_addedToCart)
         {
-            int index = transform.GetSiblingIndex();
-            _shopUI.AddToCart(_manageShopGrid.GetIdProductFromChild(index));
+            _shopUI.AddToCart(_productId);
         }
         else
         {
-            _shopUI.DeleteFromCart(_manageShopGrid.GetIdProductFromChild(transform.GetSiblingIndex()));
+            _shopUI.DeleteFromCart(_productId);
         }
     }
 }

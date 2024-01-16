@@ -65,7 +65,6 @@ public class ShopUI : MonoBehaviour, IUIConfirmation, IUIReject
         {
             int quantity = _actualVendorProducts.SearchVendorProduct(productId).quantity;
             DeliverManager.instance.Packages.Add(new DeliverObject(10, new ProductQuantity(productId, quantity)));
-            //InventoryManager.instance.ModifyInventory(productId, quantity); // TODO use a timer to get it at some point
         }
         PlayerStats.instance.Money -= _moneyInCart;
         _cart.Clear();
@@ -98,10 +97,8 @@ public class ShopUI : MonoBehaviour, IUIConfirmation, IUIReject
     {
         if (_cart.Contains(deleteProduct))
         {
-            Debug.Log("Remove " + deleteProduct);
             _moneyInCart -= ProductsManager.instance.GetProductInfo(deleteProduct).Product.buyPrice;
             UpdateCostDependencies();
-            Debug.Log("Money " + _moneyInCart);
             _cart.Remove(deleteProduct);
             if (_cart.Count == 0)
             {
