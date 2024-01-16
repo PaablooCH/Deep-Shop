@@ -1,14 +1,4 @@
-using System.Collections.Generic;
 using UnityEngine;
-
-public enum UIType
-{
-    INVENTORY,
-    TRADE,
-    SHOP,
-    ITEMS_ACQUIRED,
-    CRAFT
-}
 
 public class CanvasManager : MonoBehaviour
 {
@@ -26,112 +16,67 @@ public class CanvasManager : MonoBehaviour
     }
     #endregion
 
-    private class MyUI
-    {
-        GameObject uiGameObject;
-        UIType type;
-        bool activeBackUp;
-        bool gamePaused;
+    [SerializeField]
+    private GameObject _menuUI;
 
-        public MyUI(GameObject go, UIType type)
-        {
-            uiGameObject = go;
-            this.type = type;
-            activeBackUp = false;
-            gamePaused = false;
-        }
+    private GameObject _actualUI;
 
-        public GameObject UiGameObject { get => uiGameObject; set => uiGameObject = value; }
-        public bool ActiveBackUp { get => activeBackUp; set => activeBackUp = value; }
-        public UIType Type { get => type; set => type = value; }
-        public bool GamePaused { get => gamePaused; set => gamePaused = value; }
-    }
-
-    private List<MyUI> _uis = new(); // small number of UI and I can search iteratively
-
-    private bool _backUp = false;
-
-    public void AddUI(UIType ui, GameObject gameObjectUI)
-    {
-        _uis.Add(new MyUI(gameObjectUI, ui));
-    }
+    private bool _opened = false;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ActiveUI(UIType.CRAFT);
+            if (_opened)
+            {
+                FreeUI();
+                CallExit();
+                if (_actualUI.TryGetComponent(out MenuWindowUI menu))
+                {
+                    menu.Exit();
+                }
+            }
+            else
+            {
+                ActiveUI(_menuUI);
+                MenuWindowUI menu = _actualUI.GetComponent<MenuWindowUI>();
+                menu.OpenUI(null);
+            }
         }
     }
 
-    public void ActiveUI(UIType type)
+    private void CallExit()
     {
-        if (type == UIType.INVENTORY)
+        if (_actualUI.TryGetComponent(out MenuWindowUI menu))
         {
-            CreateBackUp();
+            menu.Exit();
         }
-        PauseManager.instance.Pause();
-        MyUI myUI = SearchByType(type);
-        myUI.UiGameObject.SetActive(true);
-        myUI.GamePaused = true;
+        else if (_actualUI.TryGetComponent(out ShopUI shop))
+        {
+            shop.Exit();
+        }
+        else if (_actualUI.TryGetComponent(out ItemsAcquiredUI itemAcquired))
+        {
+            itemAcquired.Exit();
+        }
+        else if (_actualUI.TryGetComponent(out TradeUI trade))
+        {
+            trade.Exit();
+        }
     }
 
-    public void FreeUI(UIType type)
+    public void ActiveUI(GameObject newUI)
+    {
+        PauseManager.instance.Pause();
+        _actualUI = newUI;
+        _actualUI.SetActive(true);
+        _opened = true;
+    }
+
+    public void FreeUI()
     {
         PauseManager.instance.Restart();
-        MyUI ui = SearchByType(type);
-        ui.UiGameObject.SetActive(false);
-        ui.ActiveBackUp = false;
-        ui.GamePaused = false;
-        RestoreBackUp();
-    }
-
-    private MyUI SearchByType(UIType type)
-    {
-        foreach(MyUI ui in _uis)
-        {
-            if (ui.Type == type)
-            {
-                return ui;
-            }
-        }
-        return null;
-    }
-
-    private void CreateBackUp()
-    {
-        if (_backUp)
-        {
-            return;
-        }
-
-        foreach (MyUI myUI in _uis)
-        {
-            myUI.ActiveBackUp = myUI.UiGameObject.activeInHierarchy;
-            myUI.UiGameObject.SetActive(false);
-        }
-        _backUp = true;
-    }
-
-    private void RestoreBackUp()
-    {
-        foreach(MyUI myUI in _uis)
-        {
-            myUI.UiGameObject.SetActive(myUI.ActiveBackUp);
-            myUI.ActiveBackUp = false;
-            if (myUI.GamePaused)
-            {
-                PauseManager.instance.Pause();
-            }
-        }
-        _backUp = false;
-    }
-
-    private void ClearBackUp()
-    {
-        foreach (MyUI myUI in _uis)
-        {
-            myUI.ActiveBackUp = false;
-        }
+        _actualUI.SetActive(false);
+        _opened = false;
     }
 }

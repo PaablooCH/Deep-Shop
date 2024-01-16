@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TooltipManager : MonoBehaviour
@@ -21,10 +19,13 @@ public class TooltipManager : MonoBehaviour
     [SerializeField]
     TooltipUI _tooltipUI;
 
+    // TODO cuando esta activo y se cambia de ventana se queda activo
     public void Show(string body, string header = "")
     {
+        _tooltipUI.CleanGameObjectsAdded();
         _tooltipUI.SetText(body, header);
         _tooltipUI.gameObject.SetActive(true);
+        _tooltipUI.MoveTooltipToMouse();
     }
 
     public void Hide()

@@ -4,41 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CraftUI : MonoBehaviour, IUI
+public class CraftUI : MonoBehaviour
 {
     [SerializeField]
     private ManageCraftGrid _manageCraftGrid;
     [SerializeField]
     private GameObject _prefabRecipeTooltip;
 
-    private bool _gridCreated = false;
-
     private void Start()
     {
         gameObject.SetActive(false);
-        CanvasManager.instance.AddUI(UIType.CRAFT, gameObject);
-    }
-
-    public void Exit()
-    {
-        CanvasManager.instance.FreeUI(UIType.CRAFT);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            CreateGrid();
-        }
-    }
-
-    public void OpenUI(GameObject go)
-    {
-        if (!_gridCreated)
-        {
-            CreateGrid();
-        }
-        CanvasManager.instance.ActiveUI(UIType.CRAFT);
     }
 
     public void CreateGrid()
@@ -48,9 +23,9 @@ public class CraftUI : MonoBehaviour, IUI
             GameObject productResult = ProductsManager.instance.SearchProductByID(recipe.productResult.idProduct);
             GameObject gridCraft = _manageCraftGrid.AddItem(productResult);
             _manageCraftGrid.ModifyQuantity(recipe.productResult.idProduct, recipe.productResult.quantity);
+            gridCraft.GetComponent<CraftAction>().RecipeId = recipe.id;
             CreateTooltip(recipe, gridCraft);
         }
-        _gridCreated = true;
     }
 
     private void CreateTooltip(Recipe recipe, GameObject gridCraft)
@@ -74,8 +49,13 @@ public class CraftUI : MonoBehaviour, IUI
             tooltipInfo.transform.Find("Product Image").GetComponent<Image>().sprite =
                 productNeeded.GetComponent<SpriteRenderer>().sprite;
 
-            tooltipInfo.transform.Find("Text").GetComponent<TextMeshProUGUI>().text =
-                productQuantity.quantity.ToString() + " x " + productName;
+            TextMeshProUGUI textMeshPro = tooltipInfo.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+            textMeshPro.text = productQuantity.quantity.ToString() + " x " + productName;
+
+            if (InventoryManager.instance.GetInventory(productQuantity.idProduct) < productQuantity.quantity) // Not available ingredient
+            {
+                textMeshPro.color = Color.red;
+            }
 
             gameObjectsTooltip[i] = tooltipInfo;
         }

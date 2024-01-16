@@ -13,9 +13,9 @@ public class TooltipGameObjectTrigger : TooltipTrigger
         TooltipManager.instance.AddGameObjects(_gameObjectsTooltip);
     }
 
-    public override void OnPointerExit(PointerEventData eventData)
+    public void ResetGameObjects()
     {
-        base.OnPointerExit(eventData);
         TooltipManager.instance.CleanGameObjectsAdded();
+        TooltipManager.instance.AddGameObjects(_gameObjectsTooltip);
     }
 }

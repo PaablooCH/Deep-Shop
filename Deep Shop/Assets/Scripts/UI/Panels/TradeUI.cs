@@ -18,7 +18,6 @@ public class TradeUI : MonoBehaviour, IUIConfirmation, IUIReject
     private void Start()
     {
         gameObject.SetActive(false);
-        CanvasManager.instance.AddUI(UIType.TRADE, gameObject);
     }
 
     public void OpenUI(GameObject product)
@@ -26,7 +25,7 @@ public class TradeUI : MonoBehaviour, IUIConfirmation, IUIReject
         if (product.TryGetComponent(out ProductInfo component))
         {
             _actualProduct = component;
-            CanvasManager.instance.ActiveUI(UIType.TRADE);
+            CanvasManager.instance.ActiveUI(gameObject);
             SpriteRenderer spriteProduct = _actualProduct.GetComponent<SpriteRenderer>();
 
             // Update Product Color
@@ -53,7 +52,7 @@ public class TradeUI : MonoBehaviour, IUIConfirmation, IUIReject
 
     public void Exit()
     {
-        CanvasManager.instance.FreeUI(UIType.TRADE);
+        CanvasManager.instance.FreeUI();
         _actualProduct = null;
     }
 
@@ -64,13 +63,13 @@ public class TradeUI : MonoBehaviour, IUIConfirmation, IUIReject
         PlayerStats.instance.Trade(_actualProduct, int.Parse(tMP_InputField.text), tradeUISlider.value);
         _actualProduct = null;
         _sellInteraction.EndInteraction();
-        CanvasManager.instance.FreeUI(UIType.TRADE);
+        CanvasManager.instance.FreeUI();
     }
 
     public void Reject()
     {
         PlayerStats.instance.Karma -= _actualProduct.Product.karma;
         _sellInteraction.EndInteraction();
-        CanvasManager.instance.FreeUI(UIType.TRADE);
+        CanvasManager.instance.FreeUI();
     }
 }

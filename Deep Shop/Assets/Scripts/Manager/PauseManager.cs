@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseManager : MonoBehaviour
@@ -18,24 +16,7 @@ public class PauseManager : MonoBehaviour
     }
     #endregion
 
-    //public GameObject menuPause;
     private bool _paused = false;
-
-    void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    if (paused)
-        //    {
-        //        Restart();
-        //    }
-        //    else
-        //    {
-        //        Pause();
-        //    }
-        //}
-    }
-
     public void Pause()
     {
         if (!_paused)

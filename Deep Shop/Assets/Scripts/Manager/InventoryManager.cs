@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,6 +40,14 @@ public class InventoryManager : MonoBehaviour
             {
                 ModifyInventory(startInventory.productID, startInventory.amount);
             }
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            inventory[0]++;
         }
     }
 

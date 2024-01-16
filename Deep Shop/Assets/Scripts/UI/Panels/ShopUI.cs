@@ -25,7 +25,6 @@ public class ShopUI : MonoBehaviour, IUIConfirmation, IUIReject
     private void Start()
     {
         gameObject.SetActive(false);
-        CanvasManager.instance.AddUI(UIType.SHOP, gameObject);
     }
 
     public void OpenUI(GameObject vendor)
@@ -33,7 +32,7 @@ public class ShopUI : MonoBehaviour, IUIConfirmation, IUIReject
         if (vendor.TryGetComponent(out VendorProductsToSell component))
         {
             _actualVendorProducts = component;
-            CanvasManager.instance.ActiveUI(UIType.SHOP);
+            CanvasManager.instance.ActiveUI(gameObject);
 
             foreach (ProductQuantity vendorProduct in _actualVendorProducts.VendorProducts)
             {
@@ -53,7 +52,7 @@ public class ShopUI : MonoBehaviour, IUIConfirmation, IUIReject
 
     public void Exit()
     {
-        CanvasManager.instance.FreeUI(UIType.SHOP);
+        CanvasManager.instance.FreeUI();
         _cart.Clear();
         _manageShopGrid.CleanGrid();
     }
@@ -70,13 +69,13 @@ public class ShopUI : MonoBehaviour, IUIConfirmation, IUIReject
         _cart.Clear();
         _manageShopGrid.CleanGrid();
         _buyInteraction.EndInteraction();
-        CanvasManager.instance.FreeUI(UIType.SHOP);
+        CanvasManager.instance.FreeUI();
     }
 
     public void Reject()
     {
         _buyInteraction.EndInteraction();
-        CanvasManager.instance.FreeUI(UIType.SHOP);
+        CanvasManager.instance.FreeUI();
     }
 
     public void AddToCart(int idProduct)

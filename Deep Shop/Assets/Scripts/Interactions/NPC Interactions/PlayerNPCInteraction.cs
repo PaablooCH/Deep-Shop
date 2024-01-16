@@ -1,20 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerNPCInteraction : MonoBehaviour
 {
     protected GameObject _npc = null;
     protected bool _isPlayer = false;
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (_isPlayer && _npc && Input.GetKeyDown(KeyCode.E))
-        {
-            // open dialog
-        }
-    }
 
     public virtual void EndInteraction()
     {

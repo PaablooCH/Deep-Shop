@@ -32,6 +32,11 @@ public class TooltipUI : MonoBehaviour
         _rectTransform = GetComponent<RectTransform>();
     }
 
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
+
     void Update()
     {
         // Tooltip Position
@@ -49,6 +54,11 @@ public class TooltipUI : MonoBehaviour
 
         //_rectTransform.anchoredPosition = anchoredPosition;
 
+        MoveTooltipToMouse();
+    }
+
+    public void MoveTooltipToMouse()
+    {
         Vector2 mousePosition = Input.mousePosition;
         if (mousePosition.x < Screen.width * 0.5f)
         {

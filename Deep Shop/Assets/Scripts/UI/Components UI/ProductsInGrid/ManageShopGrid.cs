@@ -10,7 +10,6 @@ public class ManageShopGrid : ManageSlotsInGrid
         // Don't need comprobation 100% the item is inside
         int newId = newItem.GetComponent<ProductInfo>().Product.id;
         SelectedShopProduct selectedProduct =  shopSlot.GetComponentInChildren<SelectedShopProduct>();
-        selectedProduct.ManageShopGrid = this;
         selectedProduct.ProductId = newId;
         return shopSlot;
     }

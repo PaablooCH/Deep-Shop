@@ -1,40 +1,17 @@
 using UnityEngine;
 
-public class InventoryUI : MonoBehaviour, IUI
+public class InventoryUI : MonoBehaviour
 {
     private bool _childsInitialized = false;
-
-    public void OpenUI(GameObject go)
-    {
-        CanvasManager.instance.ActiveUI(UIType.INVENTORY);
-    }
-
-    public void Exit()
-    {
-        CanvasManager.instance.FreeUI(UIType.INVENTORY);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        CanvasManager.instance.AddUI(UIType.INVENTORY, transform.GetChild(0).gameObject);
-    }
 
     // Update is called once per frame
     void Update()
     {
         if (!_childsInitialized)
         {
-            CanvasManager.instance.FreeUI(UIType.INVENTORY);
+            transform.parent?.gameObject.SetActive(false);
+            gameObject.SetActive(false);
             _childsInitialized = true;
-        }
-        if (Input.GetKey(KeyCode.Tab))
-        {
-            OpenUI(null);
-        }
-        if (Input.GetKeyUp(KeyCode.Tab))
-        {
-            Exit();
         }
     }
 }
