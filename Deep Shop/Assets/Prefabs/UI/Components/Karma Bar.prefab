@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4825139413821531727}
   - component: {fileID: 348028084599472967}
   - component: {fileID: 4162328326129006716}
+  - component: {fileID: 8206374488993688437}
   m_Layer: 5
   m_Name: Karma Bar
   m_TagString: Untagged
@@ -105,6 +106,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _evilSlider: {fileID: 0}
   _goodSlider: {fileID: 0}
+--- !u!114 &8206374488993688437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3432687365402241337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f720161a8285b45b2fbd96c7372d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _header: Karma
+  _body: Game changing
 --- !u!1 &4781466185361544345
 GameObject:
   m_ObjectHideFlags: 0

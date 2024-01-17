@@ -78,5 +78,6 @@ public class CanvasManager : MonoBehaviour
         PauseManager.instance.Restart();
         _actualUI.SetActive(false);
         _opened = false;
+        TooltipManager.instance.Hide();
     }
 }

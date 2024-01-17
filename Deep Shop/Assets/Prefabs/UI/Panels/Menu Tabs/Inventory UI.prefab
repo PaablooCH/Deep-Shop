@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 8927435430234439367}
   - component: {fileID: 1043227121882739930}
   - component: {fileID: 3159561370553773823}
+  - component: {fileID: 1862436525541311909}
   m_Layer: 5
   m_Name: Money
   m_TagString: Untagged
@@ -217,6 +218,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _quantity: {fileID: 6939890760120114477}
+--- !u!114 &1862436525541311909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192471598607188873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f720161a8285b45b2fbd96c7372d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _header: Money
+  _body: Buy things with it
 --- !u!1 &7441266068896737273
 GameObject:
   m_ObjectHideFlags: 0
