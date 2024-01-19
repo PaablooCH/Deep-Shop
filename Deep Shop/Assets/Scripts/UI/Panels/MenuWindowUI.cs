@@ -3,32 +3,26 @@ using UnityEngine;
 public class MenuWindowUI : MonoBehaviour, IUI
 {
     [SerializeField]
-    private GameObject _predeterminedTab;
+    private MenuTab _predeterminedTab;
 
-    private GameObject _activeTab;
+    private MenuTab _activeMenuTab;
 
     // Pre Open Tabs conditions
     private bool _gridCreated = false;
 
-    private void Start()
+    public void ChangeTab(MenuTab menuTab)
     {
-        _activeTab = _predeterminedTab;
-    }
-
-    public void ChangeTab(GameObject tab)
-    {
-        CheckPreOpenTab(tab);
-        if (tab != _activeTab)
+        CheckPreOpenTab(menuTab.MenuTabWindow);
+        if (menuTab != _activeMenuTab)
         {
-            _activeTab.SetActive(false);
-            _activeTab = tab;
-            _activeTab.SetActive(true);
+            _activeMenuTab.DeselectTab();
+            _activeMenuTab = menuTab;
         }
     }
 
-    private void CheckPreOpenTab(GameObject tab)
+    private void CheckPreOpenTab(GameObject tabWindow)
     {
-        if (!_gridCreated && tab.TryGetComponent(out CraftUI craftUI))
+        if (!_gridCreated && tabWindow.TryGetComponent(out CraftUI craftUI))
         {
             craftUI.CreateGrid();
             _gridCreated = true;
@@ -37,12 +31,12 @@ public class MenuWindowUI : MonoBehaviour, IUI
 
     public void OpenUI(GameObject go)
     {
-        _activeTab = _predeterminedTab;
-        _activeTab.SetActive(true);
+        _predeterminedTab.ActiveGameObjects(true);
+        _activeMenuTab = _predeterminedTab;
     }
 
     public void Exit()
     {
-        _activeTab.SetActive(false);
+        _activeMenuTab.DeselectTab();
     }
 }

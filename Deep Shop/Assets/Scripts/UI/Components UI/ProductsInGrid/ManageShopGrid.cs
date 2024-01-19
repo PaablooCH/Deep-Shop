@@ -8,9 +8,15 @@ public class ManageShopGrid : ManageSlotsInGrid
         GameObject shopSlot = base.AddItem(newItem);
 
         // Don't need comprobation 100% the item is inside
-        int newId = newItem.GetComponent<ProductInfo>().Product.id;
-        SelectedShopProduct selectedProduct =  shopSlot.GetComponentInChildren<SelectedShopProduct>();
+        Product product = newItem.GetComponent<ProductInfo>().Product;
+        int newId = product.id;
+        SelectedShopProduct selectedProduct = shopSlot.GetComponentInChildren<SelectedShopProduct>();
         selectedProduct.ProductId = newId;
+
+        TooltipTrigger tooltipTrigger = shopSlot.GetComponent<TooltipTrigger>();
+        tooltipTrigger.Header = product.productName;
+        tooltipTrigger.Body = product.description;
+
         return shopSlot;
     }
 
