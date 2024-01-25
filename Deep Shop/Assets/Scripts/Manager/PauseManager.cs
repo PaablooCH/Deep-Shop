@@ -17,6 +17,7 @@ public class PauseManager : MonoBehaviour
     #endregion
 
     private bool _paused = false;
+
     public void Pause()
     {
         if (!_paused)

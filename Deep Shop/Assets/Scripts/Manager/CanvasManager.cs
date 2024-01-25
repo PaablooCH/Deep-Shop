@@ -40,7 +40,7 @@ public class CanvasManager : MonoBehaviour
             {
                 ActiveUI(_menuUI);
                 MenuWindowUI menu = _actualUI.GetComponent<MenuWindowUI>();
-                menu.OpenUI(null);
+                menu.OpenUI();
             }
         }
     }

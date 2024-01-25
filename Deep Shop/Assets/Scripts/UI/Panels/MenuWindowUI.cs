@@ -29,7 +29,7 @@ public class MenuWindowUI : MonoBehaviour, IUI
         }
     }
 
-    public void OpenUI(GameObject go)
+    public void OpenUI()
     {
         _predeterminedTab.ActiveGameObjects(true);
         _activeMenuTab = _predeterminedTab;

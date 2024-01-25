@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class TradeUI : MonoBehaviour, IUIConfirmation, IUIReject
+public class TradeUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
 {
     // UI elements
     [SerializeField]

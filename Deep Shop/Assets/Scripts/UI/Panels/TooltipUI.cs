@@ -2,11 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class TooltipUI : MonoBehaviour
+public class TooltipUI : MonoBehaviour, IUI
 {
-    [SerializeField]
-    private RectTransform _canvasTransform; //TODO delete
-
     [SerializeField]
     TextMeshProUGUI _headerField;
     
@@ -39,21 +36,6 @@ public class TooltipUI : MonoBehaviour
 
     void Update()
     {
-        // Tooltip Position
-        //Vector2 anchoredPosition = Input.mousePosition / _canvasTransform.localScale.x;
-        //if (anchoredPosition.x + _rectTransform.rect.width > _canvasTransform.rect.width)
-        //{
-        //    // Tooltip left screen on right side
-        //    anchoredPosition.x = _canvasTransform.rect.width - _rectTransform.rect.width;
-        //}
-        //if (anchoredPosition.y + _rectTransform.rect.height > _canvasTransform.rect.height)
-        //{
-        //    // Tooltip left screen on top side
-        //    anchoredPosition.y = _canvasTransform.rect.height - _rectTransform.rect.height;
-        //}
-
-        //_rectTransform.anchoredPosition = anchoredPosition;
-
         MoveTooltipToMouse();
     }
 
@@ -104,6 +86,24 @@ public class TooltipUI : MonoBehaviour
         for (int i = _numberChildrenStart; i < transform.childCount; i++)
         {
             Destroy(transform.GetChild(i).gameObject);
+        }
+    }
+
+    public void OpenUI()
+    {
+        if (!gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
+        CleanGameObjectsAdded();
+        MoveTooltipToMouse();
+    }
+
+    public void Exit()
+    {
+        if (gameObject.activeSelf)
+        {
+            gameObject.SetActive(false);
         }
     }
 }

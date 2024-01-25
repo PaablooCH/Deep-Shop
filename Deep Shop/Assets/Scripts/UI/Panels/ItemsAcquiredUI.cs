@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemsAcquiredUI : MonoBehaviour, IUIConfirmation
+public class ItemsAcquiredUI : MonoBehaviour, IUIProduct, IUIConfirmation
 {
     // UI elements
     [SerializeField]

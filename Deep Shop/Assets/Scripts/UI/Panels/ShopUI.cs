@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ShopUI : MonoBehaviour, IUIConfirmation, IUIReject
+public class ShopUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
 {
     // UI elements
     [SerializeField]
@@ -20,7 +20,6 @@ public class ShopUI : MonoBehaviour, IUIConfirmation, IUIReject
     private readonly List<int> _cart = new();
 
     private float _moneyInCart = 0f;
-
 
     private void Start()
     {
