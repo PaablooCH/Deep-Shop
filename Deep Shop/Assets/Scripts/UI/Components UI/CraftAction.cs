@@ -17,17 +17,26 @@ public class CraftAction : MonoBehaviour, IPointerEnterHandler
     public void ClickButtonCraft()
     {
         Recipe recipe = RecipeManager.instance.SearchRecipeByID(_recipeId);
+        
         bool canCraft = true;
-        for (int i = 0; i < recipe.productsNeeded.Length; i++)
+        if (PlayerStats.instance.Money < recipe.money)
         {
-            ProductQuantity productNeeded = recipe.productsNeeded[i];
-            int inventoryQuantity = InventoryManager.instance.GetInventory(productNeeded.idProduct);
-            if (inventoryQuantity < productNeeded.quantity)
+            canCraft = false;
+        }
+        else
+        {
+            for (int i = 0; i < recipe.productsNeeded.Length; i++)
             {
-                canCraft = false;
-                break;
+                ProductQuantity productNeeded = recipe.productsNeeded[i];
+                int inventoryQuantity = InventoryManager.instance.GetInventory(productNeeded.idProduct);
+                if (inventoryQuantity < productNeeded.quantity)
+                {
+                    canCraft = false;
+                    break;
+                }
             }
         }
+
         if (canCraft)
         {
             CraftItem();
@@ -50,10 +59,16 @@ public class CraftAction : MonoBehaviour, IPointerEnterHandler
             {
                 tooltip.transform.Find("Text").GetComponent<TextMeshProUGUI>().color = Color.red;
             }
-            else
-            {
-                tooltip.transform.Find("Text").GetComponent<TextMeshProUGUI>().color = Color.black;
-            }
+        }
+
+        // Money
+        PlayerStats.instance.Money -= recipe.money;
+
+        float moneyLeft = PlayerStats.instance.Money;
+        GameObject moneyTooltip = _tooltipGameObject.GameObjectsTooltip[_tooltipGameObject.GameObjectsTooltip.Length - 1];
+        if (moneyLeft < recipe.money)
+        {
+            moneyTooltip.transform.Find("Text").GetComponent<TextMeshProUGUI>().color = Color.red;
         }
 
         InventoryManager.instance.ModifyInventory(recipe.productResult.idProduct, recipe.productResult.quantity);
@@ -77,6 +92,17 @@ public class CraftAction : MonoBehaviour, IPointerEnterHandler
             {
                 tooltip.transform.Find("Text").GetComponent<TextMeshProUGUI>().color = Color.black;
             }
+        }
+
+        float moneyLeft = PlayerStats.instance.Money;
+        GameObject moneyTooltip = _tooltipGameObject.GameObjectsTooltip[_tooltipGameObject.GameObjectsTooltip.Length - 1];
+        if (moneyLeft < recipe.money)
+        {
+            moneyTooltip.transform.Find("Text").GetComponent<TextMeshProUGUI>().color = Color.red;
+        }
+        else
+        {
+            moneyTooltip.transform.Find("Text").GetComponent<TextMeshProUGUI>().color = Color.black;
         }
     }
 }
