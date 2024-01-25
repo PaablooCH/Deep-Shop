@@ -12,11 +12,9 @@ public class DialogueText : ScriptableObject
         public string text;
     }
 
-    [SerializeField]
-    private string _speakerName;
+    [SerializeField] private string _speakerName;
 
-    [SerializeField]
-    private Dialogue[] _dialogues;
+    [SerializeField] private Dialogue[] _dialogues;
 
     public string SpeakerName { get => _speakerName; set => _speakerName = value; }
     public Dialogue[] Dialogues { get => _dialogues; set => _dialogues = value; }

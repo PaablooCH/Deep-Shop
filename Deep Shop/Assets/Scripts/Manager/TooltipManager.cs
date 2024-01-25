@@ -16,8 +16,7 @@ public class TooltipManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField]
-    TooltipUI _tooltipUI;
+    [SerializeField] TooltipUI _tooltipUI;
 
     public void Show(string body, string header = "")
     {

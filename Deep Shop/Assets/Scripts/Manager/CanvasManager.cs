@@ -16,8 +16,7 @@ public class CanvasManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField]
-    private GameObject _menuUI;
+    [SerializeField] private GameObject _menuUI;
 
     private GameObject _actualUI;
 

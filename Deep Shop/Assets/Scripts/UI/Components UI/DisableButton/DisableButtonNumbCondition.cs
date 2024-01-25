@@ -3,18 +3,14 @@ using TMPro;
 
 public class DisableButtonNumbCondition : DisableButton
 {  
-    [SerializeField]
-    private int _lessThan = 0;
-    [SerializeField]
-    private bool _lessResult = true;
-    [SerializeField]
-    private int _equal = 0;
-    [SerializeField]
-    private bool _equalResult = true;
-    [SerializeField]
-    private int _greaterThan = 0;
-    [SerializeField]
-    private bool _greaterResult = true;
+    [SerializeField] private int _lessThan = 0;
+    [SerializeField] private bool _lessResult = true;
+    
+    [SerializeField] private int _equal = 0;
+    [SerializeField] private bool _equalResult = true;
+    
+    [SerializeField] private int _greaterThan = 0;
+    [SerializeField] private bool _greaterResult = true;
 
     public void DisableByInputField(TMP_InputField inputField)
     {

@@ -5,13 +5,10 @@ using TMPro;
 public class TradeUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
 {
     // UI elements
-    [SerializeField]
-    private GameObject _sliderAndText;
-    [SerializeField]
-    private GameObject _inputField;
+    [SerializeField] private GameObject _sliderAndText;
+    [SerializeField] private GameObject _inputField;
 
-    [SerializeField]
-    private SellInteraction _sellInteraction;
+    [SerializeField] private SellInteraction _sellInteraction;
 
     private ProductInfo _actualProduct;
 

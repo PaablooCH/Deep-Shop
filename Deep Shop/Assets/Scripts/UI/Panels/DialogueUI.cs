@@ -6,15 +6,13 @@ using TMPro;
 
 public class DialogueUI : MonoBehaviour, IUI
 {
-    [SerializeField]
-    private TextMeshProUGUI _speakerName;
-    [SerializeField]
-    private Image _portrait;
-    [SerializeField]
-    private TextMeshProUGUI _dialogueContent;
-    [SerializeField]
+    [SerializeField] private TextMeshProUGUI _speakerName;
+    [SerializeField] private TextMeshProUGUI _dialogueContent;
+    
+    [SerializeField] private Image _portrait;
+    
     [Range(0.1f, 10f)]
-    private float _typeSpeed = 10f;
+    [SerializeField] private float _typeSpeed = 10f;
 
     private Queue<DialogueText.Dialogue> _dialogues = new();
 

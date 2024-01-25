@@ -24,12 +24,11 @@ public class PlayerStats : MonoBehaviour
     public OnMoneyChanged onMoneyChanged;
     #endregion
 
-    [SerializeField]
     [Range(0f, float.MaxValue)]
-    private float _money = 100f;
-    [SerializeField]
+    [SerializeField] private float _money = 100f;
+
     [Range(-100f, 100f)]
-    private float _karma = 0f;
+    [SerializeField] private float _karma = 0f;
 
     public float Karma { get => _karma; 
         set 

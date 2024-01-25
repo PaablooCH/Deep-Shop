@@ -2,10 +2,8 @@ using UnityEngine;
 
 public class MenuTab : MonoBehaviour
 {
-    [SerializeField]
-    private MenuWindowUI _menuWindow;
-    [SerializeField]
-    private GameObject _menuTabWindow;
+    [SerializeField] private MenuWindowUI _menuWindow;
+    [SerializeField] private GameObject _menuTabWindow;
 
     private GameObject _notSelected;
     private GameObject _selected;

@@ -3,8 +3,7 @@ using TMPro;
 
 public class UpdateCoinValue : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI _quantity;
+    [SerializeField] private TextMeshProUGUI _quantity;
 
     // Start is called before the first frame update
     void Start()

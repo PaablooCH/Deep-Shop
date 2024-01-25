@@ -3,8 +3,7 @@ using UnityEngine.UI;
 
 public class DisableButton : MonoBehaviour
 {
-    [SerializeField]
-    protected Button _button;
+    [SerializeField] protected Button _button;
 
     public void TurnOff()
     {

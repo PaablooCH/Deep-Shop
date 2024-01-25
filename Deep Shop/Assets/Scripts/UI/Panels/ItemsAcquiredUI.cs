@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemsAcquiredUI : MonoBehaviour, IUIProduct, IUIConfirmation
 {
     // UI elements
-    [SerializeField]
-    private ManageItemsAcquiredInGrid _manageItemsAcquired;
+    [SerializeField] private ManageItemsAcquiredInGrid _manageItemsAcquired;
 
     private PackageWithItems _packagesWithItems;
 

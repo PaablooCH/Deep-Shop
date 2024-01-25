@@ -4,20 +4,14 @@ using TMPro;
 
 public class TooltipUI : MonoBehaviour, IUI
 {
-    [SerializeField]
-    TextMeshProUGUI _headerField;
-    
-    [SerializeField]
-    TextMeshProUGUI _bodyField;
-    
-    [SerializeField]
-    LayoutElement _layoutElement;
-    
-    [SerializeField]
-    private int _charachterWrapLimit;
+    [SerializeField] TextMeshProUGUI _headerField;
+    [SerializeField] TextMeshProUGUI _bodyField;
 
-    [SerializeField]
-    private Vector2 _offset = new(10f, -20f);
+    [SerializeField] LayoutElement _layoutElement;
+
+    [SerializeField] private int _charachterWrapLimit;
+
+    [SerializeField] private Vector2 _offset = new(10f, -20f);
 
     private RectTransform _rectTransform;
 

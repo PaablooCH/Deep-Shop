@@ -32,10 +32,7 @@ public class DeliverManager : MonoBehaviour
     }
     #endregion
 
-    //TODO do the class
-
-    [SerializeField]
-    private PackageWithItems _deliveryPlace;
+    [SerializeField] private PackageWithItems _deliveryPlace;
 
     private List<DeliverObject> _packages = new();
 

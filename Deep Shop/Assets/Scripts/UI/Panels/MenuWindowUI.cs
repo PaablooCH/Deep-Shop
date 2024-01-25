@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class MenuWindowUI : MonoBehaviour, IUI
 {
-    [SerializeField]
-    private MenuTab _predeterminedTab;
+    [SerializeField] private MenuTab _predeterminedTab;
 
     private MenuTab _activeMenuTab;
 

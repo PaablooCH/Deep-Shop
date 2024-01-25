@@ -3,10 +3,8 @@ using UnityEngine.UI;
 
 public class KarmaSliders : MonoBehaviour
 {
-    [SerializeField]
-    private Slider _evilSlider;
-    [SerializeField]
-    private Slider _goodSlider;
+    [SerializeField] private Slider _evilSlider;
+    [SerializeField] private Slider _goodSlider;
 
     void Start()
     {

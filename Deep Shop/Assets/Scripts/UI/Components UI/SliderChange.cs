@@ -4,10 +4,8 @@ using TMPro;
 
 public class SliderChange : MonoBehaviour
 {
-    [SerializeField]
-    private Slider _slider;
-    [SerializeField]
-    private TextMeshProUGUI _textMeshPro;
+    [SerializeField] private Slider _slider;
+    [SerializeField] private TextMeshProUGUI _textMeshPro;
 
     private void Start()
     {

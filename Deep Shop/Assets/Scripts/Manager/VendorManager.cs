@@ -17,20 +17,15 @@ public class VendorManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField]
-    private float _spawnTime = 5f;
-    [SerializeField]
-    private int _numberToSell = 3;
+    [SerializeField] private float _spawnTime = 5f;
 
-    [SerializeField]
-    private GameObject _positionCorner; // probably only need transform
-    [SerializeField]
-    private GameObject _positionStart; // probably only need transform
-    [SerializeField]
-    private GameObject _positionExit; // probably only need transform
+    [SerializeField] private int _numberToSell = 3;
 
-    [SerializeField]
-    private GameObject _basePrefabVendor;
+    [SerializeField] private GameObject _positionCorner; // probably only need transform
+    [SerializeField] private GameObject _positionStart; // probably only need transform
+    [SerializeField] private GameObject _positionExit; // probably only need transform
+
+    [SerializeField] private GameObject _basePrefabVendor;
 
     private GameObject _actualVendor;
 

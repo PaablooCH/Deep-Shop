@@ -4,12 +4,11 @@ using TMPro;
 
 public class CalculateTotalPrice : MonoBehaviour
 {
-    [SerializeField]
-    private Slider _slider;
-    [SerializeField]
-    private TMP_InputField _inputField;
-    [SerializeField]
-    private TextMeshProUGUI _priceText;
+    [SerializeField] private Slider _slider;
+
+    [SerializeField] private TMP_InputField _inputField;
+
+    [SerializeField] private TextMeshProUGUI _priceText;
 
     // Update is called once per frame
     void Update()

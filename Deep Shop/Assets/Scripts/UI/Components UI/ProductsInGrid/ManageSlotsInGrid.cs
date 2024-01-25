@@ -8,14 +8,11 @@ public class ManageSlotsInGrid : MonoBehaviour
 #pragma warning disable 0414
     // Remember to use the correct derived class
     [ReadOnly]
-    [SerializeField]
-    private string remember = "Remember to use the correct derived class";
+    [SerializeField] private string remember = "Remember to use the correct derived class";
 #pragma warning restore 0414
 
-    [SerializeField]
-    protected Transform _gridTransform;
-    [SerializeField]
-    protected GameObject _slotPrefab;
+    [SerializeField] protected Transform _gridTransform;
+    [SerializeField] protected GameObject _slotPrefab;
 
     protected Dictionary<int, GameObject> _productsInGrid = new(); // key -> productID; value -> slot
 

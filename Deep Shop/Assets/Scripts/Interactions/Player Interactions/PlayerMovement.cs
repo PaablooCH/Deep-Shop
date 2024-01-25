@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float _movementSpeed = 5f;
+    [SerializeField] private float _movementSpeed = 5f;
 
     private Rigidbody2D _rb;
+
     private Animator _animator;
+    
     private Vector2 _movement;
 
     // Start is called before the first frame update

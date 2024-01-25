@@ -17,18 +17,13 @@ public class CustomerManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField]
-    private float _spawnTime = 5f;
+    [SerializeField] private float _spawnTime = 5f;
     
-    [SerializeField]
-    private GameObject _positionCorner; // probably only need transform
-    [SerializeField]
-    private GameObject _positionStart; // probably only need transform
-    [SerializeField]
-    private GameObject _positionExit; // probably only need transform
+    [SerializeField] private GameObject _positionCorner; // probably only need transform
+    [SerializeField] private GameObject _positionStart; // probably only need transform
+    [SerializeField] private GameObject _positionExit; // probably only need transform
 
-    [SerializeField]
-    private GameObject _basePrefabCostumer;
+    [SerializeField] private GameObject _basePrefabCostumer;
 
     private Queue<GameObject> _customers = new();
     private float _spawnCounter = 0f;

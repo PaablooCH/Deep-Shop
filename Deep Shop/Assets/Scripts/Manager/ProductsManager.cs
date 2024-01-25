@@ -24,10 +24,9 @@ public class ProductsManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField]
-    private GameObject _basePrefab;
-    [SerializeField]
-    private GameObject[] _products;
+    [SerializeField] private GameObject _basePrefab;
+    [SerializeField] private GameObject[] _products;
+
     private int _totalWeightSpawn = 0;
 
     private const string PRODUCTS_PATH = "JSONs/products";

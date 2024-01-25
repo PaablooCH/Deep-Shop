@@ -10,8 +10,7 @@ public enum NPCState
 
 public class NPCBehaviour : MonoBehaviour
 {
-    [SerializeField]
-    private float _movementSpeed = 30f;
+    [SerializeField] private float _movementSpeed = 30f;
 
     private float _timer = 2f;
     private NPCState _npcState = NPCState.NONE;

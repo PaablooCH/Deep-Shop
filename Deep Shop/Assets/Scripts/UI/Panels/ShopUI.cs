@@ -6,15 +6,11 @@ using TMPro;
 public class ShopUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
 {
     // UI elements
-    [SerializeField]
-    private ManageShopGrid _manageShopGrid;
-    [SerializeField]
-    private TextMeshProUGUI _cost;
-    [SerializeField]
-    private Button _button;
+    [SerializeField] private Button _button;
+    [SerializeField] private TextMeshProUGUI _cost;
+    [SerializeField] private ManageShopGrid _manageShopGrid;
 
-    [SerializeField]
-    private BuyInteraction _buyInteraction;
+    [SerializeField] private BuyInteraction _buyInteraction;
 
     VendorProductsToSell _actualVendorProducts;
     private readonly List<int> _cart = new();

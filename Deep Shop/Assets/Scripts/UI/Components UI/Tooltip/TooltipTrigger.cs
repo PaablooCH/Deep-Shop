@@ -3,10 +3,8 @@ using UnityEngine.EventSystems;
 
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField]
-    protected string _header;
-    [SerializeField]
-    protected string _body;
+    [SerializeField] protected string _header;
+    [SerializeField] protected string _body;
 
     public string Header { get => _header; set => _header = value; }
     public string Body { get => _body; set => _body = value; }

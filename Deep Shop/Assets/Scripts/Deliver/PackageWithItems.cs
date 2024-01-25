@@ -3,14 +3,11 @@ using UnityEngine;
 
 public class PackageWithItems : MonoBehaviour
 {
-    [SerializeField]
-    private ItemsAcquiredUI _itemsAcquiredUI;
-    [SerializeField]
-    private SpriteRenderer _chestOpened;
-    [SerializeField]
-    private SpriteRenderer _chestClosed;
-    [SerializeField]
-    private SpriteRenderer _chestEmpty;
+    [SerializeField] private ItemsAcquiredUI _itemsAcquiredUI;
+
+    [SerializeField] private SpriteRenderer _chestOpened;
+    [SerializeField] private SpriteRenderer _chestClosed;
+    [SerializeField] private SpriteRenderer _chestEmpty;
 
     private List<ProductQuantity> _package = new();
     private bool _isPlayer = false;

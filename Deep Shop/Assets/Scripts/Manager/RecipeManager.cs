@@ -24,8 +24,7 @@ public class RecipeManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField]
-    private Recipe[] _recipes;
+    [SerializeField] private Recipe[] _recipes;
 
     private const string RECIPES_PATH = "JSONs/recipes";
 

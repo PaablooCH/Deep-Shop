@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class BuyInteraction : PlayerNPCInteraction
 {
-    [SerializeField]
-    private ShopUI _shopUI;
+    [SerializeField] private ShopUI _shopUI;
 
     // Start is called before the first frame update
     void Start()

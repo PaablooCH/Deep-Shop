@@ -2,11 +2,10 @@ using UnityEngine;
 
 public abstract class NPC : MonoBehaviour, IInteractable
 {
-    [SerializeField]
-    private SpriteRenderer _interactSprite;
-    [SerializeField]
+    [SerializeField] private SpriteRenderer _interactSprite;
+    
     [Min(0.1f)]
-    private float _interactionDistance = 1.1f;
+    [SerializeField] private float _interactionDistance = 1.1f;
 
     private Transform _playerTransform;
 

@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class CraftUI : MonoBehaviour
 {
-    [SerializeField]
-    private ManageCraftGrid _manageCraftGrid;
-    [SerializeField]
-    private GameObject _prefabRecipeTooltip;
+    [SerializeField] private ManageCraftGrid _manageCraftGrid;
+    [SerializeField] private GameObject _prefabRecipeTooltip;
 
     private void Start()
     {

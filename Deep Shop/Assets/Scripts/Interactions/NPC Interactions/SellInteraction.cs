@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class SellInteraction : PlayerNPCInteraction
 {
-    [SerializeField]
-    private TradeUI _tradeUIManager;
+    [SerializeField] private TradeUI _tradeUIManager;
 
     // Start is called before the first frame update
     void Start()
