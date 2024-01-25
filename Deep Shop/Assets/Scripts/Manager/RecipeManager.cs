@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [System.Serializable]
@@ -19,12 +20,14 @@ public class RecipeManager : MonoBehaviour
             return;
         }
         instance = this;
-        ReadJSON();
+        StartCoroutine(LoadRecipesAsync());
     }
     #endregion
 
     [SerializeField]
     private Recipe[] _recipes;
+
+    private const string RECIPES_PATH = "JSONs/recipes";
 
     public Recipe[] Recipes { get => _recipes; set => _recipes = value; }
 
@@ -52,9 +55,19 @@ public class RecipeManager : MonoBehaviour
         return null;
     }
 
-    private void ReadJSON()
+    private IEnumerator LoadRecipesAsync()
     {
-        TextAsset jsonAsset = Resources.Load<TextAsset>("JSONs/recipes");
+        ResourceRequest request = Resources.LoadAsync<TextAsset>(RECIPES_PATH);
+
+        while (!request.isDone)
+        {
+            float progress = request.progress;
+            Debug.Log("Recipes load progress: " + progress * 100f + "%");
+            yield return null;
+        }
+        Debug.Log("Recipes load progress: 100%");
+
+        TextAsset jsonAsset = request.asset as TextAsset;
         if (jsonAsset != null)
         {
             RecipeArray dataPrefab = JsonUtility.FromJson<RecipeArray>(jsonAsset.text);

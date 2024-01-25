@@ -36,12 +36,6 @@ public class VendorManager : MonoBehaviour
 
     private float _spawnCounter = 0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        InstantiateVendor();
-    }
-
     // Update is called once per frame
     void Update()
     {

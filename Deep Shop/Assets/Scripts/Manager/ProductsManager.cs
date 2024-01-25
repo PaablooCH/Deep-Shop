@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [System.Serializable]
@@ -19,7 +20,7 @@ public class ProductsManager : MonoBehaviour
             return;
         }
         instance = this;
-        ReadJSON();
+        StartCoroutine(LoadProductsAsync());
     }
     #endregion
 
@@ -28,6 +29,8 @@ public class ProductsManager : MonoBehaviour
     [SerializeField]
     private GameObject[] _products;
     private int _totalWeightSpawn = 0;
+
+    private const string PRODUCTS_PATH = "JSONs/products";
 
     public GameObject[] Products { get => _products; set => _products = value; }
     public int TotalWeightSpawn { get => _totalWeightSpawn; set => _totalWeightSpawn = value; }
@@ -90,9 +93,20 @@ public class ProductsManager : MonoBehaviour
         return _products[_products.Length - 1];
     }
 
-    private void ReadJSON()
+    private IEnumerator LoadProductsAsync()
     {
-        TextAsset jsonAsset = Resources.Load<TextAsset>("JSONs/products");
+        ResourceRequest request = Resources.LoadAsync<TextAsset>(PRODUCTS_PATH);
+
+        while (!request.isDone)
+        {
+            float progress = request.progress;
+            Debug.Log("Products load progress: " + progress * 100f + "%");
+            yield return null;
+        }
+        Debug.Log("Products load progress: 100%");
+
+        TextAsset jsonAsset = request.asset as TextAsset;
+
         if (jsonAsset != null)
         {
             ProductArray dataPrefab = JsonUtility.FromJson<ProductArray>(jsonAsset.text);
@@ -104,12 +118,11 @@ public class ProductsManager : MonoBehaviour
                 GameObject newPrefab = Instantiate(_basePrefab, transform);
 
                 // Set Sprite
-                SpriteRenderer sprite = newPrefab.GetComponent<SpriteRenderer>();
-                Texture2D tex = (Texture2D)Resources.Load(product.spritePath);
-                sprite.sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
-                sprite.color = new Color(product.color.r / 255f, 
-                                    product.color.g / 255f, 
-                                    product.color.b / 255f, 
+                SpriteRenderer spriteRender = newPrefab.GetComponent<SpriteRenderer>();
+                spriteRender.sprite = UtilsLoadResource.LoadSprite(product.spritePath);
+                spriteRender.color = new Color(product.color.r / 255f,
+                                    product.color.g / 255f,
+                                    product.color.b / 255f,
                                     product.color.a / 255f);
 
                 // Set product info
@@ -124,5 +137,6 @@ public class ProductsManager : MonoBehaviour
                 i++;
             }
         }
+        WaitInventory.instance.ProductsReady = true;
     }
 }
