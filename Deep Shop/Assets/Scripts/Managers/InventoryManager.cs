@@ -18,16 +18,31 @@ public class InventoryManager : MonoBehaviour
     }
     #endregion
 
-    #region Listeners
-    public delegate GameObject OnAddItem(GameObject newItem);
-    public OnAddItem onAddItem;
+    [Min(0f)]
+    [SerializeField] private float _money = 100f;
 
-    public delegate void OnModifyQuantity(int idModifiedItem, int amount);
-    public OnModifyQuantity onModifyQuantity;
+    [Range(-100f, 100f)]
+    [SerializeField] private float _karma = 0f;
 
-    public delegate void OnRemoveItem(int idRemovedItem);
-    public OnRemoveItem onRemoveItem;
-    #endregion
+    public float Karma
+    {
+        get => _karma;
+        set
+        {
+            GameEventManager.instance.inventoryEvent.KarmaChanged(value, _karma);
+            _karma = value;
+        }
+    }
+
+    public float Money
+    {
+        get => _money;
+        set
+        {
+            GameEventManager.instance.inventoryEvent.MoneyChange(value);
+            _money = value;
+        }
+    }
 
     private Dictionary<int, int> _inventory = new(); // key -> product id, value -> ammount
     
@@ -65,6 +80,16 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void Trade(ProductInfo product, int n, float price)
+    {
+        ModifyInventory(product.Product.id, -n);
+        Karma += product.CalculateKarma(price);
+        if (product.CalculatePercentatgeBuy(price) < 2.5f)
+        {
+            Money += price;
+        }
+    }
+
     public int GetInventory(int id)
     {
         return _inventory[id];
@@ -76,7 +101,8 @@ public class InventoryManager : MonoBehaviour
         if (!_inventory.ContainsKey(id))
         {
             _inventory[id] = 0;
-            onAddItem?.Invoke(ProductsManager.instance.SearchProductByID(id));
+            GameObject product = ProductsManager.instance.SearchProductByID(id);
+            GameEventManager.instance.inventoryEvent.AddItem(product);
         }
         if (_inventory[id] + n < 0)
         {
@@ -84,13 +110,13 @@ public class InventoryManager : MonoBehaviour
             return;
         }
         _inventory[id] += n;
-        if (_inventory[id] > 0 && onModifyQuantity != null)
+        if (_inventory[id] > 0)
         {
-            onModifyQuantity(id, _inventory[id]);
+            GameEventManager.instance.inventoryEvent.ModifyQuantity(id, _inventory[id]);
         }
-        else if (_inventory[id] == 0 && onRemoveItem != null)
+        else if (_inventory[id] == 0)
         {
-            onRemoveItem(id);
+            GameEventManager.instance.inventoryEvent.RemoveItem(id);
         }
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Dialogue/New Dialogue Container")]
-public class DialogueText : ScriptableObject
+public class DialogueTextSO : ScriptableObject
 {
     [System.Serializable]
     public class Dialogue

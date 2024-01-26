@@ -14,13 +14,13 @@ public class DialogueUI : MonoBehaviour, IUI
     [Range(0.1f, 10f)]
     [SerializeField] private float _typeSpeed = 10f;
 
-    private Queue<DialogueText.Dialogue> _dialogues = new();
+    private Queue<DialogueTextSO.Dialogue> _dialogues = new();
 
     private bool _endTalking = false;
     private bool _isTyping = false;
 
     private Coroutine _typeCoroutine;
-    private DialogueText.Dialogue _d;
+    private DialogueTextSO.Dialogue _d;
 
     private const string HTML_ALPHA = "<color=#00000000>";
     private const float MAX_TYPE_TIME = 0.1f;
@@ -40,7 +40,7 @@ public class DialogueUI : MonoBehaviour, IUI
         CanvasManager.instance.FreeUI();
     }
 
-    public void NextDialogue(DialogueText dialogueText)
+    public void NextDialogue(DialogueTextSO dialogueText)
     {
         // Nothing in the queue
         if (_dialogues.Count == 0)
@@ -75,7 +75,7 @@ public class DialogueUI : MonoBehaviour, IUI
         }
     }
 
-    private void StartConversation(DialogueText dialogueText)
+    private void StartConversation(DialogueTextSO dialogueText)
     {
         // Open UI
         if (!gameObject.activeSelf)
@@ -87,7 +87,7 @@ public class DialogueUI : MonoBehaviour, IUI
         _speakerName.text = dialogueText.SpeakerName;
 
         // Enqueue dialogues
-        foreach (DialogueText.Dialogue dialogue in dialogueText.Dialogues)
+        foreach (DialogueTextSO.Dialogue dialogue in dialogueText.Dialogues)
         {
             _dialogues.Enqueue(dialogue);
         }
@@ -108,7 +108,7 @@ public class DialogueUI : MonoBehaviour, IUI
         }
     }
 
-    private IEnumerator TypeDialogue(DialogueText.Dialogue dialogueText)
+    private IEnumerator TypeDialogue(DialogueTextSO.Dialogue dialogueText)
     {
         _isTyping = true;
 

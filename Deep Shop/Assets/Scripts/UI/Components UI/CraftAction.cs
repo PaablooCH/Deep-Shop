@@ -19,7 +19,7 @@ public class CraftAction : MonoBehaviour, IPointerEnterHandler
         Recipe recipe = RecipeManager.instance.SearchRecipeByID(_recipeId);
         
         bool canCraft = true;
-        if (PlayerStats.instance.Money < recipe.money)
+        if (InventoryManager.instance.Money < recipe.money)
         {
             canCraft = false;
         }
@@ -53,25 +53,17 @@ public class CraftAction : MonoBehaviour, IPointerEnterHandler
 
             InventoryManager.instance.ModifyInventory(productNeeded.idProduct, -productNeeded.quantity);
 
-            int inventoryQuantity = InventoryManager.instance.GetInventory(productNeeded.idProduct);
-            GameObject tooltip = _tooltipGameObject.GameObjectsTooltip[i]; // Get Recipe Tool Tip Slot GameObject
-            if (inventoryQuantity < productNeeded.quantity)
-            {
-                tooltip.transform.Find("Text").GetComponent<TextMeshProUGUI>().color = Color.red;
-            }
+            UpdateProductTooltip(i, productNeeded);
         }
 
         // Money
-        PlayerStats.instance.Money -= recipe.money;
+        InventoryManager.instance.Money -= recipe.money;
 
-        float moneyLeft = PlayerStats.instance.Money;
-        GameObject moneyTooltip = _tooltipGameObject.GameObjectsTooltip[_tooltipGameObject.GameObjectsTooltip.Length - 1];
-        if (moneyLeft < recipe.money)
-        {
-            moneyTooltip.transform.Find("Text").GetComponent<TextMeshProUGUI>().color = Color.red;
-        }
+        UpdateMoneyTooltip(recipe);
 
         InventoryManager.instance.ModifyInventory(recipe.productResult.idProduct, recipe.productResult.quantity);
+        GameEventManager.instance.craftEvents.ItemCrafted(recipe.productResult.idProduct, recipe.productResult.quantity);
+
         _tooltipGameObject.ResetGameObjects();
     }
 
@@ -82,19 +74,15 @@ public class CraftAction : MonoBehaviour, IPointerEnterHandler
         for (int i = 0; i < recipe.productsNeeded.Length; i++)
         {
             ProductQuantity productNeeded = recipe.productsNeeded[i];
-            int inventoryQuantity = InventoryManager.instance.GetInventory(productNeeded.idProduct);
-            GameObject tooltip = _tooltipGameObject.GameObjectsTooltip[i]; // Get Recipe Tool Tip Slot GameObject
-            if (inventoryQuantity < productNeeded.quantity)
-            {
-                tooltip.transform.Find("Text").GetComponent<TextMeshProUGUI>().color = Color.red;
-            }
-            else
-            {
-                tooltip.transform.Find("Text").GetComponent<TextMeshProUGUI>().color = Color.black;
-            }
+            UpdateProductTooltip(i, productNeeded);
         }
 
-        float moneyLeft = PlayerStats.instance.Money;
+        UpdateMoneyTooltip(recipe);
+    }
+
+    private void UpdateMoneyTooltip(Recipe recipe)
+    {
+        float moneyLeft = InventoryManager.instance.Money;
         GameObject moneyTooltip = _tooltipGameObject.GameObjectsTooltip[_tooltipGameObject.GameObjectsTooltip.Length - 1];
         if (moneyLeft < recipe.money)
         {
@@ -103,6 +91,20 @@ public class CraftAction : MonoBehaviour, IPointerEnterHandler
         else
         {
             moneyTooltip.transform.Find("Text").GetComponent<TextMeshProUGUI>().color = Color.black;
+        }
+    }
+
+    private void UpdateProductTooltip(int i, ProductQuantity productNeeded)
+    {
+        int inventoryQuantity = InventoryManager.instance.GetInventory(productNeeded.idProduct);
+        GameObject tooltip = _tooltipGameObject.GameObjectsTooltip[i]; // Get Recipe Tool Tip Slot GameObject
+        if (inventoryQuantity < productNeeded.quantity)
+        {
+            tooltip.transform.Find("Text").GetComponent<TextMeshProUGUI>().color = Color.red;
+        }
+        else
+        {
+            tooltip.transform.Find("Text").GetComponent<TextMeshProUGUI>().color = Color.black;
         }
     }
 }

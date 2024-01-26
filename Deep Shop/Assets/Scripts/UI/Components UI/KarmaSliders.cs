@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ public class KarmaSliders : MonoBehaviour
 
     void Start()
     {
-        PlayerStats.instance.onKarmaChanged += UpdateKarmaSliders;
+        GameEventManager.instance.inventoryEvent.onKarmaChanged += UpdateKarmaSliders;
     }
 
     private void UpdateKarmaSliders(float newKarma, float oldKarma)
@@ -37,5 +38,10 @@ public class KarmaSliders : MonoBehaviour
                 _evilSlider.value = -newKarma;
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameEventManager.instance.inventoryEvent.onKarmaChanged -= UpdateKarmaSliders;
     }
 }

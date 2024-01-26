@@ -4,9 +4,9 @@ public class ManageInventoryGrid : ManageSlotsInGrid
 {
     private void Start()
     {
-        InventoryManager.instance.onAddItem += AddItem;
-        InventoryManager.instance.onModifyQuantity += ModifyQuantity;
-        InventoryManager.instance.onRemoveItem += RemoveItem;
+        GameEventManager.instance.inventoryEvent.onAddItem += AddItem;
+        GameEventManager.instance.inventoryEvent.onModifyQuantity += ModifyQuantity;
+        GameEventManager.instance.inventoryEvent.onRemoveItem += RemoveItem;
         WaitInventory.instance.InventorySlotReady = true;
     }
 
@@ -18,5 +18,12 @@ public class ManageInventoryGrid : ManageSlotsInGrid
         tooltipTrigger.Header = product.productName;
         tooltipTrigger.Body = product.description;
         return slot;
+    }
+
+    private void OnDestroy()
+    {
+        GameEventManager.instance.inventoryEvent.onAddItem -= AddItem;
+        GameEventManager.instance.inventoryEvent.onModifyQuantity -= ModifyQuantity;
+        GameEventManager.instance.inventoryEvent.onRemoveItem -= RemoveItem;
     }
 }

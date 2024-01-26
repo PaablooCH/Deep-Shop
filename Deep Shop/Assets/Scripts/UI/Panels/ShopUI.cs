@@ -60,7 +60,7 @@ public class ShopUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
             int quantity = _actualVendorProducts.SearchVendorProduct(productId).quantity;
             DeliverManager.instance.Packages.Add(new DeliverObject(10, new ProductQuantity(productId, quantity)));
         }
-        PlayerStats.instance.Money -= _moneyInCart;
+        InventoryManager.instance.Money -= _moneyInCart;
         _cart.Clear();
         _manageShopGrid.CleanGrid();
         _buyInteraction.EndInteraction();
@@ -104,7 +104,7 @@ public class ShopUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
     private void UpdateCostDependencies()
     {
         _cost.text = _moneyInCart.ToString("0.00") + " G";
-        if (_moneyInCart > PlayerStats.instance.Money)
+        if (_moneyInCart > InventoryManager.instance.Money)
         {
             _button.interactable = false;
             _cost.color = Color.red;

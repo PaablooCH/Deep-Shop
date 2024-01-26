@@ -104,8 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2006bcf5ed98df4681733acca3ff130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _evilSlider: {fileID: 0}
-  _goodSlider: {fileID: 0}
+  _evilSlider: {fileID: 9164352358731486677}
+  _goodSlider: {fileID: 1851450695675133338}
 --- !u!114 &8206374488993688437
 MonoBehaviour:
   m_ObjectHideFlags: 0

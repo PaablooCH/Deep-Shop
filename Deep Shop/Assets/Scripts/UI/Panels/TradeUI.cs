@@ -57,7 +57,7 @@ public class TradeUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
     {
         TMP_InputField tMP_InputField = _inputField.GetComponent<TMP_InputField>();
         Slider tradeUISlider = _sliderAndText.transform.Find("Slider").gameObject.GetComponent<Slider>();
-        PlayerStats.instance.Trade(_actualProduct, int.Parse(tMP_InputField.text), tradeUISlider.value);
+        InventoryManager.instance.Trade(_actualProduct, int.Parse(tMP_InputField.text), tradeUISlider.value);
         _actualProduct = null;
         _sellInteraction.EndInteraction();
         CanvasManager.instance.FreeUI();
@@ -65,7 +65,7 @@ public class TradeUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
 
     public void Reject()
     {
-        PlayerStats.instance.Karma -= _actualProduct.Product.karma;
+        InventoryManager.instance.Karma -= _actualProduct.Product.karma;
         _sellInteraction.EndInteraction();
         CanvasManager.instance.FreeUI();
     }

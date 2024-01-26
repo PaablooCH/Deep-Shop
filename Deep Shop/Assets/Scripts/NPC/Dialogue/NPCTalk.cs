@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class NPCTalk : NPC, ITalkable
 {
-    [SerializeField] private DialogueText _dialogueText;
+    [SerializeField] private DialogueTextSO _dialogueText;
     [SerializeField] private DialogueUI _dialogueUI;
 
     public override void Interact()
@@ -10,7 +10,7 @@ public class NPCTalk : NPC, ITalkable
         Talk(_dialogueText);
     }
 
-    public void Talk(DialogueText dialogueText)
+    public void Talk(DialogueTextSO dialogueText)
     {
         //start conversation
         _dialogueUI.NextDialogue(_dialogueText);

@@ -68,7 +68,7 @@ public class CraftUI : MonoBehaviour
             TextMeshProUGUI textMeshPro = moneyNeeded.transform.Find("Text").GetComponent<TextMeshProUGUI>();
             textMeshPro.text = recipe.money + " G";
 
-            if (PlayerStats.instance.Money < recipe.money) // Not enough money
+            if (InventoryManager.instance.Money < recipe.money) // Not enough money
             {
                 textMeshPro.color = Color.red;
             }
