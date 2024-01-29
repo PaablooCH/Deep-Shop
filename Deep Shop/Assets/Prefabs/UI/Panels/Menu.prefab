@@ -399,8 +399,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f720161a8285b45b2fbd96c7372d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _header: Craft
-  _body: Combine objects to obtain a different one.
+  _header: Quests
+  _body: On going quests
 --- !u!1 &4604261800938748606
 GameObject:
   m_ObjectHideFlags: 0
