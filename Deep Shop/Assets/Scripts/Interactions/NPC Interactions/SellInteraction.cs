@@ -9,7 +9,7 @@ public class SellInteraction : PlayerNPCInteraction
         {
             // open dialog
             CanvasManager.instance.GetPanel(UIs.TRADE).GetComponent<TradeUI>()
-                .OpenUI(_npc.GetComponent<CustomerTastes>().ProductDesired);
+                .OpenUI(_npc.GetComponent<CustomerTastes>().ItemDesired);
         }
     }
 

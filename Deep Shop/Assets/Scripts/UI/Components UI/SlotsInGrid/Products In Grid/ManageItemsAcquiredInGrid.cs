@@ -1,3 +1,3 @@
-public class ManageItemsAcquiredInGrid : ManageProductsInGrid
+public class ManageItemsAcquiredInGrid : ManageItemsInGrid
 {
 }

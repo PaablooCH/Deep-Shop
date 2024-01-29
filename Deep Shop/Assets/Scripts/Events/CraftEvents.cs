@@ -2,8 +2,8 @@ using System;
 
 public class CraftEvents
 {
-    public event Action<int, int> onItemCrafted;
-    public void ItemCrafted(int id, int quantity)
+    public event Action<string, int> onItemCrafted;
+    public void ItemCrafted(string id, int quantity)
     {
         if (onItemCrafted != null)
         {

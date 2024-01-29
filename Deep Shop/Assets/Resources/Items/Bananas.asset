@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a37712047c10d40b6398264d5429ea, type: 3}
+  m_Name: Bananas
+  m_EditorClassIdentifier: 
+  _id: cd87c601-fed4-4bfd-be8c-f7f0dab32c32
+  _idItem: IT_2
+  _nameItem: Bananas
+  _description: Tastier than the red one.
+  _buyPrice: 49.9
+  _maxSoldPrice: 20
+  _karma: 10
+  _weightSpawn: 25
+  _sprite: {fileID: 21300000, guid: 99824fe5b9bd04d46bbe6f7e4d0645af, type: 3}
+  _color: {r: 1, g: 1, b: 1, a: 1}

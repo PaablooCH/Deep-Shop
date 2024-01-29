@@ -1,39 +1,40 @@
 using UnityEngine;
 using System;
 
-public enum QuestType
-{
-    DELIVER,
-    CRAFT
-}
-
 [CreateAssetMenu(menuName = "Quest/New Quest Container")]
 public class QuestInfoSO : ScriptableObject
 {
     [SerializeField, ReadOnly] private string _id = Guid.NewGuid().ToString();
     [SerializeField] private string _idQuest;
-    
-    public string Id { get => _id; }
-    public string IdQuest { get => _idQuest; }
 
     [Header("General")]
     [SerializeField] private string _nameQuest;
-    public string NameQuest { get => _nameQuest; }
 
     [Header("Dialogues")]
-    public DialogueTextSO startDialogueQuest;
-    public DialogueTextSO finishDialogueQuest;
+    [SerializeField] private DialogueTextSO _startDialogueQuest;
+    [SerializeField] private DialogueTextSO _finishDialogueQuest;
 
     [Header("Requirements")]
-    public int karma;
-    public QuestInfoSO[] questPrerequisites;
+    [SerializeField] private int _karma;
+    [SerializeField] private QuestInfoSO[] _questPrerequisites;
 
     [Header("Steps")]
-    public GameObject[] segments;
+    [SerializeField] private GameObject[] _segments;
 
     [Header("Rewards")]
-    public ProductQuantity _productReward;
-    public int _moneyReward;
+    [SerializeField] private ItemQuantitySerialized _productReward;
+    [SerializeField] private int _moneyReward;
+
+    public string Id { get => _id; }
+    public string IdQuest { get => _idQuest; }
+    public string NameQuest { get => _nameQuest; }
+    public DialogueTextSO StartDialogueQuest { get => _startDialogueQuest; }
+    public DialogueTextSO FinishDialogueQuest { get => _finishDialogueQuest; }
+    public int Karma { get => _karma; }
+    public QuestInfoSO[] QuestPrerequisites { get => _questPrerequisites; }
+    public GameObject[] Segments { get => _segments; }
+    public ItemQuantitySerialized ProductReward { get => _productReward; }
+    public int MoneyReward { get => _moneyReward; }
 
     private void OnValidate()
     {

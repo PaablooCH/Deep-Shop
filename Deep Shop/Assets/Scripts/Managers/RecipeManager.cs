@@ -1,11 +1,5 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
-[System.Serializable]
-public class RecipeArray
-{
-    public Recipe[] recipes;
-}
 
 public class RecipeManager : MonoBehaviour
 {
@@ -20,57 +14,62 @@ public class RecipeManager : MonoBehaviour
             return;
         }
         instance = this;
-        StartCoroutine(LoadRecipesAsync());
+        _recipeMap = CreateRecipeMap();
     }
     #endregion
 
-    [SerializeField] private Recipe[] _recipes;
+    private Dictionary<string, Recipe> _recipeMap;
 
-    private const string RECIPES_PATH = "JSONs/recipes";
+    public Dictionary<string, Recipe> RecipeMap { get => _recipeMap; set => _recipeMap = value; }
 
-    public Recipe[] Recipes { get => _recipes; set => _recipes = value; }
-
-    public Recipe SearchRecipeByID(int id)
+    public Recipe SearchRecipeByID(string id)
     {
-        foreach (Recipe recipe in _recipes)
+        // Search by recipe id
+        foreach (Recipe recipe in _recipeMap.Values)
         {
-            if (recipe.id == id)
+            if (recipe.GetRecipeId() == id)
             {
                 return recipe;
             }
         }
+        // If not found, display error and return null
+        Debug.LogWarning("Doesn`t exist any Recipe with id: " + id + ".");
         return null;
     }
 
-    public Recipe SearchRecipeByIDResult(int idResult)
+    public Recipe SearchRecipeByIDResult(string idResult)
     {
-        foreach (Recipe recipe in _recipes)
+        // Search by result item id
+        foreach (Recipe recipe in _recipeMap.Values)
         {
-            if (recipe.productResult.idProduct == idResult)
+            if (recipe.GetResultItemId() == idResult)
             {
                 return recipe;
             }
         }
+        // If not found, display error and return null
+        Debug.LogWarning("Doesn`t exist any Recipe which result in an item with id: " + idResult + "."); 
         return null;
     }
 
-    private IEnumerator LoadRecipesAsync()
+    private Dictionary<string, Recipe> CreateRecipeMap()
     {
-        ResourceRequest request = Resources.LoadAsync<TextAsset>(RECIPES_PATH);
+        // Get all the Scriptable Objects from the quests folder
+        RecipeInfoSO[] allRecipes = Resources.LoadAll<RecipeInfoSO>("Recipes");
 
-        while (!request.isDone)
+        // Insert all the quests into a dictionary
+        Dictionary<string, Recipe> auxDictionary = new();
+        foreach (RecipeInfoSO info in allRecipes)
         {
-            float progress = request.progress;
-            Debug.Log("Recipes load progress: " + progress * 100f + "%");
-            yield return null;
+            if (auxDictionary.ContainsKey(info.IdRecipe))
+            {
+                Debug.LogWarning("The IdRecipe: " + info.IdRecipe + " has been found repeated, while creating the Item Map.");
+                continue;
+            }
+            auxDictionary.Add(info.IdRecipe, new Recipe(info));
         }
-        Debug.Log("Recipes load progress: 100%");
 
-        TextAsset jsonAsset = request.asset as TextAsset;
-        if (jsonAsset != null)
-        {
-            RecipeArray dataPrefab = JsonUtility.FromJson<RecipeArray>(jsonAsset.text);
-            _recipes = dataPrefab.recipes;
-        }
+        //return the dictionary
+        return auxDictionary;
     }
 }

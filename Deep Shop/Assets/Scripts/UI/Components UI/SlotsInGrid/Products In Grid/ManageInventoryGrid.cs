@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ManageInventoryGrid : ManageProductsInGrid
+public class ManageInventoryGrid : ManageItemsInGrid
 {
     private void Start()
     {
@@ -12,12 +12,11 @@ public class ManageInventoryGrid : ManageProductsInGrid
 
     public override GameObject AddItem(string newItem)
     {
-        int id = int.Parse(newItem);
         GameObject slot = base.AddItem(newItem);
-        Product product = ProductsManager.instance.GetProductInfo(id).Product;
+        Item item = ItemsManager.instance.GetItemByID(newItem);
         TooltipTrigger tooltipTrigger = slot.GetComponent<TooltipTrigger>();
-        tooltipTrigger.Header = product.productName;
-        tooltipTrigger.Body = product.description;
+        tooltipTrigger.Header = item.ItemInfo.NameItem;
+        tooltipTrigger.Body = item.ItemInfo.Description;
         return slot;
     }
 

@@ -1,3 +1,3 @@
-public class ManageCraftGrid : ManageProductsInGrid
+public class ManageCraftGrid : ManageItemsInGrid
 {
 }

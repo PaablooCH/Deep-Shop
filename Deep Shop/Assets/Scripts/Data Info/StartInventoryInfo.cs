@@ -1,7 +1,7 @@
 [System.Serializable]
 public class StartInventoryInfo
 {
-    public int productID;
+    public string idItem;
     public int amount;
 }
 

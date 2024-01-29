@@ -44,7 +44,7 @@ public class QuestManager : MonoBehaviour
         {
             if (auxDictionary.ContainsKey(info.IdQuest))
             {
-                Debug.LogWarning("The IdQuest: " + info.IdQuest + "has been found repeated, while creating the Quest Map.");
+                Debug.LogWarning("The IdQuest: " + info.IdQuest + " has been found repeated, while creating the Quest Map.");
                 continue;
             }
             auxDictionary.Add(info.IdQuest, new Quest(info));
@@ -111,8 +111,9 @@ public class QuestManager : MonoBehaviour
 
     private void ClaimReward(Quest quest)
     {
-        InventoryManager.instance.Money += quest.QuestInfo._moneyReward;
-        InventoryManager.instance.ModifyInventory(quest.QuestInfo._productReward.idProduct, quest.QuestInfo._productReward.quantity);
+        InventoryManager.instance.Money += quest.QuestInfo.MoneyReward;
+        InventoryManager.instance.ModifyInventory(quest.QuestInfo.ProductReward.itemInfo.IdItem,
+            quest.QuestInfo.ProductReward.quantity);
     }
 
     private void UpdateKarma(float newKarma)
@@ -136,23 +137,23 @@ public class QuestManager : MonoBehaviour
     private bool CheckRequirements(Quest quest)
     {
         // Check Karmar (good and evil)
-        if (quest.QuestInfo.karma >= 0)
+        if (quest.QuestInfo.Karma >= 0)
         {
-            if (quest.QuestInfo.karma > _karma)
+            if (quest.QuestInfo.Karma > _karma)
             {
                 return false;
             }
         }
         else
         {
-            if (quest.QuestInfo.karma < _karma)
+            if (quest.QuestInfo.Karma < _karma)
             {
                 return false;
             }
         }
 
         // See if the prerequisites quest are finished
-        foreach (QuestInfoSO requirement in quest.QuestInfo.questPrerequisites)
+        foreach (QuestInfoSO requirement in quest.QuestInfo.QuestPrerequisites)
         {
             Quest requirementQuest = GetQuestById(requirement.IdQuest);
             if (!requirementQuest.State.Equals(QuestState.FINISHED))

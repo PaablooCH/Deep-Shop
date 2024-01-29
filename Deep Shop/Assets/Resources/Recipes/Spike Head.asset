@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792e7889645658545ad1e0fdcec2558e, type: 3}
+  m_Name: Spike Head
+  m_EditorClassIdentifier: 
+  _id: 217d8ee7-b896-4323-b301-954890f922be
+  _idRecipe: REC_2
+  _nameRecipe: Spike Head
+  _productResult:
+    itemInfo: {fileID: 11400000, guid: db9385156fc1dac42856228d40e0361d, type: 2}
+    quantity: 1
+  _productsNeeded:
+  - itemInfo: {fileID: 11400000, guid: 94e8fb13bab5f8842b371929429dae0c, type: 2}
+    quantity: 1
+  - itemInfo: {fileID: 11400000, guid: 05055280597a206438fdaf39f5911f99, type: 2}
+    quantity: 1
+  _money: 0

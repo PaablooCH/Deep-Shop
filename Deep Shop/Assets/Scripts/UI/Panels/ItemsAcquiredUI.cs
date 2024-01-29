@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ItemsAcquiredUI : MonoBehaviour, IUIProduct, IUIConfirmation
+public class ItemsAcquiredUI : MonoBehaviour, IUIGameObject, IUIConfirmation
 {
     // UI elements
     [SerializeField] private ManageItemsAcquiredInGrid _manageItemsAcquired;
@@ -23,10 +23,10 @@ public class ItemsAcquiredUI : MonoBehaviour, IUIProduct, IUIConfirmation
         {
             _packagesWithItems = component;
             CanvasManager.instance.ActiveUI(UIs.ITEM_ACQ);
-            foreach (ProductQuantity productQuantity in _packagesWithItems.Package)
+            foreach (ItemQuantity productQuantity in _packagesWithItems.Package)
             {
-                _manageItemsAcquired.AddItem(productQuantity.idProduct.ToString());
-                _manageItemsAcquired.ModifyQuantity(productQuantity.idProduct, productQuantity.quantity);
+                _manageItemsAcquired.AddItem(productQuantity.Item.GetItemId());
+                _manageItemsAcquired.ModifyQuantity(productQuantity.Item.GetItemId(), productQuantity.Quantity);
             }
         }
     }
@@ -35,9 +35,9 @@ public class ItemsAcquiredUI : MonoBehaviour, IUIProduct, IUIConfirmation
     {
         if (_packagesWithItems)
         {
-            foreach (ProductQuantity productQuantity in _packagesWithItems.PickPackages())
+            foreach (ItemQuantity productQuantity in _packagesWithItems.PickPackages())
             {
-                InventoryManager.instance.ModifyInventory(productQuantity.idProduct, productQuantity.quantity);
+                InventoryManager.instance.ModifyInventory(productQuantity.Item.GetItemId(), productQuantity.Quantity);
             }
             CanvasManager.instance.FreeUI();
         }

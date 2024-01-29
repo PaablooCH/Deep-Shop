@@ -21,10 +21,10 @@ public class QuestInGrid : MonoBehaviour
         {
             Quest quest = QuestManager.instance.GetQuestById(_idQuest);
             _segmentPostion++;
-            if (_segmentPostion < quest.QuestInfo.segments.Length)
+            if (_segmentPostion < quest.QuestInfo.Segments.Length)
             {
                 TextMeshProUGUI text = transform.Find("Segment Description").GetComponent<TextMeshProUGUI>();
-                text.text = quest.QuestInfo.segments[_segmentPostion].GetComponent<QuestSegment>().Description;
+                text.text = quest.QuestInfo.Segments[_segmentPostion].GetComponent<QuestSegment>().Description;
             }
         }
     }

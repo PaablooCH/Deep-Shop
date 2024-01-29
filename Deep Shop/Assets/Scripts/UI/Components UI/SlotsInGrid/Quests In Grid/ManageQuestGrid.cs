@@ -16,9 +16,7 @@ public class ManageQuestGrid : ManageSlotsInGrid
 
     public override GameObject AddItem(string newQuestId)
     {
-        int id = int.Parse(newQuestId);
-        // TODO redo when item Scriptable Object created
-        if (!_productsInGrid.ContainsKey(int.Parse(newQuestId)))
+        if (!_productsInGrid.ContainsKey(newQuestId))
         {
             // Instatiate slot
             GameObject gridObject = Instantiate(_slotPrefab, _gridTransform);
@@ -32,13 +30,13 @@ public class ManageQuestGrid : ManageSlotsInGrid
 
             // Set First Segment Quest
             text = gridObject.transform.Find("Segment Description").GetComponent<TextMeshProUGUI>();
-            text.text = quest.QuestInfo.segments[0].GetComponent<QuestSegment>().Description;
+            text.text = quest.QuestInfo.Segments[0].GetComponent<QuestSegment>().Description;
 
             // TODO Tooltip
 
-            _productsInGrid.Add(id, gridObject);
+            _productsInGrid.Add(newQuestId, gridObject);
         }
-        return _productsInGrid[id];
+        return _productsInGrid[newQuestId];
     }
 
     private void StartQuest(string idQuest)
@@ -49,6 +47,6 @@ public class ManageQuestGrid : ManageSlotsInGrid
 
     private void FinishQuest(string idQuest)
     {
-        RemoveItem(int.Parse(idQuest));
+        RemoveItem(idQuest);
     }
 }

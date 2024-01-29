@@ -44,9 +44,9 @@ public class NPCQuest : NPC, IQuest, ITalkable
         if (CheckIfCanStart())
         {
             // If the quest starts with a dialog play it
-            if (_questInfo.startDialogueQuest)
+            if (_questInfo.StartDialogueQuest)
             {
-                Talk(_questInfo.startDialogueQuest);
+                Talk(_questInfo.StartDialogueQuest);
             }
             // If not start it directly
             else
@@ -57,9 +57,9 @@ public class NPCQuest : NPC, IQuest, ITalkable
         else if (CheckIfCanFinish())
         {
             // If the quest ends with a dialog play it
-            if (_questInfo.finishDialogueQuest)
+            if (_questInfo.FinishDialogueQuest)
             {
-                Talk(_questInfo.finishDialogueQuest);
+                Talk(_questInfo.FinishDialogueQuest);
             }
             // If not end it directly
             else
@@ -95,12 +95,12 @@ public class NPCQuest : NPC, IQuest, ITalkable
 
     private void FinishDialogue(string dialogueId)
     {
-        if (CheckIfCanStart() && dialogueId == _questInfo.startDialogueQuest?.Id)
+        if (CheckIfCanStart() && dialogueId == _questInfo.StartDialogueQuest?.Id)
         {
             GameEventsManager.instance.questEvents.StartQuest(_questId);
         }
 
-        else if (CheckIfCanFinish() && dialogueId == _questInfo.finishDialogueQuest?.Id)
+        else if (CheckIfCanFinish() && dialogueId == _questInfo.FinishDialogueQuest?.Id)
         {
             GameEventsManager.instance.questEvents.FinishQuest(_questId);
         }

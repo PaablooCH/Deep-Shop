@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ShopUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
+public class ShopUI : MonoBehaviour, IUIGameObject, IUIConfirmation, IUIReject
 {
     // UI elements
     [SerializeField] private Button _button;
@@ -13,7 +13,8 @@ public class ShopUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
     [SerializeField] private BuyInteraction _buyInteraction;
 
     VendorProductsToSell _actualVendorProducts;
-    private readonly List<int> _cart = new();
+    
+    private List<string> _cart = new(); // stores the idItems that we want to buy
 
     private float _moneyInCart = 0f;
 
@@ -29,18 +30,18 @@ public class ShopUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
             _actualVendorProducts = component;
             CanvasManager.instance.ActiveUI(UIs.SHOP);
 
-            foreach (ProductQuantity vendorProduct in _actualVendorProducts.VendorProducts)
+            foreach (ItemQuantity vendorProduct in _actualVendorProducts.VendorProducts)
             {
-                ProductInfo productInfo = ProductsManager.instance.GetProductInfo(vendorProduct.idProduct);
+                string idItem = vendorProduct.Item.GetItemId();
                 
-                GameObject shopSlot = _manageShopGrid.AddItem(vendorProduct.idProduct.ToString());
+                GameObject shopSlot = _manageShopGrid.AddItem(idItem);
 
                 shopSlot.GetComponentInChildren<SelectedShopProduct>().ShopUI = this; // this implementation avoids
-                                                                                  // ManageShopGrid to know anything about
-                                                                                  // this class
+                                                                                      // ManageShopGrid to know anything about
+                                                                                      // this class
 
-                _manageShopGrid.ModifyQuantity(vendorProduct.idProduct, vendorProduct.quantity);
-                _manageShopGrid.ModifyPrice(productInfo.Product.id, productInfo.Product.buyPrice);
+                _manageShopGrid.ModifyQuantity(idItem, vendorProduct.Quantity);
+                _manageShopGrid.ModifyPrice(idItem, vendorProduct.Item.ItemInfo.BuyPrice);
             }
         }
     }
@@ -55,10 +56,11 @@ public class ShopUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
     public void Confirm()
     {
         // Trade money and add the new items to the deliverManager
-        foreach (int productId in _cart)
+        foreach (string itemId in _cart)
         {
-            int quantity = _actualVendorProducts.SearchVendorProduct(productId).quantity;
-            DeliverManager.instance.Packages.Add(new DeliverObject(10, new ProductQuantity(productId, quantity)));
+            int quantity = _actualVendorProducts.SearchVendorProduct(itemId).Quantity;
+            Item itemToDeliver = ItemsManager.instance.GetItemByID(itemId);
+            DeliverManager.instance.Packages.Add(new DeliverObject(10, new ItemQuantity(itemToDeliver, quantity)));
         }
         InventoryManager.instance.Money -= _moneyInCart;
         _cart.Clear();
@@ -73,13 +75,13 @@ public class ShopUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
         CanvasManager.instance.FreeUI();
     }
 
-    public void AddToCart(int idProduct)
+    public void AddToCart(string idItem)
     {
-        if (!_cart.Contains(idProduct))
+        if (!_cart.Contains(idItem))
         {
-            _moneyInCart += ProductsManager.instance.GetProductInfo(idProduct).Product.buyPrice;
+            _moneyInCart += ItemsManager.instance.GetItemByID(idItem).ItemInfo.BuyPrice;
             UpdateCostDependencies();
-            _cart.Add(idProduct);
+            _cart.Add(idItem);
             if (_button.interactable == false)
             {
                 _button.interactable = true;
@@ -87,11 +89,11 @@ public class ShopUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
         }
     }
 
-    public void DeleteFromCart(int deleteProduct)
+    public void DeleteFromCart(string deleteProduct)
     {
         if (_cart.Contains(deleteProduct))
         {
-            _moneyInCart -= ProductsManager.instance.GetProductInfo(deleteProduct).Product.buyPrice;
+            _moneyInCart -= ItemsManager.instance.GetItemByID(deleteProduct).ItemInfo.BuyPrice;
             UpdateCostDependencies();
             _cart.Remove(deleteProduct);
             if (_cart.Count == 0)

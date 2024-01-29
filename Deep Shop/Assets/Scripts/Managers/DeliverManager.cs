@@ -4,16 +4,16 @@ using UnityEngine;
 public class DeliverObject
 {
     private float _timeToDeliver;
-    private ProductQuantity _productQuantity;
+    private ItemQuantity _productQuantity;
 
-    public DeliverObject(float timeToDeliver, ProductQuantity vendorProduct)
+    public DeliverObject(float timeToDeliver, ItemQuantity productQuantity)
     {
         _timeToDeliver = timeToDeliver;
-        _productQuantity = vendorProduct;
+        _productQuantity = productQuantity;
     }
 
     public float TimeToDeliver { get => _timeToDeliver; set => _timeToDeliver = value; }
-    public ProductQuantity ProductQuantity { get => _productQuantity; set => _productQuantity = value; }
+    public ItemQuantity ProductQuantity { get => _productQuantity; set => _productQuantity = value; }
 }
 
 public class DeliverManager : MonoBehaviour

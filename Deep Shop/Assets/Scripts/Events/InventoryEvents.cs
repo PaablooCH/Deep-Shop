@@ -13,21 +13,21 @@ public class InventoryEvents
         }
     }
 
-    public event Action<int, int> onModifyQuantity;
-    public void ModifyQuantity(int id, int quantity)
+    public event Action<string, int> onModifyQuantity;
+    public void ModifyQuantity(string idItem, int quantity)
     {
         if (onModifyQuantity != null)
         {
-            onModifyQuantity(id, quantity);
+            onModifyQuantity(idItem, quantity);
         }
     }
 
-    public event Action<int> onRemoveItem;
-    public void RemoveItem(int id)
+    public event Action<string> onRemoveItem;
+    public void RemoveItem(string idItem)
     {
         if (onRemoveItem != null)
         {
-            onRemoveItem(id);
+            onRemoveItem(idItem);
         }
     }
 

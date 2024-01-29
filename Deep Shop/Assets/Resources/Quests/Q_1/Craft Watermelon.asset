@@ -15,14 +15,12 @@ MonoBehaviour:
   _id: 3d0076d8-1266-4fb5-a7e9-ca3e4c2a1969
   _idQuest: 1
   _nameQuest: Craft Watermelon
-  startDialogueQuest: {fileID: 11400000, guid: 2f70916d4941fd3489a55e29653ae8cc, type: 2}
-  finishDialogueQuest: {fileID: 11400000, guid: 3cbebdda5e45b6243b790c0946ff503f, type: 2}
-  karma: 0
-  questPrerequisites: []
-  segments:
-  - {fileID: 6451873652413181644, guid: cdf320052eef1c548982d81f1ffc6424, type: 3}
-  - {fileID: 6451873652413181644, guid: 7e12e6b74d908d040b67a70692c596b6, type: 3}
+  _startDialogueQuest: {fileID: 0}
+  _finishDialogueQuest: {fileID: 0}
+  _karma: 0
+  _questPrerequisites: []
+  _segments: []
   _productReward:
-    idProduct: 3
+    itemInfo: {fileID: 0}
     quantity: 10
   _moneyReward: 200

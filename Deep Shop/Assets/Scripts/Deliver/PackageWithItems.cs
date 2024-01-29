@@ -9,10 +9,10 @@ public class PackageWithItems : MonoBehaviour
     [SerializeField] private SpriteRenderer _chestClosed;
     [SerializeField] private SpriteRenderer _chestEmpty;
 
-    private List<ProductQuantity> _package = new();
+    private List<ItemQuantity> _package = new();
     private bool _isPlayer = false;
 
-    public List<ProductQuantity> Package { get => _package; set => _package = value; }
+    public List<ItemQuantity> Package { get => _package; set => _package = value; }
 
     private void Start()
     {
@@ -29,7 +29,7 @@ public class PackageWithItems : MonoBehaviour
         }
     }
 
-    public void AddNewPackage(ProductQuantity newProductQuantity)
+    public void AddNewPackage(ItemQuantity newProductQuantity)
     {
         _package.Add(newProductQuantity);
         if (_package.Count > 0)
@@ -38,9 +38,9 @@ public class PackageWithItems : MonoBehaviour
         }
     }
 
-    public List<ProductQuantity> PickPackages()
+    public List<ItemQuantity> PickPackages()
     {
-        List<ProductQuantity> copyPackage = new(_package);
+        List<ItemQuantity> copyPackage = new(_package);
         _package.Clear();
         _chestOpened.enabled = false;
         return copyPackage;

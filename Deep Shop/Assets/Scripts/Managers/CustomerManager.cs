@@ -67,7 +67,7 @@ public class CustomerManager : MonoBehaviour
     {
         GameObject go = Instantiate(_basePrefabCostumer, _positionStart.transform.position, _basePrefabCostumer.transform.rotation);
         CustomerTastes tastes = go.GetComponent<CustomerTastes>();
-        tastes.ProductDesired = ProductsManager.instance.RandomProduct();
+        tastes.ItemDesired = ItemsManager.instance.RandomItem();
         _customers.Enqueue(go);
         if (_customers.Count == 1)
         {

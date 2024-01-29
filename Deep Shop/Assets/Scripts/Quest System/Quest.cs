@@ -24,7 +24,7 @@ public class Quest
 
     public bool CurrentSegmentExists()
     {
-        return _currentQuestSegmentIndex < _questInfo.segments.Length;
+        return _currentQuestSegmentIndex < _questInfo.Segments.Length;
     }
 
     public void InstantiateSegment(Transform parent)
@@ -43,7 +43,7 @@ public class Quest
         GameObject currentSegement = null;
         if (CurrentSegmentExists())
         {
-            currentSegement = _questInfo.segments[_currentQuestSegmentIndex];
+            currentSegement = _questInfo.Segments[_currentQuestSegmentIndex];
         }
         else
         {

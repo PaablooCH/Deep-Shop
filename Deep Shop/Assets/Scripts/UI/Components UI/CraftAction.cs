@@ -5,9 +5,9 @@ using TMPro;
 public class CraftAction : MonoBehaviour, IPointerEnterHandler
 {
     private TooltipGameObjectTrigger _tooltipGameObject;
-    private int _recipeId;
+    private string _recipeId;
 
-    public int RecipeId { get => _recipeId; set => _recipeId = value; }
+    public string RecipeId { get => _recipeId; set => _recipeId = value; }
 
     private void Start()
     {
@@ -19,16 +19,16 @@ public class CraftAction : MonoBehaviour, IPointerEnterHandler
         Recipe recipe = RecipeManager.instance.SearchRecipeByID(_recipeId);
         
         bool canCraft = true;
-        if (InventoryManager.instance.Money < recipe.money)
+        if (InventoryManager.instance.Money < recipe.RecipeInfo.Money)
         {
             canCraft = false;
         }
         else
         {
-            for (int i = 0; i < recipe.productsNeeded.Length; i++)
+            for (int i = 0; i < recipe.RecipeInfo.ProductsNeeded.Length; i++)
             {
-                ProductQuantity productNeeded = recipe.productsNeeded[i];
-                int inventoryQuantity = InventoryManager.instance.GetInventory(productNeeded.idProduct);
+                ItemQuantitySerialized productNeeded = recipe.RecipeInfo.ProductsNeeded[i];
+                int inventoryQuantity = InventoryManager.instance.GetInventory(productNeeded.itemInfo.IdItem);
                 if (inventoryQuantity < productNeeded.quantity)
                 {
                     canCraft = false;
@@ -47,22 +47,22 @@ public class CraftAction : MonoBehaviour, IPointerEnterHandler
     {
         Recipe recipe = RecipeManager.instance.SearchRecipeByID(_recipeId);
 
-        for (int i = 0; i < recipe.productsNeeded.Length; i++)
+        for (int i = 0; i < recipe.RecipeInfo.ProductsNeeded.Length; i++)
         {
-            ProductQuantity productNeeded = recipe.productsNeeded[i];
+            ItemQuantitySerialized productNeeded = recipe.RecipeInfo.ProductsNeeded[i];
 
-            InventoryManager.instance.ModifyInventory(productNeeded.idProduct, -productNeeded.quantity);
+            InventoryManager.instance.ModifyInventory(productNeeded.itemInfo.IdItem, -productNeeded.quantity);
 
             UpdateProductTooltip(i, productNeeded);
         }
 
         // Money
-        InventoryManager.instance.Money -= recipe.money;
+        InventoryManager.instance.Money -= recipe.RecipeInfo.Money;
 
         UpdateMoneyTooltip(recipe);
 
-        InventoryManager.instance.ModifyInventory(recipe.productResult.idProduct, recipe.productResult.quantity);
-        GameEventsManager.instance.craftEvents.ItemCrafted(recipe.productResult.idProduct, recipe.productResult.quantity);
+        InventoryManager.instance.ModifyInventory(recipe.GetResultItemId(), recipe.GetResultQuantity());
+        GameEventsManager.instance.craftEvents.ItemCrafted(recipe.GetResultItemId(), recipe.GetResultQuantity());
 
         _tooltipGameObject.ResetGameObjects();
     }
@@ -71,9 +71,9 @@ public class CraftAction : MonoBehaviour, IPointerEnterHandler
                                                            // to make sure this is called before.
     {
         Recipe recipe = RecipeManager.instance.SearchRecipeByID(_recipeId);
-        for (int i = 0; i < recipe.productsNeeded.Length; i++)
+        for (int i = 0; i < recipe.RecipeInfo.ProductsNeeded.Length; i++)
         {
-            ProductQuantity productNeeded = recipe.productsNeeded[i];
+            ItemQuantitySerialized productNeeded = recipe.RecipeInfo.ProductsNeeded[i];
             UpdateProductTooltip(i, productNeeded);
         }
 
@@ -84,7 +84,7 @@ public class CraftAction : MonoBehaviour, IPointerEnterHandler
     {
         float moneyLeft = InventoryManager.instance.Money;
         GameObject moneyTooltip = _tooltipGameObject.GameObjectsTooltip[_tooltipGameObject.GameObjectsTooltip.Length - 1];
-        if (moneyLeft < recipe.money)
+        if (moneyLeft < recipe.RecipeInfo.Money)
         {
             moneyTooltip.transform.Find("Text").GetComponent<TextMeshProUGUI>().color = Color.red;
         }
@@ -94,9 +94,9 @@ public class CraftAction : MonoBehaviour, IPointerEnterHandler
         }
     }
 
-    private void UpdateProductTooltip(int i, ProductQuantity productNeeded)
+    private void UpdateProductTooltip(int i, ItemQuantitySerialized productNeeded)
     {
-        int inventoryQuantity = InventoryManager.instance.GetInventory(productNeeded.idProduct);
+        int inventoryQuantity = InventoryManager.instance.GetInventory(productNeeded.itemInfo.IdItem);
         GameObject tooltip = _tooltipGameObject.GameObjectsTooltip[i]; // Get Recipe Tool Tip Slot GameObject
         if (inventoryQuantity < productNeeded.quantity)
         {

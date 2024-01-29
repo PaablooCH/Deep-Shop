@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a37712047c10d40b6398264d5429ea, type: 3}
+  m_Name: Spike Head
+  m_EditorClassIdentifier: 
+  _id: 74cb328b-cb8c-476e-8562-d2ba31bde207
+  _idItem: IT_6
+  _nameItem: Spike Head
+  _description: Third deadly weapon, wait, that's illegal.
+  _buyPrice: 79.9
+  _maxSoldPrice: 30
+  _karma: -15
+  _weightSpawn: 4
+  _sprite: {fileID: 21300000, guid: cf724d04c2274874ea4dca63c7a3f141, type: 3}
+  _color: {r: 1, g: 1, b: 1, a: 1}

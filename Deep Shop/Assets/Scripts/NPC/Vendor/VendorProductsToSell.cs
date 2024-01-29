@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class VendorProductsToSell : MonoBehaviour
 {
-    private ProductQuantity[] _vendorProducts;
+    private ItemQuantity[] _vendorProducts;
 
-    public ProductQuantity[] VendorProducts { get => _vendorProducts; set => _vendorProducts = value; }
+    public ItemQuantity[] VendorProducts { get => _vendorProducts; set => _vendorProducts = value; }
 
-    public ProductQuantity SearchVendorProduct(int id)
+    public ItemQuantity SearchVendorProduct(string id)
     {
-        foreach (ProductQuantity item in _vendorProducts)
+        foreach (ItemQuantity itemQuantity in _vendorProducts)
         {
-            if (item.idProduct == id)
+            if (itemQuantity.Item.GetItemId() == id)
             {
-                return item;
+                return itemQuantity;
             }
         }
         return null;

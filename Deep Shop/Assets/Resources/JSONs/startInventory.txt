@@ -1,27 +1,27 @@
 {
   "startInventory": [
     {
-      "productID": 1,
+      "idItem": "IT_1",
       "amount": 5
     },
     {
-      "productID": 2,
+      "idItem": "IT_2",
       "amount": 5
     },
     {
-      "productID": 3,
+      "idItem": "IT_3",
       "amount": 2
     },
     {
-      "productID": 4,
+      "idItem": "IT_4",
       "amount": 3
     },
     {
-      "productID": 5,
+      "idItem": "IT_5",
       "amount": 1
     },
     {
-      "productID": 6,
+      "idItem": "IT_6",
       "amount": 1
     }
   ]

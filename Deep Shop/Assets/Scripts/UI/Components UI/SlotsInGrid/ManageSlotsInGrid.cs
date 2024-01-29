@@ -12,11 +12,11 @@ public abstract class ManageSlotsInGrid : MonoBehaviour
     [SerializeField] protected Transform _gridTransform;
     [SerializeField] protected GameObject _slotPrefab;
 
-    protected Dictionary<int, GameObject> _productsInGrid = new(); // key -> productID; value -> slot
+    protected Dictionary<string, GameObject> _productsInGrid = new(); // key -> itemID; value -> slot
 
     public abstract GameObject AddItem(string newItemId);
 
-    protected void RemoveItem(int removedItem)
+    protected void RemoveItem(string removedItem)
     {
         if (_productsInGrid.TryGetValue(removedItem, out GameObject slot))
         {

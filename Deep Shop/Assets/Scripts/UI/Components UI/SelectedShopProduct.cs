@@ -5,21 +5,21 @@ public class SelectedShopProduct : MonoBehaviour
     private ShopUI _shopUI;
 
     private bool _addedToCart = false;
-    private int _productId;
+    private string _itemId;
 
     public ShopUI ShopUI { get => _shopUI; set => _shopUI = value; }
-    public int ProductId { get => _productId; set => _productId = value; }
+    public string ItemId { get => _itemId; set => _itemId = value; }
 
     public void ModifyCart()
     {
         _addedToCart = !_addedToCart;
         if (_addedToCart)
         {
-            _shopUI.AddToCart(_productId);
+            _shopUI.AddToCart(_itemId);
         }
         else
         {
-            _shopUI.DeleteFromCart(_productId);
+            _shopUI.DeleteFromCart(_itemId);
         }
     }
 }

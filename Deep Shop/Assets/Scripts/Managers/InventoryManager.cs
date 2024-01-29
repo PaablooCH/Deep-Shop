@@ -44,7 +44,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private Dictionary<int, int> _inventory = new(); // key -> product id, value -> ammount
+    private Dictionary<string, int> _inventory = new(); // key -> item id, value -> ammount
     
     private const string START_INVENTORY_PATH = "JSONs/startInventory";
 
@@ -67,38 +67,30 @@ public class InventoryManager : MonoBehaviour
             StartInventoryArray dataPrefab = JsonUtility.FromJson<StartInventoryArray>(jsonAsset.text);
             foreach (StartInventoryInfo startInventory in dataPrefab.startInventory)
             {
-                ModifyInventory(startInventory.productID, startInventory.amount);
+                ModifyInventory(startInventory.idItem, startInventory.amount);
             }
         }
     }
 
-    private void Update()
+    public void Trade(Item item, int quantity, float price)
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            _inventory[0]++;
-        }
-    }
-
-    public void Trade(ProductInfo product, int n, float price)
-    {
-        ModifyInventory(product.Product.id, -n);
-        Karma += product.CalculateKarma(price);
-        if (product.CalculatePercentatgeBuy(price) < 2.5f)
+        ModifyInventory(item.GetItemId(), -quantity);
+        Karma += item.CalculateKarma(price);
+        if (item.CalculatePercentatgeBuy(price) < 2.5f)
         {
             Money += price;
         }
     }
 
-    public int GetInventory(int id)
+    public int GetInventory(string id)
     {
         return _inventory[id];
     }
 
     // n can be negative (substract) or positive (sum)
-    public void ModifyInventory(int id, int n)
+    public void ModifyInventory(string id, int n)
     {
-        if (!ProductsManager.instance.ExistsProduct(id))
+        if (!ItemsManager.instance.ExistsItem(id))
         {
             Debug.LogWarning("Product with id: " + id + " doesn't exist.");
             return;
@@ -106,7 +98,7 @@ public class InventoryManager : MonoBehaviour
         if (!_inventory.ContainsKey(id))
         {
             _inventory[id] = 0;
-            GameEventsManager.instance.inventoryEvent.AddItem(id.ToString());
+            GameEventsManager.instance.inventoryEvent.AddItem(id);
         }
         if (_inventory[id] + n < 0)
         {

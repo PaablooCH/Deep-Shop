@@ -72,29 +72,28 @@ public class VendorManager : MonoBehaviour
 
     private void CreateVendorProducts(GameObject go)
     {
-        VendorProductsToSell productsToSell = go.GetComponent<VendorProductsToSell>();
-        if (productsToSell)
+        if (go.TryGetComponent(out VendorProductsToSell productsToSell))
         {
-            int numberToSell = _numberToSell < ProductsManager.instance.Products.Length ?
-            _numberToSell : ProductsManager.instance.Products.Length;
+            int numberToSell = _numberToSell < ItemsManager.instance.HowManyItemsExist() ?
+            _numberToSell : ItemsManager.instance.HowManyItemsExist();
             int howMany = UtilsNumberGenerator.GenerateNumberWithWeight(1, numberToSell, 2, 1);
-            List<int> products = new();
+            List<Item> products = new();
             int i = 0;
             while (i < howMany)
             {
-                int id = ProductsManager.instance.RandomProductID();
-                if (!products.Contains(id))
+                Item item = ItemsManager.instance.RandomItem();
+                if (!products.Contains(item))
                 {
-                    products.Add(id);
+                    products.Add(item);
                     i++;
                 }
             }
 
-            ProductQuantity[] vendorProducts = new ProductQuantity[howMany];
+            ItemQuantity[] vendorProducts = new ItemQuantity[howMany];
             for (i = 0; i < howMany; i++)
             {
                 int quantity = UtilsNumberGenerator.GenerateNumberWithWeight(1, 5, 3, 1);
-                vendorProducts[i] = new ProductQuantity(products[i], quantity);
+                vendorProducts[i] = new ItemQuantity(products[i], quantity);
             }
             productsToSell.VendorProducts = vendorProducts;
         }

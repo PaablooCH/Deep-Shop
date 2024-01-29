@@ -1,27 +1,25 @@
 using UnityEngine;
 using TMPro;
 
-public class ManageShopGrid : ManageProductsInGrid
+public class ManageShopGrid : ManageItemsInGrid
 {
     public override GameObject AddItem(string newItem)
     {
         GameObject shopSlot = base.AddItem(newItem);
-        int id = int.Parse(newItem);
 
         // Don't need comprobation 100% the item is inside
-        Product product = ProductsManager.instance.GetProductInfo(id).Product;
-        int newId = product.id;
+        Item item = ItemsManager.instance.GetItemByID(newItem);
         SelectedShopProduct selectedProduct = shopSlot.GetComponentInChildren<SelectedShopProduct>();
-        selectedProduct.ProductId = newId;
+        selectedProduct.ItemId = newItem;
 
         TooltipTrigger tooltipTrigger = shopSlot.GetComponent<TooltipTrigger>();
-        tooltipTrigger.Header = product.productName;
-        tooltipTrigger.Body = product.description;
+        tooltipTrigger.Header = item.ItemInfo.NameItem;
+        tooltipTrigger.Body = item.ItemInfo.Description;
 
         return shopSlot;
     }
 
-    public void ModifyPrice(int modifiedItem, float price)
+    public void ModifyPrice(string modifiedItem, float price)
     {
         if (_productsInGrid.TryGetValue(modifiedItem, out GameObject slot))
         {

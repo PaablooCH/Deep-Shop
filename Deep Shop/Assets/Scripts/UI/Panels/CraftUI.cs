@@ -14,41 +14,42 @@ public class CraftUI : MonoBehaviour
 
     public void CreateGrid()
     {
-        foreach(Recipe recipe in RecipeManager.instance.Recipes)
+        foreach(Recipe recipe in RecipeManager.instance.RecipeMap.Values)
         {
-            GameObject gridCraft = _manageCraftGrid.AddItem(recipe.productResult.idProduct.ToString());
-            _manageCraftGrid.ModifyQuantity(recipe.productResult.idProduct, recipe.productResult.quantity);
-            gridCraft.GetComponent<CraftAction>().RecipeId = recipe.id;
+            GameObject gridCraft = _manageCraftGrid.AddItem(recipe.GetResultItemId());
+            _manageCraftGrid.ModifyQuantity(recipe.GetResultItemId(), recipe.GetResultQuantity());
+            gridCraft.GetComponent<CraftAction>().RecipeId = recipe.GetRecipeId();
             CreateTooltip(recipe, gridCraft);
         }
     }
 
     private void CreateTooltip(Recipe recipe, GameObject gridCraft)
     {
-        ProductInfo productInfo = ProductsManager.instance.GetProductInfo(recipe.productResult.idProduct);
+        Item item = ItemsManager.instance.GetItemByID(recipe.GetResultItemId());
 
         TooltipGameObjectTrigger tooltipGameObjectTrigger = gridCraft.GetComponent<TooltipGameObjectTrigger>();
-        tooltipGameObjectTrigger.Header = productInfo.Product.productName;
-        tooltipGameObjectTrigger.Body = productInfo.Product.description;
-        int requireMoney = recipe.money > 0 ? 1 : 0;
-        GameObject[] gameObjectsTooltip = new GameObject[recipe.productsNeeded.Length + requireMoney];
-        for (int i = 0; i < recipe.productsNeeded.Length; i++)
+        tooltipGameObjectTrigger.Header = item.ItemInfo.NameItem;
+        tooltipGameObjectTrigger.Body = item.ItemInfo.Description;
+        int requireMoney = recipe.RecipeInfo.Money > 0 ? 1 : 0;
+        GameObject[] gameObjectsTooltip = new GameObject[recipe.RecipeInfo.ProductsNeeded.Length + requireMoney];
+        for (int i = 0; i < recipe.RecipeInfo.ProductsNeeded.Length; i++)
         {
-            ProductQuantity productQuantity = recipe.productsNeeded[i];
+            ItemQuantitySerialized productQuantity = recipe.RecipeInfo.ProductsNeeded[i];
 
-            GameObject productNeeded = ProductsManager.instance.SearchProductByID(productQuantity.idProduct);
-            string productName = productNeeded.GetComponent<ProductInfo>().Product.productName;
+            Item itemNeeded = ItemsManager.instance.GetItemByID(productQuantity.itemInfo.IdItem);
+            string nameItem = itemNeeded.ItemInfo.NameItem;
 
             GameObject tooltipInfo = Instantiate(_prefabRecipeTooltip, gridCraft.transform);
             tooltipInfo.SetActive(false);
 
             tooltipInfo.transform.Find("Product Image").GetComponent<Image>().sprite =
-                productNeeded.GetComponent<SpriteRenderer>().sprite;
+                itemNeeded.ItemInfo.Sprite;
 
             TextMeshProUGUI textMeshPro = tooltipInfo.transform.Find("Text").GetComponent<TextMeshProUGUI>();
-            textMeshPro.text = productQuantity.quantity.ToString() + " x " + productName;
+            textMeshPro.text = productQuantity.quantity.ToString() + " x " + nameItem;
 
-            if (InventoryManager.instance.GetInventory(productQuantity.idProduct) < productQuantity.quantity) // Not available ingredient
+            // If not available ingredient print red
+            if (InventoryManager.instance.GetInventory(productQuantity.itemInfo.IdItem) < productQuantity.quantity) 
             {
                 textMeshPro.color = Color.red;
             }
@@ -56,7 +57,7 @@ public class CraftUI : MonoBehaviour
             gameObjectsTooltip[i] = tooltipInfo;
         }
 
-        if (recipe.money > 0)
+        if (recipe.RecipeInfo.Money > 0)
         {
             GameObject moneyNeeded = Instantiate(_prefabRecipeTooltip, gridCraft.transform);
             moneyNeeded.SetActive(false);
@@ -65,9 +66,10 @@ public class CraftUI : MonoBehaviour
                 UtilsLoadResource.LoadSprite("Sprites/coin");
 
             TextMeshProUGUI textMeshPro = moneyNeeded.transform.Find("Text").GetComponent<TextMeshProUGUI>();
-            textMeshPro.text = recipe.money + " G";
+            textMeshPro.text = recipe.RecipeInfo.Money + " G";
 
-            if (InventoryManager.instance.Money < recipe.money) // Not enough money
+            // If not enough money print red
+            if (InventoryManager.instance.Money < recipe.RecipeInfo.Money)
             {
                 textMeshPro.color = Color.red;
             }

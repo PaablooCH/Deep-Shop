@@ -8,8 +8,8 @@ public enum CustomerType
 
 public class CustomerTastes : MonoBehaviour
 {
-    private GameObject _productDesired;
+    private Item _itemDesired;
     private CustomerType _customerType;
 
-    public GameObject ProductDesired { get => _productDesired; set => _productDesired = value; }
+    public Item ItemDesired { get => _itemDesired; set => _itemDesired = value; }
 }

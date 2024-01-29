@@ -17,15 +17,15 @@ public class WaitInventory : MonoBehaviour
     #endregion
 
     private bool _inventorySlotReady = false;
-    private bool _productsReady = false;
+    private bool _itemsReady = false;
 
     public bool InventorySlotReady { get => _inventorySlotReady; set => _inventorySlotReady = value; }
-    public bool ProductsReady { get => _productsReady; set => _productsReady = value; }
+    public bool ItemsReady { get => _itemsReady; set => _itemsReady = value; }
 
     // Update is called once per frame
     void Update()
     {
-        if (_inventorySlotReady && _productsReady)
+        if (_inventorySlotReady)
         {
             StartCoroutine(InventoryManager.instance.StartItemsAsync());
             enabled = false;

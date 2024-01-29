@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CraftItemQuest : QuestSegment
 {
-    [SerializeField] private int _craftItemId;
+    [SerializeField] private ItemInfoSO _craftItem;
     [SerializeField] private int _quantityToCraft;
 
     private int _numCrafted = 0;
@@ -17,9 +17,9 @@ public class CraftItemQuest : QuestSegment
         GameEventsManager.instance.craftEvents.onItemCrafted -= ItemCrafted;
     }
 
-    private void ItemCrafted(int productCraftedId, int quantityCrafted)
+    private void ItemCrafted(string productCraftedId, int quantityCrafted)
     {
-        if (_craftItemId == productCraftedId)
+        if (_craftItem.IdItem == productCraftedId)
         {
             _numCrafted += quantityCrafted;   
         }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a37712047c10d40b6398264d5429ea, type: 3}
+  m_Name: Watermelon
+  m_EditorClassIdentifier: 
+  _id: bc35170e-a5e1-4a47-873c-5ebd87d0ece3
+  _idItem: IT_3
+  _nameItem: Watermelon
+  _description: Tastiest fruit ever made.
+  _buyPrice: 79.9
+  _maxSoldPrice: 30
+  _karma: 15
+  _weightSpawn: 15
+  _sprite: {fileID: 21300000, guid: 78eb0d4d8e654834bbd496d500e6ed20, type: 3}
+  _color: {r: 1, g: 1, b: 1, a: 1}

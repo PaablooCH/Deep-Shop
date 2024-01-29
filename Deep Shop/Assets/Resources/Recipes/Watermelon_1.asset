@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792e7889645658545ad1e0fdcec2558e, type: 3}
+  m_Name: Watermelon_1
+  m_EditorClassIdentifier: 
+  _id: 260995aa-3788-46d5-a7f5-613f16c137d9
+  _idRecipe: REC_1
+  _nameRecipe: Watermelon_1
+  _productResult:
+    itemInfo: {fileID: 11400000, guid: 722e2c39185c663429600e213e2b85f9, type: 2}
+    quantity: 1
+  _productsNeeded:
+  - itemInfo: {fileID: 11400000, guid: 36330399a34a9f948bf0a84741d534c7, type: 2}
+    quantity: 3
+  - itemInfo: {fileID: 11400000, guid: e622ff757f1d13e4abf35b3207b7c7d4, type: 2}
+    quantity: 1
+  _money: 50
