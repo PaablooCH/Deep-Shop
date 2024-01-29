@@ -7,12 +7,15 @@ public class KarmaSliders : MonoBehaviour
     [SerializeField] private Slider _evilSlider;
     [SerializeField] private Slider _goodSlider;
 
+    private float _karma;
+
     void Start()
     {
-        GameEventManager.instance.inventoryEvent.onKarmaChanged += UpdateKarmaSliders;
+        GameEventsManager.instance.inventoryEvent.onKarmaChanged += UpdateKarmaSliders;
+        _karma = InventoryManager.instance.Karma;
     }
 
-    private void UpdateKarmaSliders(float newKarma, float oldKarma)
+    private void UpdateKarmaSliders(float newKarma)
     {
         if (_evilSlider != null && _goodSlider != null)
         {
@@ -23,7 +26,7 @@ public class KarmaSliders : MonoBehaviour
             }
             if (newKarma > 0)
             {
-                if (oldKarma < 0)
+                if (_karma < 0)
                 {
                     _evilSlider.value = 0; // Reset old predominant Slider
                 }
@@ -31,17 +34,18 @@ public class KarmaSliders : MonoBehaviour
             }
             else
             {
-                if (oldKarma > 0)
+                if (_karma > 0)
                 {
                     _goodSlider.value = 0; // Reset old predominant Slider
                 }
                 _evilSlider.value = -newKarma;
             }
+            _karma = newKarma;
         }
     }
 
     private void OnDestroy()
     {
-        GameEventManager.instance.inventoryEvent.onKarmaChanged -= UpdateKarmaSliders;
+        GameEventsManager.instance.inventoryEvent.onKarmaChanged -= UpdateKarmaSliders;
     }
 }

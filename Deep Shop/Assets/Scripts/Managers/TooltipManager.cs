@@ -9,7 +9,7 @@ public class TooltipManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("Singleton fails.");
+            Debug.LogError("Tooltip Manager singleton already exists.");
             return;
         }
         instance = this;

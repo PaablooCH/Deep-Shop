@@ -27,13 +27,13 @@ public class ShopUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
         if (vendor.TryGetComponent(out VendorProductsToSell component))
         {
             _actualVendorProducts = component;
-            CanvasManager.instance.ActiveUI(gameObject);
+            CanvasManager.instance.ActiveUI(UIs.SHOP);
 
             foreach (ProductQuantity vendorProduct in _actualVendorProducts.VendorProducts)
             {
-                GameObject product = ProductsManager.instance.SearchProductByID(vendorProduct.idProduct);
-                ProductInfo productInfo = product.GetComponent<ProductInfo>();
-                GameObject shopSlot = _manageShopGrid.AddItem(product);
+                ProductInfo productInfo = ProductsManager.instance.GetProductInfo(vendorProduct.idProduct);
+                
+                GameObject shopSlot = _manageShopGrid.AddItem(vendorProduct.idProduct.ToString());
 
                 shopSlot.GetComponentInChildren<SelectedShopProduct>().ShopUI = this; // this implementation avoids
                                                                                   // ManageShopGrid to know anything about

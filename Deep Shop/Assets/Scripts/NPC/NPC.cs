@@ -1,45 +1,48 @@
 using UnityEngine;
 
+[RequireComponent(typeof(CircleCollider2D))]
 public abstract class NPC : MonoBehaviour, IInteractable
 {
     [SerializeField] private SpriteRenderer _interactSprite;
-    
-    [Min(0.1f)]
-    [SerializeField] private float _interactionDistance = 1.1f;
 
-    private Transform _playerTransform;
-
-    private void Start()
-    {
-        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-    }
+    private bool _playerIsNear;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && IsPlayerClose())
+        if (Input.GetKeyDown(KeyCode.E) && _playerIsNear)
         {
             Interact();
         }
 
-        if (!_interactSprite.gameObject.activeSelf && IsPlayerClose())
+        if (_interactSprite)
         {
-            _interactSprite.gameObject.SetActive(true);
-        }
+            if (!_interactSprite.gameObject.activeSelf && _playerIsNear)
+            {
+                _interactSprite.gameObject.SetActive(true);
+            }
 
-        if (_interactSprite.gameObject.activeSelf && !IsPlayerClose())
-        {
-            _interactSprite.gameObject.SetActive(false);
+            if (_interactSprite.gameObject.activeSelf && !_playerIsNear)
+            {
+                _interactSprite.gameObject.SetActive(false);
+            }
         }
     }
 
     public abstract void Interact();
 
-    private bool IsPlayerClose()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Vector2.Distance(_playerTransform.position, transform.position) <= _interactionDistance)
+        if (collision.CompareTag("Player"))
         {
-            return true;
+            _playerIsNear = true;
         }
-        return false;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            _playerIsNear = false;
+        }
     }
 }

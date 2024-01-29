@@ -16,8 +16,7 @@ public class CraftUI : MonoBehaviour
     {
         foreach(Recipe recipe in RecipeManager.instance.Recipes)
         {
-            GameObject productResult = ProductsManager.instance.SearchProductByID(recipe.productResult.idProduct);
-            GameObject gridCraft = _manageCraftGrid.AddItem(productResult);
+            GameObject gridCraft = _manageCraftGrid.AddItem(recipe.productResult.idProduct.ToString());
             _manageCraftGrid.ModifyQuantity(recipe.productResult.idProduct, recipe.productResult.quantity);
             gridCraft.GetComponent<CraftAction>().RecipeId = recipe.id;
             CreateTooltip(recipe, gridCraft);

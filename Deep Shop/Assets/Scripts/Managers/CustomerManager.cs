@@ -10,7 +10,7 @@ public class CustomerManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("Singleton fails.");
+            Debug.LogError("Customer Manager singleton already exists.");
             return;
         }
         instance = this;

@@ -12,6 +12,8 @@ public class InventoryUI : MonoBehaviour
             transform.parent?.gameObject.SetActive(false);
             gameObject.SetActive(false);
             _childsInitialized = true;
+
+            enabled = false;
         }
     }
 }

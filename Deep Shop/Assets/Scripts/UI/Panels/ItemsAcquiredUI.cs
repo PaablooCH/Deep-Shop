@@ -22,11 +22,10 @@ public class ItemsAcquiredUI : MonoBehaviour, IUIProduct, IUIConfirmation
         if (go.TryGetComponent(out PackageWithItems component))
         {
             _packagesWithItems = component;
-            CanvasManager.instance.ActiveUI(gameObject);
+            CanvasManager.instance.ActiveUI(UIs.ITEM_ACQ);
             foreach (ProductQuantity productQuantity in _packagesWithItems.Package)
             {
-                GameObject product = ProductsManager.instance.SearchProductByID(productQuantity.idProduct);
-                _manageItemsAcquired.AddItem(product);
+                _manageItemsAcquired.AddItem(productQuantity.idProduct.ToString());
                 _manageItemsAcquired.ModifyQuantity(productQuantity.idProduct, productQuantity.quantity);
             }
         }

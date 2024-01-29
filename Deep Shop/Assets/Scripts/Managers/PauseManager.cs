@@ -9,7 +9,7 @@ public class PauseManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("Singleton fails.");
+            Debug.LogError("Pause Manager singleton already exists.");
             return;
         }
         instance = this;

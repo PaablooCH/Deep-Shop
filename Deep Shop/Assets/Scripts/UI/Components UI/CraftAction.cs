@@ -62,7 +62,7 @@ public class CraftAction : MonoBehaviour, IPointerEnterHandler
         UpdateMoneyTooltip(recipe);
 
         InventoryManager.instance.ModifyInventory(recipe.productResult.idProduct, recipe.productResult.quantity);
-        GameEventManager.instance.craftEvents.ItemCrafted(recipe.productResult.idProduct, recipe.productResult.quantity);
+        GameEventsManager.instance.craftEvents.ItemCrafted(recipe.productResult.idProduct, recipe.productResult.quantity);
 
         _tooltipGameObject.ResetGameObjects();
     }

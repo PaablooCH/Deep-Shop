@@ -22,7 +22,7 @@ public class TradeUI : MonoBehaviour, IUIProduct, IUIConfirmation, IUIReject
         if (product.TryGetComponent(out ProductInfo component))
         {
             _actualProduct = component;
-            CanvasManager.instance.ActiveUI(gameObject);
+            CanvasManager.instance.ActiveUI(UIs.TRADE);
             SpriteRenderer spriteProduct = _actualProduct.GetComponent<SpriteRenderer>();
 
             // Update Product Color

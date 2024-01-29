@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5800025579401997431}
   - component: {fileID: 8773610276116023434}
   - component: {fileID: 9127168398196842491}
+  - component: {fileID: 3361762937429215637}
   m_Layer: 0
   m_Name: Talker
   m_TagString: Vendor
@@ -167,8 +168,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactSprite: {fileID: 816643030931954094}
-  _interactionDistance: 1.1
-  _dialogueText: {fileID: 11400000, guid: a5012056559aae04a97282a70fc95cab, type: 2}
+  _dialogueText: {fileID: 11400000, guid: a6d0b813e6b237c44a160d8f6d0a83f3, type: 2}
+  _dialogueUI: {fileID: 0}
+--- !u!58 &3361762937429215637
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2285698892836534935}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
 --- !u!1 &8987636689184406474
 GameObject:
   m_ObjectHideFlags: 0

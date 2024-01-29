@@ -14,6 +14,7 @@ public class DialogueUI : MonoBehaviour, IUI
     [Range(0.1f, 10f)]
     [SerializeField] private float _typeSpeed = 10f;
 
+    private string _dialogueId;
     private Queue<DialogueTextSO.Dialogue> _dialogues = new();
 
     private bool _endTalking = false;
@@ -32,7 +33,7 @@ public class DialogueUI : MonoBehaviour, IUI
 
     public void OpenUI()
     {
-        CanvasManager.instance.ActiveUI(gameObject);
+        CanvasManager.instance.ActiveUI(UIs.DIALOGUE);
     }
 
     public void Exit()
@@ -83,6 +84,9 @@ public class DialogueUI : MonoBehaviour, IUI
             OpenUI();
         }
 
+        // Get dialogue ID
+        _dialogueId = dialogueText.Id;
+
         // Update speaker name
         _speakerName.text = dialogueText.SpeakerName;
 
@@ -93,13 +97,16 @@ public class DialogueUI : MonoBehaviour, IUI
         }
     }
 
-    private void EndConversation()
+    public void EndConversation()
     {
         // Clear pending dialogues
         _dialogues.Clear();
 
         // Set endTalking
         _endTalking = false;
+
+        // Propagate event
+        GameEventsManager.instance.dialogueEvents.FinishDialogue(_dialogueId);
 
         // Exit UI
         if (gameObject.activeSelf)

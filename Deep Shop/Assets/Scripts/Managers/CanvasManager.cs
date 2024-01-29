@@ -1,5 +1,14 @@
 using UnityEngine;
 
+public enum UIs
+{
+    MENU, 
+    SHOP, 
+    TRADE,
+    ITEM_ACQ,
+    DIALOGUE
+}
+
 public class CanvasManager : MonoBehaviour
 {
     #region Singleton
@@ -9,7 +18,7 @@ public class CanvasManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("Singleton fails.");
+            Debug.LogError("Canvas Manager singleton already exists.");
             return;
         }
         instance = this;
@@ -17,8 +26,12 @@ public class CanvasManager : MonoBehaviour
     #endregion
 
     [SerializeField] private GameObject _menuUI;
+    [SerializeField] private GameObject _tradeUI;
+    [SerializeField] private GameObject _shopUI;
+    [SerializeField] private GameObject _itemAcqUI;
+    [SerializeField] private GameObject _dialogueUI;
 
-    private GameObject _actualUI;
+    private GameObject _actualPanel;
 
     private bool _opened = false;
 
@@ -30,15 +43,15 @@ public class CanvasManager : MonoBehaviour
             {
                 FreeUI();
                 CallExit();
-                if (_actualUI.TryGetComponent(out MenuWindowUI menu))
+                if (_actualPanel.TryGetComponent(out MenuWindowUI menu))
                 {
                     menu.Exit();
                 }
             }
             else
             {
-                ActiveUI(_menuUI);
-                MenuWindowUI menu = _actualUI.GetComponent<MenuWindowUI>();
+                ActiveUI(UIs.MENU);
+                MenuWindowUI menu = _actualPanel.GetComponent<MenuWindowUI>();
                 menu.OpenUI();
             }
         }
@@ -46,36 +59,61 @@ public class CanvasManager : MonoBehaviour
 
     private void CallExit()
     {
-        if (_actualUI.TryGetComponent(out MenuWindowUI menu))
+        if (_actualPanel.TryGetComponent(out MenuWindowUI menu))
         {
             menu.Exit();
         }
-        else if (_actualUI.TryGetComponent(out ShopUI shop))
+        else if (_actualPanel.TryGetComponent(out ShopUI shop))
         {
             shop.Exit();
         }
-        else if (_actualUI.TryGetComponent(out ItemsAcquiredUI itemAcquired))
+        else if (_actualPanel.TryGetComponent(out ItemsAcquiredUI itemAcquired))
         {
             itemAcquired.Exit();
         }
-        else if (_actualUI.TryGetComponent(out TradeUI trade))
+        else if (_actualPanel.TryGetComponent(out TradeUI trade))
         {
             trade.Exit();
         }
+        else if (_actualPanel.TryGetComponent(out DialogueUI dialogue))
+        {
+            dialogue.EndConversation();
+        }
     }
 
-    public void ActiveUI(GameObject newUI)
+    public void ActiveUI(UIs ui)
     {
         PauseManager.instance.Pause();
-        _actualUI = newUI;
-        _actualUI.SetActive(true);
+        _actualPanel = GetPanel(ui);
+        
+        _actualPanel.SetActive(true);
         _opened = true;
+    }
+
+    public GameObject GetPanel(UIs ui)
+    {
+        switch (ui)
+        {
+            case UIs.MENU:
+                return _menuUI;
+            case UIs.SHOP:
+                return _shopUI;
+            case UIs.TRADE:
+                return _tradeUI;
+            case UIs.ITEM_ACQ:
+                return _itemAcqUI;
+            case UIs.DIALOGUE:
+                return _dialogueUI;
+            default:
+                Debug.LogWarning("Panel: " + ui + " doesn't exist.");
+                return null;
+        }
     }
 
     public void FreeUI()
     {
         PauseManager.instance.Restart();
-        _actualUI.SetActive(false);
+        _actualPanel.SetActive(false);
         _opened = false;
         TooltipManager.instance.Hide();
     }

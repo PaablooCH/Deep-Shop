@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class InventoryEvents
 {
-    public delegate GameObject OnAddItem(GameObject product);
+    public delegate GameObject OnAddItem(string idItem);
     public event OnAddItem onAddItem;
-    public void AddItem(GameObject product)
+    public void AddItem(string idItem)
     {
         if (onAddItem != null)
         {
-            onAddItem(product);
+            onAddItem(idItem);
         }
     }
 
@@ -31,12 +31,12 @@ public class InventoryEvents
         }
     }
 
-    public Action<float, float> onKarmaChanged;
-    public void KarmaChanged(float newKarma, float oldKarma)
+    public Action<float> onKarmaChanged;
+    public void KarmaChanged(float newKarma)
     {
         if (onKarmaChanged != null)
         {
-            onKarmaChanged(newKarma, oldKarma);
+            onKarmaChanged(newKarma);
         }
     }
 

@@ -25,7 +25,7 @@ public class DeliverManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("Singleton fails.");
+            Debug.LogError("Deliver Manager singleton already exists.");
             return;
         }
         instance = this;

@@ -2,20 +2,14 @@ using UnityEngine;
 
 public class SellInteraction : PlayerNPCInteraction
 {
-    [SerializeField] private TradeUI _tradeUIManager;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
         if (_isPlayer && _npc && Input.GetKeyDown(KeyCode.E))
         {
             // open dialog
-            _tradeUIManager.OpenUI(_npc.GetComponent<CustomerTastes>().ProductDesired);
+            CanvasManager.instance.GetPanel(UIs.TRADE).GetComponent<TradeUI>()
+                .OpenUI(_npc.GetComponent<CustomerTastes>().ProductDesired);
         }
     }
 

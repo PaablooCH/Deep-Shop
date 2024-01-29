@@ -11,7 +11,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("Singleton fails.");
+            Debug.LogError("Inventory Manager singleton already exists.");
             return;
         }
         instance = this;
@@ -29,7 +29,7 @@ public class InventoryManager : MonoBehaviour
         get => _karma;
         set
         {
-            GameEventManager.instance.inventoryEvent.KarmaChanged(value, _karma);
+            GameEventsManager.instance.inventoryEvent.KarmaChanged(value);
             _karma = value;
         }
     }
@@ -39,7 +39,7 @@ public class InventoryManager : MonoBehaviour
         get => _money;
         set
         {
-            GameEventManager.instance.inventoryEvent.MoneyChange(value);
+            GameEventsManager.instance.inventoryEvent.MoneyChange(value);
             _money = value;
         }
     }
@@ -98,11 +98,15 @@ public class InventoryManager : MonoBehaviour
     // n can be negative (substract) or positive (sum)
     public void ModifyInventory(int id, int n)
     {
+        if (!ProductsManager.instance.ExistsProduct(id))
+        {
+            Debug.LogWarning("Product with id: " + id + " doesn't exist.");
+            return;
+        }
         if (!_inventory.ContainsKey(id))
         {
             _inventory[id] = 0;
-            GameObject product = ProductsManager.instance.SearchProductByID(id);
-            GameEventManager.instance.inventoryEvent.AddItem(product);
+            GameEventsManager.instance.inventoryEvent.AddItem(id.ToString());
         }
         if (_inventory[id] + n < 0)
         {
@@ -112,11 +116,11 @@ public class InventoryManager : MonoBehaviour
         _inventory[id] += n;
         if (_inventory[id] > 0)
         {
-            GameEventManager.instance.inventoryEvent.ModifyQuantity(id, _inventory[id]);
+            GameEventsManager.instance.inventoryEvent.ModifyQuantity(id, _inventory[id]);
         }
         else if (_inventory[id] == 0)
         {
-            GameEventManager.instance.inventoryEvent.RemoveItem(id);
+            GameEventsManager.instance.inventoryEvent.RemoveItem(id);
         }
     }
 }

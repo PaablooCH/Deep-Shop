@@ -10,7 +10,7 @@ public class VendorManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("Singleton fails.");
+            Debug.LogError("Vendor Manager singleton already exists."); 
             return;
         }
         instance = this;

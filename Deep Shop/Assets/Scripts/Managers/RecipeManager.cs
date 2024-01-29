@@ -16,7 +16,7 @@ public class RecipeManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("Singleton fails.");
+            Debug.LogError("Recipe Manager singleton already exists."); 
             return;
         }
         instance = this;

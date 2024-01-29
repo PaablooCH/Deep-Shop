@@ -16,7 +16,7 @@ public class ProductsManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("Singleton fails.");
+            Debug.LogError("Product Manager singleton already exists.");
             return;
         }
         instance = this;
@@ -44,6 +44,11 @@ public class ProductsManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public bool ExistsProduct(int id)
+    {
+        return SearchProductByID(id) != null;
     }
 
     public ProductInfo GetProductInfo(int id)

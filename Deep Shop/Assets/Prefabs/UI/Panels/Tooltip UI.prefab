@@ -287,7 +287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e26d34b8b1d7b3442bc74875bb44ac64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasTransform: {fileID: 0}
   _headerField: {fileID: 1106054014413413323}
   _bodyField: {fileID: 1738483265529303383}
   _layoutElement: {fileID: 6740210359412691615}

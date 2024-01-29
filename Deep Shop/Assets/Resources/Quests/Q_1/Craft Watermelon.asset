@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5219c94352a2ffd428af3546f604bea0, type: 3}
+  m_Name: Craft Watermelon
+  m_EditorClassIdentifier: 
+  _id: 3d0076d8-1266-4fb5-a7e9-ca3e4c2a1969
+  _idQuest: 1
+  _nameQuest: Craft Watermelon
+  startDialogueQuest: {fileID: 11400000, guid: 2f70916d4941fd3489a55e29653ae8cc, type: 2}
+  finishDialogueQuest: {fileID: 11400000, guid: 3cbebdda5e45b6243b790c0946ff503f, type: 2}
+  karma: 0
+  questPrerequisites: []
+  segments:
+  - {fileID: 6451873652413181644, guid: cdf320052eef1c548982d81f1ffc6424, type: 3}
+  - {fileID: 6451873652413181644, guid: 7e12e6b74d908d040b67a70692c596b6, type: 3}
+  _productReward:
+    idProduct: 3
+    quantity: 10
+  _moneyReward: 200
