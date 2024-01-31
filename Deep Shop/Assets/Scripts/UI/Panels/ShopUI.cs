@@ -12,7 +12,7 @@ public class ShopUI : MonoBehaviour, IUIGameObject, IUIConfirmation, IUIReject
 
     [SerializeField] private BuyInteraction _buyInteraction;
 
-    VendorProductsToSell _actualVendorProducts;
+    VendorItemToSell _actualVendorProducts;
     
     private List<string> _cart = new(); // stores the idItems that we want to buy
 
@@ -25,7 +25,7 @@ public class ShopUI : MonoBehaviour, IUIGameObject, IUIConfirmation, IUIReject
 
     public void OpenUI(GameObject vendor)
     {
-        if (vendor.TryGetComponent(out VendorProductsToSell component))
+        if (vendor.TryGetComponent(out VendorItemToSell component))
         {
             _actualVendorProducts = component;
             CanvasManager.instance.ActiveUI(UIs.SHOP);
@@ -36,7 +36,7 @@ public class ShopUI : MonoBehaviour, IUIGameObject, IUIConfirmation, IUIReject
                 
                 GameObject shopSlot = _manageShopGrid.AddItem(idItem);
 
-                shopSlot.GetComponentInChildren<SelectedShopProduct>().ShopUI = this; // this implementation avoids
+                shopSlot.GetComponentInChildren<SelectedShopItem>().ShopUI = this; // this implementation avoids
                                                                                       // ManageShopGrid to know anything about
                                                                                       // this class
 

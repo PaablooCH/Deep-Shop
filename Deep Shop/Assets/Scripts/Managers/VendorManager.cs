@@ -72,7 +72,7 @@ public class VendorManager : MonoBehaviour
 
     private void CreateVendorProducts(GameObject go)
     {
-        if (go.TryGetComponent(out VendorProductsToSell productsToSell))
+        if (go.TryGetComponent(out VendorItemToSell productsToSell))
         {
             int numberToSell = _numberToSell < ItemsManager.instance.HowManyItemsExist() ?
             _numberToSell : ItemsManager.instance.HowManyItemsExist();

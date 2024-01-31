@@ -9,7 +9,7 @@ public class ManageShopGrid : ManageItemsInGrid
 
         // Don't need comprobation 100% the item is inside
         Item item = ItemsManager.instance.GetItemByID(newItem);
-        SelectedShopProduct selectedProduct = shopSlot.GetComponentInChildren<SelectedShopProduct>();
+        SelectedShopItem selectedProduct = shopSlot.GetComponentInChildren<SelectedShopItem>();
         selectedProduct.ItemId = newItem;
 
         TooltipTrigger tooltipTrigger = shopSlot.GetComponent<TooltipTrigger>();

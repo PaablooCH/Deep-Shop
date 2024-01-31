@@ -1,12 +1,14 @@
 [System.Serializable]
-public class StartInventoryInfo
+public class StartItemInfo
 {
     public string idItem;
     public int amount;
 }
 
 [System.Serializable]
-public class StartInventoryArray
+public class StartInventoryInfo
 {
-    public StartInventoryInfo[] startInventory;
+    public float money;
+    public float karma;
+    public StartItemInfo[] items;
 }

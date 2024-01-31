@@ -7,7 +7,6 @@ public class ManageInventoryGrid : ManageItemsInGrid
         GameEventsManager.instance.inventoryEvent.onAddItem += AddItem;
         GameEventsManager.instance.inventoryEvent.onModifyQuantity += ModifyQuantity;
         GameEventsManager.instance.inventoryEvent.onRemoveItem += RemoveItem;
-        WaitInventory.instance.InventorySlotReady = true;
     }
 
     public override GameObject AddItem(string newItem)

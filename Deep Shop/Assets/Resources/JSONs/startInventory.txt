@@ -1,5 +1,7 @@
 {
-  "startInventory": [
+  "money": 100,
+  "karma": 0,
+  "items": [
     {
       "idItem": "IT_1",
       "amount": 5

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour, IDataPersistence
 {
     #region Singleton
     public static InventoryManager instance;
@@ -18,11 +18,9 @@ public class InventoryManager : MonoBehaviour
     }
     #endregion
 
-    [Min(0f)]
-    [SerializeField] private float _money = 100f;
+    private float _money;
 
-    [Range(-100f, 100f)]
-    [SerializeField] private float _karma = 0f;
+    private float _karma;
 
     public float Karma
     {
@@ -45,32 +43,6 @@ public class InventoryManager : MonoBehaviour
     }
 
     private Dictionary<string, int> _inventory = new(); // key -> item id, value -> ammount
-    
-    private const string START_INVENTORY_PATH = "JSONs/startInventory";
-
-    public IEnumerator StartItemsAsync()
-    {
-        ResourceRequest request = Resources.LoadAsync<TextAsset>(START_INVENTORY_PATH);
-
-        while (!request.isDone)
-        {
-            float progress = request.progress;
-            Debug.Log("Inventory load progress: " + progress * 100f + "%");
-            yield return null;
-        }
-        Debug.Log("Inventory load progress: 100%");
-
-        TextAsset jsonAsset = request.asset as TextAsset;
-
-        if (jsonAsset != null)
-        {
-            StartInventoryArray dataPrefab = JsonUtility.FromJson<StartInventoryArray>(jsonAsset.text);
-            foreach (StartInventoryInfo startInventory in dataPrefab.startInventory)
-            {
-                ModifyInventory(startInventory.idItem, startInventory.amount);
-            }
-        }
-    }
 
     public void Trade(Item item, int quantity, float price)
     {
@@ -102,7 +74,7 @@ public class InventoryManager : MonoBehaviour
         }
         if (_inventory[id] + n < 0)
         {
-            Debug.LogError("Attempt to leave a negative value in the inventory");
+            Debug.LogWarning("Attempt to leave a negative value in the inventory");
             return;
         }
         _inventory[id] += n;
@@ -113,6 +85,27 @@ public class InventoryManager : MonoBehaviour
         else if (_inventory[id] == 0)
         {
             GameEventsManager.instance.inventoryEvent.RemoveItem(id);
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        InventoryData inventoryData = new InventoryData();
+        inventoryData.karma = _karma;
+        inventoryData.moneyCount = _money;
+        inventoryData.items = _inventory;
+
+        data.inventoryData = inventoryData;
+    }
+
+    public void LoadData(GameData data)
+    {
+        Money = data.inventoryData.moneyCount;
+        Karma = data.inventoryData.karma;
+
+        foreach (KeyValuePair<string, int> item in data.inventoryData.items)
+        {
+            ModifyInventory(item.Key, item.Value);
         }
     }
 }

@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
+public class PlayerMovement : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private float _movementSpeed = 5f;
 
@@ -42,5 +44,18 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.MovePosition(_rb.position + _movement * _movementSpeed * Time.fixedDeltaTime);
         }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        PlayerData playerData = new PlayerData();
+        playerData.position = transform.position;
+
+        data.playerData = playerData;
+    }
+
+    public void LoadData(GameData data)
+    {
+        transform.position = data.playerData.position;
     }
 }
