@@ -1,16 +1,29 @@
 using UnityEngine;
 
-public class PlayerNPCInteraction : MonoBehaviour
+[RequireComponent(typeof(BoxCollider2D))]
+public abstract class PlayerNPCInteraction : MonoBehaviour, IInteractable
 {
     protected GameObject _npc = null;
     protected bool _isPlayer = false;
+
+    private void Update()
+    {
+        if (_isPlayer && _npc && Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
+        }
+    }
+
+    protected abstract void CheckNPC(GameObject npc);
+
+    public abstract void Interact();
 
     public virtual void EndInteraction()
     {
         _npc = null;
     }
 
-    protected void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -18,11 +31,11 @@ public class PlayerNPCInteraction : MonoBehaviour
         }
         else
         {
-            NeededByInheritClasses(collision.gameObject);
+            CheckNPC(collision.gameObject);
         }
     }
 
-    protected void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject == _npc)
         {
@@ -33,6 +46,4 @@ public class PlayerNPCInteraction : MonoBehaviour
             _isPlayer = false;
         }
     }
-
-    protected virtual void NeededByInheritClasses(GameObject npc) { }
 }
