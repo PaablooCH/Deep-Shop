@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _description: Craft a watermelon for Lola
-  _craftItemId: 3
-  _quantityToCraft: 1
+  _craftItem: {fileID: 11400000, guid: 722e2c39185c663429600e213e2b85f9, type: 2}
+  _quantityToCraft: 2

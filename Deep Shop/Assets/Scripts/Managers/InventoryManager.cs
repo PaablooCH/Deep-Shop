@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour, IDataPersistence
+public class InventoryManager : MonoBehaviour, IPersistenceData
 {
     #region Singleton
     public static InventoryManager instance;

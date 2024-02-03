@@ -1,4 +1,4 @@
-public interface IDataPersistence
+public interface IPersistenceData
 {
     void SaveData(ref GameData data);
 

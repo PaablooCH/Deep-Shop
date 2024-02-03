@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 962283152136887353}
   - component: {fileID: 7876346682250138328}
   m_Layer: 0
-  m_Name: CraftHeadSpike
+  m_Name: CraftSpikeHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _description: AAAAAAAAAAAAAAA
-  _craftItemId: 6
+  _craftItem: {fileID: 11400000, guid: db9385156fc1dac42856228d40e0361d, type: 2}
   _quantityToCraft: 1

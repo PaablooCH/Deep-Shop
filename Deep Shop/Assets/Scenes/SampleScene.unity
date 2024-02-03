@@ -5748,7 +5748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fileName: deepShop.save
-  _useEncryption: 1
+  _useEncryption: 0
 --- !u!1 &1415633073
 GameObject:
   m_ObjectHideFlags: 0

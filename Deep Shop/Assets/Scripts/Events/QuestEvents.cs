@@ -37,4 +37,13 @@ public class QuestEvents
             onQuestStateChange(quest);
         }
     }
+
+    public event Action<string, int, QuestSegmentState> onQuestSegmentStateChange;
+    public void QuestSegmentStateChange(string idQuest, int segment, QuestSegmentState state)
+    {
+        if (onQuestStateChange != null)
+        {
+            onQuestSegmentStateChange(idQuest, segment, state);
+        }
+    }
 }

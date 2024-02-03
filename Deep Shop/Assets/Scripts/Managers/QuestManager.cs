@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestManager : MonoBehaviour
+public class QuestManager : MonoBehaviour, IPersistenceData
 {
     #region Singleton
     public static QuestManager instance;
@@ -30,7 +30,8 @@ public class QuestManager : MonoBehaviour
         }
 
         _karma = InventoryManager.instance.Karma;
-        CheckIfCanStart();
+        // TODO Probably not necessary
+        //CheckIfCanStart();
     }
 
     private Dictionary<string, Quest> CreateQuestMap()
@@ -59,6 +60,7 @@ public class QuestManager : MonoBehaviour
         GameEventsManager.instance.questEvents.onStartQuest += StartQuest;
         GameEventsManager.instance.questEvents.onAdvanceQuest += AdvanceQuest;
         GameEventsManager.instance.questEvents.onFinishQuest += FinishQuest;
+        GameEventsManager.instance.questEvents.onQuestSegmentStateChange += UpdateSegmentState;
 
         GameEventsManager.instance.inventoryEvent.onKarmaChanged += UpdateKarma;
     }
@@ -68,6 +70,7 @@ public class QuestManager : MonoBehaviour
         GameEventsManager.instance.questEvents.onStartQuest -= StartQuest;
         GameEventsManager.instance.questEvents.onAdvanceQuest -= AdvanceQuest;
         GameEventsManager.instance.questEvents.onFinishQuest -= FinishQuest;
+        GameEventsManager.instance.questEvents.onQuestSegmentStateChange -= UpdateSegmentState;
 
         GameEventsManager.instance.inventoryEvent.onKarmaChanged -= UpdateKarma;
     }
@@ -106,7 +109,7 @@ public class QuestManager : MonoBehaviour
         Quest quest = GetQuestById(id);
         ClaimReward(quest);
         ChangeQuestState(id, QuestState.FINISHED);
-        CheckIfCanStart();
+        CheckConditions();
     }
 
     private void ClaimReward(Quest quest)
@@ -119,10 +122,10 @@ public class QuestManager : MonoBehaviour
     private void UpdateKarma(float newKarma)
     {
         _karma = newKarma;
-        CheckIfCanStart();
+        CheckConditions();
     }
 
-    private void CheckIfCanStart()
+    private void CheckConditions()
     {
         // Check if some Quest can start now that some requirements are updated
         foreach (Quest quest in _questMap.Values)
@@ -173,5 +176,45 @@ public class QuestManager : MonoBehaviour
             Debug.LogError("Quest with IdQuest: " + id + " doesn't exist.");
         }
         return requested;
+    }
+
+    private void UpdateSegmentState(string idQuest, int segment, QuestSegmentState state)
+    {
+        Quest quest = GetQuestById(idQuest);
+        quest.UpdateSegmentState(segment, state);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        Dictionary<string, QuestData> dataMap = new();
+        foreach (string idQuest in _questMap.Keys)
+        {
+            Quest quest = GetQuestById(idQuest);
+            QuestData questData = quest.Save();
+            dataMap.Add(idQuest, questData);
+        }
+        data.questsData = dataMap;
+    }
+
+    public void LoadData(GameData data)
+    {
+        foreach (string idQuest in data.questsData.Keys)
+        {
+            // Save the state
+            Quest quest = _questMap[idQuest];
+            quest.Load(data.questsData[idQuest]);
+
+            // Propagate Quest State
+            GameEventsManager.instance.questEvents.QuestStateChange(quest);
+
+            // If quest is In Progress instantiate segment
+            if (quest.State == QuestState.IN_PROGRESS)
+            {
+                quest.InstantiateSegment(transform);
+            }
+        }
+
+        // Check if some quests can be initialize after load
+        CheckConditions();
     }
 }

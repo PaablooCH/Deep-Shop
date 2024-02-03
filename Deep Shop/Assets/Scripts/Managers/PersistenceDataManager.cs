@@ -24,7 +24,7 @@ public class PersistenceDataManager : MonoBehaviour
 
     private FileDataHandler _fileDataHandler;
     private GameData _gameData;
-    private List<IDataPersistence> _dataPersistencesObjects = new();
+    private List<IPersistenceData> _dataPersistencesObjects = new();
 
     private void Start()
     {
@@ -53,7 +53,7 @@ public class PersistenceDataManager : MonoBehaviour
         }
 
         // Load the values into the components that need it
-        foreach (IDataPersistence dataPerObj in _dataPersistencesObjects)
+        foreach (IPersistenceData dataPerObj in _dataPersistencesObjects)
         {
             dataPerObj.LoadData(_gameData);
         }
@@ -62,7 +62,7 @@ public class PersistenceDataManager : MonoBehaviour
     public void SaveGame()
     {
         // Save the data from the components
-        foreach (IDataPersistence dataPerObj in _dataPersistencesObjects)
+        foreach (IPersistenceData dataPerObj in _dataPersistencesObjects)
         {
             dataPerObj.SaveData(ref _gameData);
         }
@@ -76,10 +76,10 @@ public class PersistenceDataManager : MonoBehaviour
         SaveGame();
     }
 
-    private List<IDataPersistence> FindAllIDataPersistences()
+    private List<IPersistenceData> FindAllIDataPersistences()
     {
-        IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().
-            OfType<IDataPersistence>();
+        IEnumerable<IPersistenceData> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().
+            OfType<IPersistenceData>();
 
         return new(dataPersistenceObjects);
     }

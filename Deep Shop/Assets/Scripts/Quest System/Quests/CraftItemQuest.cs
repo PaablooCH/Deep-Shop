@@ -21,12 +21,32 @@ public class CraftItemQuest : QuestSegment
     {
         if (_craftItem.IdItem == productCraftedId)
         {
-            _numCrafted += quantityCrafted;   
+            _numCrafted += quantityCrafted;
+            SaveSegmentState();
         }
 
         if (_numCrafted >= _quantityToCraft)
         {
             FinishQuestSegment();
         }
+    }
+
+    protected override void LoadSegmentState(string segmentState)
+    {
+        if (int.TryParse(segmentState, out int result))
+        {
+            _numCrafted = result;
+        }
+        else
+        {
+            Debug.LogWarning("The state saved in the quest: " + _questId +
+                " and segment: " + _segmentIndex + " is not a int.");
+        }
+    }
+
+    protected override void SaveSegmentState()
+    {
+        string state = _numCrafted.ToString();
+        ChangeState(new QuestSegmentState(state));
     }
 }

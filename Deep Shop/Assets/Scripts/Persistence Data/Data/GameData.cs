@@ -2,17 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class PlayerData
-{
-    public Vector3 position;
-
-    public PlayerData()
-    {
-        position = Vector3.zero;
-    }
-}
-
-[System.Serializable]
 public class InventoryData
 {
     public float moneyCount;
@@ -46,10 +35,37 @@ public class InventoryData
 }
 
 [System.Serializable]
+public class PlayerData
+{
+    public Vector3 position;
+
+    public PlayerData()
+    {
+        position = Vector3.zero;
+    }
+}
+
+[System.Serializable]
+public class QuestData
+{
+    public QuestState state;
+    public int actualSegment;
+    public QuestSegmentState[] segmentsStates;
+
+    public QuestData(QuestState state, int actualSegment, QuestSegmentState[] segmentsStates)
+    {
+        this.state = state;
+        this.actualSegment = actualSegment;
+        this.segmentsStates = segmentsStates;
+    }
+}
+
+[System.Serializable]
 public class GameData
 {
     public PlayerData playerData;
     public InventoryData inventoryData;
+    public Dictionary<string, QuestData> questsData = new();
 
     public GameData()
     {

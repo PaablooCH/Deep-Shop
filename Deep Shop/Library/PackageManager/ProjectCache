@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638422979700916033
-    m_Hash: 2090641820
+      ticks: 638423927772171359
+    m_Hash: 1174246163
   m_LockFileStatus:
     m_FilePath: E:/Github/Deep-Shop/Deep Shop/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638422979705377653
-    m_Hash: 1641382048
+      ticks: 638423927772181352
+    m_Hash: 674982206
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:

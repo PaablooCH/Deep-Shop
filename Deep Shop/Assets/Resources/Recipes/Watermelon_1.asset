@@ -20,7 +20,7 @@ MonoBehaviour:
     quantity: 1
   _productsNeeded:
   - itemInfo: {fileID: 11400000, guid: 36330399a34a9f948bf0a84741d534c7, type: 2}
-    quantity: 3
+    quantity: 1
   - itemInfo: {fileID: 11400000, guid: e622ff757f1d13e4abf35b3207b7c7d4, type: 2}
     quantity: 1
   _money: 50
