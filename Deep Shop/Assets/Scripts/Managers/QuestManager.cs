@@ -30,8 +30,6 @@ public class QuestManager : MonoBehaviour, IPersistenceData
         }
 
         _karma = InventoryManager.instance.Karma;
-        // TODO Probably not necessary
-        //CheckIfCanStart();
     }
 
     private Dictionary<string, Quest> CreateQuestMap()

@@ -46,6 +46,20 @@ public class Quest
         }
     }
 
+    public QuestSegment GetQuestSegment(int segmentIndex)
+    {
+        QuestSegment questSegment = null;
+        if (segmentIndex < _questInfo.Segments.Length)
+        {
+            questSegment = _questInfo.Segments[segmentIndex].GetComponent<QuestSegment>();
+        }
+        else
+        {
+            Debug.LogWarning("Tried to get the segment: " + segmentIndex + " but it's out of bound.");
+        }
+        return questSegment;
+    }
+
     private GameObject GetCurrentSegment()
     {
         GameObject currentSegement = null;
@@ -69,7 +83,7 @@ public class Quest
         }
         else
         {
-            Debug.LogWarning("Try to save a Segment State out of bound. Segment: " + segment + ", total states: " + 
+            Debug.LogWarning("Try to save a Segment State out of bound. Segment: " + segment + ", total states: " +
                 _segmentsStates.Length + ".");
         }
     }
@@ -82,7 +96,7 @@ public class Quest
 
         if (_segmentsStates.Length != _questInfo.Segments.Length)
         {
-            Debug.LogError("The data saved not correspond to the number of segments in this quest with id: " + 
+            Debug.LogError("The data saved not correspond to the number of segments in this quest with id: " +
                 _questInfo.IdQuest + ". We must redo the save file");
         }
     }

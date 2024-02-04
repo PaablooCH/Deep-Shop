@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class QuestEvents
 {
@@ -44,6 +45,15 @@ public class QuestEvents
         if (onQuestStateChange != null)
         {
             onQuestSegmentStateChange(idQuest, segment, state);
+        }
+    }
+
+    public event Action<string, GameObject> onUpdateQuestTooltip;
+    public void UpdateQuestTooltip(string idQuest, GameObject tooltip)
+    {
+        if (onUpdateQuestTooltip != null)
+        {
+            onUpdateQuestTooltip(idQuest, tooltip);
         }
     }
 }

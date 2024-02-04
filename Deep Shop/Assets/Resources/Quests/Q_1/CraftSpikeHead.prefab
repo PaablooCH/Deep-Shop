@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f21174f23c9f3438301596dfc78018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _description: AAAAAAAAAAAAAAA
+  _description: Craft a spike head for Lola
+  _questTooltipPrefab: {fileID: 8838869018672325813, guid: e508fa91e15800b4ea30b5d82b7dce04, type: 3}
   _craftItem: {fileID: 11400000, guid: db9385156fc1dac42856228d40e0361d, type: 2}
   _quantityToCraft: 1
