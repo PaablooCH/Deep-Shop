@@ -1,48 +1,66 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PackageWithItems : MonoBehaviour
+public class PackageWithItems : MonoBehaviour, IInteractable
 {
-    [SerializeField] private ItemsAcquiredUI _itemsAcquiredUI;
+    [Header("Package Sprites")]
+    [SerializeField] private SpriteRenderer _spriteOpened;
+    [SerializeField] private SpriteRenderer _spriteClosed;
+    [SerializeField] private SpriteRenderer _spriteEmpty;
 
-    [SerializeField] private SpriteRenderer _chestOpened;
-    [SerializeField] private SpriteRenderer _chestClosed;
-    [SerializeField] private SpriteRenderer _chestEmpty;
-
-    private List<ItemQuantity> _package = new();
+    private List<DeliverObject> _packagesWaiting = new();
+    private List<ItemQuantity> _packagesReady = new();
     private bool _isPlayer = false;
 
-    public List<ItemQuantity> Package { get => _package; set => _package = value; }
+    public List<ItemQuantity> Package { get => _packagesReady; set => _packagesReady = value; }
+    public List<DeliverObject> PackagesWaiting { get => _packagesWaiting; set => _packagesWaiting = value; }
 
     private void Start()
     {
-        _chestOpened.enabled = false;
-        _chestClosed.enabled = false;
-        _chestEmpty.enabled = false;
+        _spriteOpened.enabled = false;
+        _spriteClosed.enabled = false;
+        _spriteEmpty.enabled = false;
     }
 
     private void Update()
     {
-        if (_package.Count != 0 && _isPlayer && Input.GetKeyDown(KeyCode.E))
+        // Interact point
+        if (_packagesReady.Count != 0 && _isPlayer && Input.GetKeyDown(KeyCode.E))
         {
-            _itemsAcquiredUI.OpenUI(gameObject);
+            Interact();
         }
+
+        // From waiting to ready
+        List<DeliverObject> auxList = new();
+        foreach (DeliverObject deliverObject in _packagesWaiting)
+        {
+            deliverObject.TimeToDeliver -= Time.deltaTime;
+            if (deliverObject.TimeToDeliver <= 0f)
+            {
+                AddNewPackage(deliverObject.ProductQuantity);
+            }
+            else
+            {
+                auxList.Add(deliverObject);
+            }
+        }
+        _packagesWaiting = auxList;
     }
 
     public void AddNewPackage(ItemQuantity newProductQuantity)
     {
-        _package.Add(newProductQuantity);
-        if (_package.Count > 0)
+        _packagesReady.Add(newProductQuantity);
+        if (_packagesReady.Count > 0)
         {
-            _chestOpened.enabled = true;
+            _spriteOpened.enabled = true;
         }
     }
 
     public List<ItemQuantity> PickPackages()
     {
-        List<ItemQuantity> copyPackage = new(_package);
-        _package.Clear();
-        _chestOpened.enabled = false;
+        List<ItemQuantity> copyPackage = new(_packagesReady);
+        _packagesReady.Clear();
+        _spriteOpened.enabled = false;
         return copyPackage;
     }
 
@@ -60,5 +78,10 @@ public class PackageWithItems : MonoBehaviour
         {
             _isPlayer = false;
         }
+    }
+
+    public void Interact()
+    {
+        UIManager.instance.OpenUI(UIs.ITEM_ACQ, gameObject);
     }
 }

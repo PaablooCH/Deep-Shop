@@ -9,6 +9,7 @@ public class ShopUI : MonoBehaviour, IUIGameObject, IUIConfirmation, IUIReject
     [SerializeField] private Button _button;
     [SerializeField] private TextMeshProUGUI _cost;
     [SerializeField] private ManageShopGrid _manageShopGrid;
+    [SerializeField] private PackageWithItems _deliveryPlace;
 
     [SerializeField] private BuyInteraction _buyInteraction;
 
@@ -28,7 +29,7 @@ public class ShopUI : MonoBehaviour, IUIGameObject, IUIConfirmation, IUIReject
         if (vendor.TryGetComponent(out VendorItemToSell component))
         {
             _actualVendorProducts = component;
-            CanvasManager.instance.ActiveUI(UIs.SHOP);
+            UIManager.instance.ActiveUI(UIs.SHOP);
 
             foreach (ItemQuantity vendorProduct in _actualVendorProducts.VendorProducts)
             {
@@ -48,7 +49,7 @@ public class ShopUI : MonoBehaviour, IUIGameObject, IUIConfirmation, IUIReject
 
     public void Exit()
     {
-        CanvasManager.instance.FreeUI();
+        UIManager.instance.FreeUI();
         _cart.Clear();
         _manageShopGrid.CleanGrid();
     }
@@ -60,19 +61,19 @@ public class ShopUI : MonoBehaviour, IUIGameObject, IUIConfirmation, IUIReject
         {
             int quantity = _actualVendorProducts.SearchVendorProduct(itemId).Quantity;
             Item itemToDeliver = ItemsManager.instance.GetItemByID(itemId);
-            DeliverManager.instance.Packages.Add(new DeliverObject(10, new ItemQuantity(itemToDeliver, quantity)));
+            _deliveryPlace.PackagesWaiting.Add(new DeliverObject(10, new ItemQuantity(itemToDeliver, quantity)));
         }
-        InventoryManager.instance.Money -= _moneyInCart;
+        PlayerManager.instance.GetPlayerInventory().Money -= _moneyInCart;
         _cart.Clear();
         _manageShopGrid.CleanGrid();
         _buyInteraction.EndInteraction();
-        CanvasManager.instance.FreeUI();
+        UIManager.instance.FreeUI();
     }
 
     public void Reject()
     {
         _buyInteraction.EndInteraction();
-        CanvasManager.instance.FreeUI();
+        UIManager.instance.FreeUI();
     }
 
     public void AddToCart(string idItem)
@@ -106,7 +107,7 @@ public class ShopUI : MonoBehaviour, IUIGameObject, IUIConfirmation, IUIReject
     private void UpdateCostDependencies()
     {
         _cost.text = _moneyInCart.ToString("0.00") + " G";
-        if (_moneyInCart > InventoryManager.instance.Money)
+        if (_moneyInCart > PlayerManager.instance.GetPlayerInventory().Money)
         {
             _button.interactable = false;
             _cost.color = Color.red;

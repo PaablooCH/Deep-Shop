@@ -15,13 +15,13 @@ public class DialogueUI : MonoBehaviour, IUI
     [SerializeField] private float _typeSpeed = 10f;
 
     private string _dialogueId;
-    private Queue<DialogueTextSO.Dialogue> _dialogues = new();
+    private Queue<Dialogue> _dialogues = new();
 
     private bool _endTalking = false;
     private bool _isTyping = false;
 
     private Coroutine _typeCoroutine;
-    private DialogueTextSO.Dialogue _d;
+    private Dialogue _d;
 
     private const string HTML_ALPHA = "<color=#00000000>";
     private const float MAX_TYPE_TIME = 0.1f;
@@ -33,12 +33,12 @@ public class DialogueUI : MonoBehaviour, IUI
 
     public void OpenUI()
     {
-        CanvasManager.instance.ActiveUI(UIs.DIALOGUE);
+        UIManager.instance.ActiveUI(UIs.DIALOGUE);
     }
 
     public void Exit()
     {
-        CanvasManager.instance.FreeUI();
+        UIManager.instance.FreeUI();
     }
 
     public void NextDialogue(DialogueTextSO dialogueText)
@@ -69,7 +69,7 @@ public class DialogueUI : MonoBehaviour, IUI
             FinishConversationEarly();
         }
 
-        // Check if we have dialogue
+        // Check if we have more dialogues
         if (_dialogues.Count == 0)
         {
             _endTalking = true;
@@ -91,7 +91,7 @@ public class DialogueUI : MonoBehaviour, IUI
         _speakerName.text = dialogueText.SpeakerName;
 
         // Enqueue dialogues
-        foreach (DialogueTextSO.Dialogue dialogue in dialogueText.Dialogues)
+        foreach (Dialogue dialogue in dialogueText.Dialogues)
         {
             _dialogues.Enqueue(dialogue);
         }
@@ -106,7 +106,7 @@ public class DialogueUI : MonoBehaviour, IUI
         _endTalking = false;
 
         // Propagate event
-        GameEventsManager.instance.dialogueEvents.FinishDialogue(_dialogueId);
+        GameEventsMediator.instance.dialogueEvents.FinishDialogue(_dialogueId);
 
         // Exit UI
         if (gameObject.activeSelf)
@@ -115,7 +115,7 @@ public class DialogueUI : MonoBehaviour, IUI
         }
     }
 
-    private IEnumerator TypeDialogue(DialogueTextSO.Dialogue dialogueText)
+    private IEnumerator TypeDialogue(Dialogue dialogueText)
     {
         _isTyping = true;
 
@@ -124,7 +124,6 @@ public class DialogueUI : MonoBehaviour, IUI
         _dialogueContent.text = "";
 
         string originalText = dialogueText.text;
-        string displayedText = "";
         int alphaIndex = 0;
 
         for (int i = 0; i < dialogueText.text.Length; i++)
@@ -132,8 +131,8 @@ public class DialogueUI : MonoBehaviour, IUI
             alphaIndex++;
             _dialogueContent.text = originalText;
 
-            displayedText = _dialogueContent.text.Insert(alphaIndex, HTML_ALPHA);
-            _dialogueContent.text = displayedText;
+            // Insert an ALPHA = 0 character to the left. This hides the rest of the text and simulates a real conversation
+            _dialogueContent.text = _dialogueContent.text.Insert(alphaIndex, HTML_ALPHA);
 
             yield return new WaitForSecondsRealtime(MAX_TYPE_TIME / _typeSpeed);
         }

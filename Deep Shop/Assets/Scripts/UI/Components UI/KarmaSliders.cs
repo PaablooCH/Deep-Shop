@@ -11,8 +11,8 @@ public class KarmaSliders : MonoBehaviour
 
     void Start()
     {
-        GameEventsManager.instance.inventoryEvent.onKarmaChanged += UpdateKarmaSliders;
-        _karma = InventoryManager.instance.Karma;
+        GameEventsMediator.instance.inventoryEvent.onKarmaChanged += UpdateKarmaSliders;
+        _karma = PlayerManager.instance.GetPlayerInventory().Karma;
     }
 
     private void UpdateKarmaSliders(float newKarma)
@@ -46,6 +46,6 @@ public class KarmaSliders : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameEventsManager.instance.inventoryEvent.onKarmaChanged -= UpdateKarmaSliders;
+        GameEventsMediator.instance.inventoryEvent.onKarmaChanged -= UpdateKarmaSliders;
     }
 }

@@ -8,8 +8,8 @@ public class UpdateCoinValue : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameEventsManager.instance.inventoryEvent.onMoneyChanged += UptadeQuantity;
-        _quantity.text = InventoryManager.instance.Money.ToString("0.00");
+        GameEventsMediator.instance.inventoryEvent.onMoneyChanged += UptadeQuantity;
+        _quantity.text = PlayerManager.instance.GetPlayerInventory().Money.ToString("0.00");
     }
 
     private void UptadeQuantity(float newQuantity)
@@ -19,6 +19,6 @@ public class UpdateCoinValue : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameEventsManager.instance.inventoryEvent.onMoneyChanged -= UptadeQuantity;
+        GameEventsMediator.instance.inventoryEvent.onMoneyChanged -= UptadeQuantity;
     }
 }

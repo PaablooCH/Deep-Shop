@@ -20,7 +20,7 @@ public class TradeUI : MonoBehaviour, IUIItem, IUIConfirmation, IUIReject
     public void OpenUI(Item item)
     {
             _actualItem = item;
-            CanvasManager.instance.ActiveUI(UIs.TRADE);
+            UIManager.instance.ActiveUI(UIs.TRADE);
 
             // Update Product Color
             Image image = transform.Find("Product Image").gameObject.GetComponent<Image>();
@@ -35,7 +35,7 @@ public class TradeUI : MonoBehaviour, IUIItem, IUIConfirmation, IUIReject
             text.text = _actualItem.ItemInfo.BuyPrice.ToString("0.0") + " G";
 
             // InputField init
-            int inventory = InventoryManager.instance.GetInventory(_actualItem.GetItemId());
+            int inventory = PlayerManager.instance.GetPlayerInventory().GetInventory(_actualItem.GetItemId());
             TMP_InputField tMP_InputField = _inputField.GetComponent<TMP_InputField>();
             tMP_InputField.text = inventory > 0 ? "1" : "0";
             InputNumberInteraction inputNumberInteraction = _inputField.GetComponent<InputNumberInteraction>();
@@ -45,7 +45,7 @@ public class TradeUI : MonoBehaviour, IUIItem, IUIConfirmation, IUIReject
 
     public void Exit()
     {
-        CanvasManager.instance.FreeUI();
+        UIManager.instance.FreeUI();
         _actualItem = null;
     }
 
@@ -53,16 +53,16 @@ public class TradeUI : MonoBehaviour, IUIItem, IUIConfirmation, IUIReject
     {
         TMP_InputField tMP_InputField = _inputField.GetComponent<TMP_InputField>();
         Slider tradeUISlider = _sliderAndText.transform.Find("Slider").gameObject.GetComponent<Slider>();
-        InventoryManager.instance.Trade(_actualItem, int.Parse(tMP_InputField.text), tradeUISlider.value);
+        PlayerManager.instance.GetPlayerInventory().Trade(_actualItem, int.Parse(tMP_InputField.text), tradeUISlider.value);
         _actualItem = null;
         _sellInteraction.EndInteraction();
-        CanvasManager.instance.FreeUI();
+        UIManager.instance.FreeUI();
     }
 
     public void Reject()
     {
-        InventoryManager.instance.Karma -= _actualItem.ItemInfo.Karma;
+        PlayerManager.instance.GetPlayerInventory().Karma -= _actualItem.ItemInfo.Karma;
         _sellInteraction.EndInteraction();
-        CanvasManager.instance.FreeUI();
+        UIManager.instance.FreeUI();
     }
 }

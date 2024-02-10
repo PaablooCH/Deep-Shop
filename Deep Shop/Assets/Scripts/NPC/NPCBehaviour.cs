@@ -14,22 +14,21 @@ public class NPCBehaviour : MonoBehaviour
 
     private float _timer = 2f;
     private NPCState _npcState = NPCState.NONE;
+
+    private Transform _positionExit;
     private Transform _travelPoint;
     
     private Rigidbody2D _rb;
     private Animator _animator;
 
     public Transform TravelPoint { get => _travelPoint; set => _travelPoint = value; }
-    public NPCState NpcState { get => _npcState; set => _npcState = value; }
 
-    // Start is called before the first frame update
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_travelPoint == null)
@@ -73,11 +72,19 @@ public class NPCBehaviour : MonoBehaviour
         }
     }
 
-    public void ExitStore(Transform outside)
+    public void SetPositions(Transform positionCorner, Transform positionStart, Transform positionExit)
     {
-        _travelPoint = outside;
+        _positionExit = positionExit;
+        transform.position = positionStart.position;
+        GoToPoint(positionCorner);
+    }
+
+    public void ExitStore()
+    {
+        _travelPoint = _positionExit;
         _npcState = NPCState.EXIT;
         GetComponent<BoxCollider2D>().enabled = false;
+        GameEventsMediator.instance.npcEvents.NPCExit(tag);
     }
 
     public void GoToPoint (Transform point)
@@ -88,6 +95,12 @@ public class NPCBehaviour : MonoBehaviour
 
     private void RequestTravelPoint()
     {
-        _travelPoint = CustomerManager.instance.NextPosition(_travelPoint);
+        _travelPoint = NextPosition(_travelPoint);
+    }
+
+    private Transform NextPosition(Transform currentPosition)
+    {
+        // TODO return a new position different from the current
+        return transform;
     }
 }

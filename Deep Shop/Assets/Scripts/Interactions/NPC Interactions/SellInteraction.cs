@@ -4,8 +4,8 @@ public class SellInteraction : PlayerNPCInteraction
 {
     public override void EndInteraction()
     {
+        _npc.GetComponent<NPCBehaviour>().ExitStore();
         base.EndInteraction();
-        CustomerManager.instance.ExitStore();
     }
 
     protected override void CheckNPC(GameObject npc)
@@ -18,7 +18,6 @@ public class SellInteraction : PlayerNPCInteraction
 
     public override void Interact()
     {
-        CanvasManager.instance.GetPanel(UIs.TRADE).GetComponent<TradeUI>()
-                .OpenUI(_npc.GetComponent<CustomerTastes>().ItemDesired);
+        UIManager.instance.OpenUI(UIs.TRADE, _npc.GetComponent<CustomerTastes>().ItemDesired);
     }
 }

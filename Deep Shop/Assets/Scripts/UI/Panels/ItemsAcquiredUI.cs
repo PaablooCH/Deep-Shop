@@ -22,7 +22,7 @@ public class ItemsAcquiredUI : MonoBehaviour, IUIGameObject, IUIConfirmation
         if (go.TryGetComponent(out PackageWithItems component))
         {
             _packagesWithItems = component;
-            CanvasManager.instance.ActiveUI(UIs.ITEM_ACQ);
+            UIManager.instance.ActiveUI(UIs.ITEM_ACQ);
             foreach (ItemQuantity productQuantity in _packagesWithItems.Package)
             {
                 _manageItemsAcquired.AddItem(productQuantity.Item.GetItemId());
@@ -37,9 +37,9 @@ public class ItemsAcquiredUI : MonoBehaviour, IUIGameObject, IUIConfirmation
         {
             foreach (ItemQuantity productQuantity in _packagesWithItems.PickPackages())
             {
-                InventoryManager.instance.ModifyInventory(productQuantity.Item.GetItemId(), productQuantity.Quantity);
+                PlayerManager.instance.GetPlayerInventory().ModifyInventory(productQuantity.Item.GetItemId(), productQuantity.Quantity);
             }
-            CanvasManager.instance.FreeUI();
+            UIManager.instance.FreeUI();
         }
     }
 }

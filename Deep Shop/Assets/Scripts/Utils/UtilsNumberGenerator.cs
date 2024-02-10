@@ -2,6 +2,7 @@ using UnityEngine;
 
 public static class UtilsNumberGenerator
 {
+    // Exponent: It affects how the weight is distributed among the values within the range.
     // WeightDirection > 0: generates a number with more probability in the lower numbers
     // WeightDirection < 0: generates a number with more probability in the upper numbers
     public static int GenerateNumberWithWeight(int minValor, int maxValor, int exponent, int weightDirection)

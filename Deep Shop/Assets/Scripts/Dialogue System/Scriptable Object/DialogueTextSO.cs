@@ -4,15 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Dialogue/New Dialogue Container")]
 public class DialogueTextSO : ScriptableObject
 {
-    [System.Serializable]
-    public class Dialogue
-    {
-        public Sprite sprite;
-
-        [TextArea(5, 10)]
-        public string text;
-    }
-
     [SerializeField, ReadOnly] private string _id = Guid.NewGuid().ToString();
     [SerializeField] private string _idDialogue;
 

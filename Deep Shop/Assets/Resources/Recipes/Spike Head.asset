@@ -15,10 +15,10 @@ MonoBehaviour:
   _id: 217d8ee7-b896-4323-b301-954890f922be
   _idRecipe: REC_2
   _nameRecipe: Spike Head
-  _productResult:
+  _itemResult:
     itemInfo: {fileID: 11400000, guid: db9385156fc1dac42856228d40e0361d, type: 2}
     quantity: 1
-  _productsNeeded:
+  _itemNeeded:
   - itemInfo: {fileID: 11400000, guid: 94e8fb13bab5f8842b371929429dae0c, type: 2}
     quantity: 1
   - itemInfo: {fileID: 11400000, guid: 05055280597a206438fdaf39f5911f99, type: 2}

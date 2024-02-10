@@ -15,7 +15,7 @@ public class QuestInfoSO : ScriptableObject
     [SerializeField] private DialogueTextSO _finishDialogueQuest;
 
     [Header("Requirements")]
-    [SerializeField] private int _karma;
+    [SerializeField] private float _karma;
     [SerializeField] private QuestInfoSO[] _questPrerequisites;
 
     [Header("Steps")]
@@ -30,7 +30,7 @@ public class QuestInfoSO : ScriptableObject
     public string NameQuest { get => _nameQuest; }
     public DialogueTextSO StartDialogueQuest { get => _startDialogueQuest; }
     public DialogueTextSO FinishDialogueQuest { get => _finishDialogueQuest; }
-    public int Karma { get => _karma; }
+    public float Karma { get => _karma; }
     public QuestInfoSO[] QuestPrerequisites { get => _questPrerequisites; }
     public GameObject[] Segments { get => _segments; }
     public ItemQuantitySerialized ProductReward { get => _productReward; }
@@ -43,74 +43,4 @@ public class QuestInfoSO : ScriptableObject
         UnityEditor.EditorUtility.SetDirty(this);
 #endif
     }
-
-    //[SerializeField] private int _id;
-    //[SerializeField] private string _name;
-    //[SerializeField] private string _description;
-    //[SerializeField] private int _karmaNeeded;
-    //[SerializeField] private QuestInfoSO _nextQuest;
-    //[SerializeField] private QuestInfoSO _previousQuest;
-    //[SerializeField] private int _productReward; // don't know if GameObject class is necessary
-    //[SerializeField] private int _moneyReward; // always positive
-    //[SerializeField] private QuestType _questType;
-
-    //// Type Deliver
-    //[SerializeField] private ProductQuantity _productToDeliver;
-    //[SerializeField] private int _whomToDeliver;
-
-    //// Type Craft
-    //[SerializeField] private ProductQuantity _productToCraft;
-
-    //public int Id { get => _id; set => _id = value; }
-    //public string Name { get => _name; set => _name = value; }
-    //public string Description { get => _description; set => _description = value; }
-    //public QuestType QuestType { get => _questType; set => _questType = value; }
-    //public QuestInfoSO NextQuest { get => _nextQuest; set => _nextQuest = value; }
-    //public QuestInfoSO PreviousQuest { get => _previousQuest; set => _previousQuest = value; }
-    //public int ProductReward { get => _productReward; set => _productReward = value; }
-    //public int MoneyReward { get => _moneyReward; set => _moneyReward = value; }
-    //public int KarmaNeeded { get => _karmaNeeded; set => _karmaNeeded = value; }
-
-    //public ProductQuantity ProductToDeliver { get => _productToDeliver; set => _productToDeliver = value; }
-    //public int WhomToDeliver { get => _whomToDeliver; set => _whomToDeliver = value; }
-
-    //public ProductQuantity ProductToCraft { get => _productToCraft; set => _productToCraft = value; }
 }
-
-//[CustomEditor(typeof(QuestInfoSO))]
-//public class QuestEditor : Editor
-//{
-//    public override void OnInspectorGUI()
-//    {
-//        QuestInfoSO quest = (QuestInfoSO)target;
-
-//        // Display main attributes
-//        EditorGUILayout.PropertyField(serializedObject.FindProperty("_id"));
-//        EditorGUILayout.PropertyField(serializedObject.FindProperty("_name"));
-//        EditorGUILayout.PropertyField(serializedObject.FindProperty("_description"));
-//        EditorGUILayout.PropertyField(serializedObject.FindProperty("_karmaNeeded"));
-//        EditorGUILayout.PropertyField(serializedObject.FindProperty("_nextQuest"));
-//        EditorGUILayout.PropertyField(serializedObject.FindProperty("_previousQuest"));
-//        EditorGUILayout.PropertyField(serializedObject.FindProperty("_productReward"));
-//        EditorGUILayout.PropertyField(serializedObject.FindProperty("_moneyReward"));
-
-//        // Display dropdown
-//        quest.QuestType = (QuestType)EditorGUILayout.EnumPopup("Quest Type", quest.QuestType);
-
-//        // Display conditional for DELIVER
-//        if (quest.QuestType == QuestType.DELIVER)
-//        {
-//            EditorGUILayout.PropertyField(serializedObject.FindProperty("_productToDeliver"), true);
-//            EditorGUILayout.PropertyField(serializedObject.FindProperty("_whomToDeliver"));
-//        }
-
-//        // Display conditional for CRAFT
-//        else if (quest.QuestType == QuestType.CRAFT)
-//        {
-//            EditorGUILayout.PropertyField(serializedObject.FindProperty("_productToCraft"), true);
-//        }
-
-//        // Apply modifications
-//        serializedObject.ApplyModifiedProperties();
-//    }
-//}

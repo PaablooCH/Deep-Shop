@@ -4,8 +4,8 @@ public class BuyInteraction : PlayerNPCInteraction
 {
     public override void EndInteraction()
     {
+        _npc.GetComponent<NPCBehaviour>().ExitStore();
         base.EndInteraction();
-        VendorManager.instance.ExitStore();
     }
 
     protected override void CheckNPC(GameObject npc)
@@ -18,6 +18,6 @@ public class BuyInteraction : PlayerNPCInteraction
 
     public override void Interact()
     {
-        CanvasManager.instance.GetPanel(UIs.SHOP).GetComponent<ShopUI>().OpenUI(_npc);
+        UIManager.instance.OpenUI(UIs.SHOP, _npc);
     }
 }

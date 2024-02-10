@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NPCQuest : NPC, IQuest, ITalkable
+public class NPCQuest : NPC, IQuestGiver, ITalkable
 {
     [Header("Quest")]
     [SerializeField] private QuestInfoSO _questInfo;
@@ -22,24 +22,24 @@ public class NPCQuest : NPC, IQuest, ITalkable
 
     private void OnEnable()
     {
-        GameEventsManager.instance.questEvents.onQuestStateChange += QuestStateChange;
+        GameEventsMediator.instance.questEvents.onQuestStateChange += QuestStateChange;
 
-        GameEventsManager.instance.dialogueEvents.onFinishDialogue += FinishDialogue;
+        GameEventsMediator.instance.dialogueEvents.onFinishDialogue += FinishDialogue;
     }
 
     private void OnDisable()
     {
-        GameEventsManager.instance.questEvents.onQuestStateChange -= QuestStateChange;
+        GameEventsMediator.instance.questEvents.onQuestStateChange -= QuestStateChange;
 
-        GameEventsManager.instance.dialogueEvents.onFinishDialogue -= FinishDialogue;
+        GameEventsMediator.instance.dialogueEvents.onFinishDialogue -= FinishDialogue;
     }
 
     public override void Interact()
     {
-       Quest(_questInfo);
+       QuestGiver(_questInfo);
     }
 
-    public void Quest(QuestInfoSO questInfo)
+    public void QuestGiver(QuestInfoSO questInfo)
     {
         if (CheckIfCanStart())
         {
@@ -51,7 +51,7 @@ public class NPCQuest : NPC, IQuest, ITalkable
             // If not start it directly
             else
             {
-                GameEventsManager.instance.questEvents.StartQuest(_questId);
+                GameEventsMediator.instance.questEvents.StartQuest(_questId);
             }
         }
         else if (CheckIfCanFinish())
@@ -64,14 +64,14 @@ public class NPCQuest : NPC, IQuest, ITalkable
             // If not end it directly
             else
             {
-                GameEventsManager.instance.questEvents.FinishQuest(_questId);
+                GameEventsMediator.instance.questEvents.FinishQuest(_questId);
             }
         }
     }
 
     public void Talk(DialogueTextSO dialogueText)
     {
-        CanvasManager.instance.GetPanel(UIs.DIALOGUE).GetComponent<DialogueUI>().NextDialogue(dialogueText);
+        UIManager.instance.GetPanel(UIs.DIALOGUE).GetComponent<DialogueUI>().NextDialogue(dialogueText);
     }
 
     private bool CheckIfCanStart()
@@ -97,12 +97,12 @@ public class NPCQuest : NPC, IQuest, ITalkable
     {
         if (CheckIfCanStart() && dialogueId == _questInfo.StartDialogueQuest?.Id)
         {
-            GameEventsManager.instance.questEvents.StartQuest(_questId);
+            GameEventsMediator.instance.questEvents.StartQuest(_questId);
         }
 
         else if (CheckIfCanFinish() && dialogueId == _questInfo.FinishDialogueQuest?.Id)
         {
-            GameEventsManager.instance.questEvents.FinishQuest(_questId);
+            GameEventsMediator.instance.questEvents.FinishQuest(_questId);
         }
     }
 }

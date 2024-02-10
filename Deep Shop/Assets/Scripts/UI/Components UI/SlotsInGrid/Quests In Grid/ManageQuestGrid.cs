@@ -5,13 +5,13 @@ public class ManageQuestGrid : ManageSlotsInGrid
 {
     private void Start()
     {
-        GameEventsManager.instance.questEvents.onQuestStateChange += StartQuestInProgress;
-        GameEventsManager.instance.questEvents.onFinishQuest += FinishQuest;
+        GameEventsMediator.instance.questEvents.onQuestStateChange += InstantiateQuestInChange;
+        GameEventsMediator.instance.questEvents.onFinishQuest += FinishQuest;
     }
     private void OnDestroy()
     {
-        GameEventsManager.instance.questEvents.onQuestStateChange -= StartQuestInProgress;
-        GameEventsManager.instance.questEvents.onFinishQuest -= FinishQuest;
+        GameEventsMediator.instance.questEvents.onQuestStateChange -= InstantiateQuestInChange;
+        GameEventsMediator.instance.questEvents.onFinishQuest -= FinishQuest;
     }
 
     public override GameObject AddItem(string newQuestId)
@@ -41,7 +41,7 @@ public class ManageQuestGrid : ManageSlotsInGrid
         return _productsInGrid[newQuestId];
     }
 
-    private void StartQuestInProgress(Quest quest)
+    private void InstantiateQuestInChange(Quest quest)
     {
         string idQuest = quest.QuestInfo.IdQuest;
 

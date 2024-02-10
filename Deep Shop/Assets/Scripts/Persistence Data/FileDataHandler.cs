@@ -87,6 +87,7 @@ public class FileDataHandler
         }
     }
 
+    // Encrypt using a XOR encryption
     private string EncryptDecrypt(string data)
     {
         string modifiedData = "";

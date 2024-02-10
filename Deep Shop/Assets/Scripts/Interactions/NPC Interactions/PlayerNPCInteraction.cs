@@ -4,11 +4,11 @@ using UnityEngine;
 public abstract class PlayerNPCInteraction : MonoBehaviour, IInteractable
 {
     protected GameObject _npc = null;
-    protected bool _isPlayer = false;
+    protected bool _isPlayerPresent = false;
 
     private void Update()
     {
-        if (_isPlayer && _npc && Input.GetKeyDown(KeyCode.E))
+        if (_isPlayerPresent && _npc && Input.GetKeyDown(KeyCode.E))
         {
             Interact();
         }
@@ -27,7 +27,7 @@ public abstract class PlayerNPCInteraction : MonoBehaviour, IInteractable
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            _isPlayer = true;
+            _isPlayerPresent = true;
         }
         else
         {
@@ -43,7 +43,7 @@ public abstract class PlayerNPCInteraction : MonoBehaviour, IInteractable
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
-            _isPlayer = false;
+            _isPlayerPresent = false;
         }
     }
 }

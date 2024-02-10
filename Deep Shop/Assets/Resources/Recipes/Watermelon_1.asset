@@ -15,12 +15,12 @@ MonoBehaviour:
   _id: 260995aa-3788-46d5-a7f5-613f16c137d9
   _idRecipe: REC_1
   _nameRecipe: Watermelon_1
-  _productResult:
+  _itemResult:
     itemInfo: {fileID: 11400000, guid: 722e2c39185c663429600e213e2b85f9, type: 2}
     quantity: 1
-  _productsNeeded:
+  _itemNeeded:
   - itemInfo: {fileID: 11400000, guid: 36330399a34a9f948bf0a84741d534c7, type: 2}
-    quantity: 1
+    quantity: 2
   - itemInfo: {fileID: 11400000, guid: e622ff757f1d13e4abf35b3207b7c7d4, type: 2}
     quantity: 1
   _money: 50

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8776437288388445163}
   - component: {fileID: 995324468362443190}
   m_Layer: 0
-  m_Name: Chest Closed
+  m_Name: Sprite Closed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6014362677717273055}
   - component: {fileID: 7410156505110883831}
   m_Layer: 0
-  m_Name: Chest Empty
+  m_Name: Sprite Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 8207950201319142106}
   - component: {fileID: 994982905230793988}
   m_Layer: 0
-  m_Name: Chest Opened
+  m_Name: Sprite Opened
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -345,6 +345,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3199ef86e92304f8facbd54edcba03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chestOpened: {fileID: 994982905230793988}
-  _chestClosed: {fileID: 995324468362443190}
-  _chestEmpty: {fileID: 7410156505110883831}
+  _spriteOpened: {fileID: 994982905230793988}
+  _spriteClosed: {fileID: 995324468362443190}
+  _spriteEmpty: {fileID: 7410156505110883831}

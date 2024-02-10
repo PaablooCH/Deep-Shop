@@ -12,6 +12,6 @@ public class NPCTalk : NPC, ITalkable
     public void Talk(DialogueTextSO dialogueText)
     {
         // Start conversation
-        CanvasManager.instance.GetPanel(UIs.DIALOGUE).GetComponent<DialogueUI>().NextDialogue(dialogueText);
+        UIManager.instance.GetPanel(UIs.DIALOGUE).GetComponent<DialogueUI>().NextDialogue(dialogueText);
     }
 }
