@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 323561879161462191}
   - component: {fileID: 3732592051232810399}
   m_Layer: 5
-  m_Name: Craft Quest Tooltip Slot
+  m_Name: Quest Tooltip Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -428,6 +428,7 @@
 "Assets/Scripts/Quest System/Quests Segments/CraftItemQuest.cs"
 "Assets/Scripts/Quest System/Quests Segments/QuestSegment.cs"
 "Assets/Scripts/Quest System/Quests Segments/QuestSegmentState.cs"
+"Assets/Scripts/Quest System/Quests Segments/VisitPlaceQuest.cs"
 "Assets/Scripts/Quest System/Scriptable Object/QuestInfoSO.cs"
 "Assets/Scripts/Spawns/CustomerSpawn.cs"
 "Assets/Scripts/Spawns/VendorSpawn.cs"
