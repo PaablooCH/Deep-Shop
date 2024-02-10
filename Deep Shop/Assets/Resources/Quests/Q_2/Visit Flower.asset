@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Visit Flower
   m_EditorClassIdentifier: 
   _id: 96b3d038-bb2c-4755-b4a8-0ab65f084527
-  _idQuest: 
+  _idQuest: Q_2
   _nameQuest: Visit Flower
-  _startDialogueQuest: {fileID: 0}
-  _finishDialogueQuest: {fileID: 0}
+  _startDialogueQuest: {fileID: 11400000, guid: 7b5a4cfce0445ae47a5b2bac30e260d9, type: 2}
+  _finishDialogueQuest: {fileID: 11400000, guid: 4d45728aeacee3d448a803f46ff581de, type: 2}
   _karma: 0
   _questPrerequisites:
   - {fileID: 11400000, guid: f29915314c96eac41af6e5670f322e2b, type: 2}

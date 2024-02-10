@@ -5,6 +5,10 @@ using TMPro;
 [RequireComponent(typeof(CircleCollider2D))]
 public class VisitPlaceQuest : QuestSegment
 {
+#pragma warning disable 0414
+    [SerializeField, ReadOnly] private string remember = "Position the Gameobject's position where you want the quest to occur";
+#pragma warning restore 0414
+
     [SerializeField] private Sprite _placeToVisitSprite;
 
     void Start()
@@ -26,7 +30,7 @@ public class VisitPlaceQuest : QuestSegment
         itemImage.sprite = _placeToVisitSprite;
 
         TextMeshProUGUI craftText = _questTooltipPrefab.GetComponentInChildren<TextMeshProUGUI>();
-        craftText.text = "Go to this place.";
+        craftText.text = "Visit this place.";
 
         GameEventsMediator.instance.questEvents.UpdateQuestTooltip(_questId, _questTooltipPrefab);
     }
