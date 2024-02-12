@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85253890b30a3184d97343386c135413, type: 3}
+  m_Name: "Mar\xEDa Dialogue"
+  m_EditorClassIdentifier: 
+  _id: a27a03ed-312c-4e75-b988-0525ad495b2a
+  _idDialogue: D_1
+  _speakerName: "Mar\xEDa"
+  _dialogues:
+  - sprite: {fileID: 21300002, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
+    text: "Hi my name is Mar\xEDa :)"
+  - sprite: {fileID: 21300004, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
+    text: Nice to meet you.

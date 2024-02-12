@@ -17,4 +17,5 @@ MonoBehaviour:
   _speakerName: Lola
   _dialogues:
   - sprite: {fileID: 21300002, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
-    text: I need your help, pls craft a watermelon.
+    text: I need your help, pls craft 2 watermelons and 1 head spyke and deliver
+      them to Ana

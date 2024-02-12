@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1231082009245011125}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.05, y: -0.32, z: 0}
+  m_LocalPosition: {x: -8.4, y: 8.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -67,7 +67,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.3
 --- !u!114 &708498111576922284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,4 +82,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _description: Go to see the flowers
   _questTooltipPrefab: {fileID: 8838869018672325813, guid: e508fa91e15800b4ea30b5d82b7dce04, type: 3}
+  remember: Position the Gameobject's position where you want the quest to occur
   _placeToVisitSprite: {fileID: -3803466081661082397, guid: 20d6cce5c7ac33b4e97f0f98a09aa347, type: 3}

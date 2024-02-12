@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sliderAndText: {fileID: 2468019177948177262}
-  _inputField: {fileID: 1593700566949953639}
+  _inputField: {fileID: 6713065124207551990}
   _sellInteraction: {fileID: 0}
 --- !u!1 &7398294571387692212
 GameObject:
@@ -1344,11 +1344,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8663e29ebddd0348974469ea0a41fbe, type: 3}
---- !u!1 &1593700566949953639 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5249481109415051805, guid: c8663e29ebddd0348974469ea0a41fbe, type: 3}
-  m_PrefabInstance: {fileID: 6828602147574825594}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5825942558853316336 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1017240234706009226, guid: c8663e29ebddd0348974469ea0a41fbe, type: 3}
@@ -1359,7 +1354,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 283032231002154892, guid: c8663e29ebddd0348974469ea0a41fbe, type: 3}
   m_PrefabInstance: {fileID: 6828602147574825594}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593700566949953639}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}

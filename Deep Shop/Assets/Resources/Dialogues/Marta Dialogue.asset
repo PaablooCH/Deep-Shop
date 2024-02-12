@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85253890b30a3184d97343386c135413, type: 3}
+  m_Name: Marta Dialogue
+  m_EditorClassIdentifier: 
+  _id: eab875d6-c2c9-4731-a75b-bff0ef0d4c3f
+  _idDialogue: D_7
+  _speakerName: Marta
+  _dialogues:
+  - sprite: {fileID: 21300006, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
+    text: Green, green, green, green, green, green, green, green.

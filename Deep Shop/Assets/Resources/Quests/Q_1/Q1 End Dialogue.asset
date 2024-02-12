@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 03a6368f-5a5a-4031-bb7f-3d948be5572b
   _idDialogue: D_3
-  _speakerName: Joana
+  _speakerName: Ana
   _dialogues:
   - sprite: {fileID: 21300006, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
-    text: JAJAJAJAJAJAJJAJAJAJAJJAJA
+    text: Thank you for your work.

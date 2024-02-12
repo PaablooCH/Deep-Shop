@@ -6,7 +6,7 @@ public class TradeUI : MonoBehaviour, IUIItem, IUIConfirmation, IUIReject
 {
     // UI elements
     [SerializeField] private GameObject _sliderAndText;
-    [SerializeField] private GameObject _inputField;
+    [SerializeField] private TMP_InputField _inputField;
 
     [SerializeField] private SellInteraction _sellInteraction;
 
@@ -36,8 +36,7 @@ public class TradeUI : MonoBehaviour, IUIItem, IUIConfirmation, IUIReject
 
             // InputField init
             int inventory = PlayerManager.instance.GetPlayerInventory().GetInventory(_actualItem.GetItemId());
-            TMP_InputField tMP_InputField = _inputField.GetComponent<TMP_InputField>();
-            tMP_InputField.text = inventory > 0 ? "1" : "0";
+            _inputField.text = inventory > 0 ? "1" : "0";
             InputNumberInteraction inputNumberInteraction = _inputField.GetComponent<InputNumberInteraction>();
             inputNumberInteraction.UpperLimit = inventory;
             inputNumberInteraction.LowerLimit = 0;
@@ -51,9 +50,8 @@ public class TradeUI : MonoBehaviour, IUIItem, IUIConfirmation, IUIReject
 
     public void Confirm()
     {
-        TMP_InputField tMP_InputField = _inputField.GetComponent<TMP_InputField>();
         Slider tradeUISlider = _sliderAndText.transform.Find("Slider").gameObject.GetComponent<Slider>();
-        PlayerManager.instance.GetPlayerInventory().Trade(_actualItem, int.Parse(tMP_InputField.text), tradeUISlider.value);
+        PlayerManager.instance.GetPlayerInventory().Trade(_actualItem, int.Parse(_inputField.text), tradeUISlider.value);
         _actualItem = null;
         _sellInteraction.EndInteraction();
         UIManager.instance.FreeUI();
