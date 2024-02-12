@@ -439,6 +439,7 @@
 "Assets/Scripts/UI/Components UI/InputNumberInteraction.cs"
 "Assets/Scripts/UI/Components UI/KarmaSliders.cs"
 "Assets/Scripts/UI/Components UI/MenuTab.cs"
+"Assets/Scripts/UI/Components UI/QuitGameUI.cs"
 "Assets/Scripts/UI/Components UI/SliderChange.cs"
 "Assets/Scripts/UI/Components UI/SlotsInGrid/ManageSlotsInGrid.cs"
 "Assets/Scripts/UI/Components UI/SlotsInGrid/Products In Grid/Craft/CraftAction.cs"
