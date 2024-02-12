@@ -1,4 +1,6 @@
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 public class QuitGameUI : MonoBehaviour
@@ -10,13 +12,10 @@ public class QuitGameUI : MonoBehaviour
 
     public void Quit()
     {
-        if (Application.isEditor)
-        {
-            EditorApplication.ExitPlaymode();
-        }
-        else
-        {
-            Application.Quit();
-        }
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
     }
 }
