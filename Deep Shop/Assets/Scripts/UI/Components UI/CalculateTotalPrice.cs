@@ -13,15 +13,18 @@ public class CalculateTotalPrice : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (float.TryParse(_inputField.text, out float inputValue))
-        {
-            float price = _slider.value * inputValue;
-            _priceText.text = price.ToString("0.0") + " G";
-        }
-        else
-        {
-            _priceText.text = "";
-            Debug.LogWarning("Wrong value in input field");
-        }
+        //if (float.TryParse(_inputField.text, out float inputValue))
+        //{
+        //    float price = _slider.value * inputValue;
+        //    _priceText.text = price.ToString("0.0") + " G";
+        //}
+        //else
+        //{
+        //    _priceText.text = "";
+        //    Debug.LogWarning("Wrong value in input field");
+        //}
+        
+        float price = _slider.value;
+        _priceText.text = price.ToString("0.0") + " G";
     }
 }

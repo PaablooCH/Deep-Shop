@@ -61766,17 +61766,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7510318180422581597, guid: 9129c7ba4173249448a7eb761b52ecaf, type: 3}
   m_PrefabInstance: {fileID: 1697060573}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1718095840 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6713065124207551990, guid: fa71c1519cafedd448bd00fa6d4886dc, type: 3}
-  m_PrefabInstance: {fileID: 4730013029287479319}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1724726502 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8278598382310713888, guid: ff9630fa7a06de04384976679f8f72bd, type: 3}
@@ -62832,7 +62821,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2130280213762330588
 Transform:
   m_ObjectHideFlags: 0
@@ -63036,7 +63025,7 @@ PrefabInstance:
     - target: {fileID: 1867029886786460630, guid: fa71c1519cafedd448bd00fa6d4886dc, type: 3}
       propertyPath: _inputField
       value: 
-      objectReference: {fileID: 1718095840}
+      objectReference: {fileID: 0}
     - target: {fileID: 4026241452662621434, guid: fa71c1519cafedd448bd00fa6d4886dc, type: 3}
       propertyPath: m_Name
       value: Trade UI
@@ -63052,7 +63041,7 @@ PrefabInstance:
     - target: {fileID: 4486144902727591531, guid: fa71c1519cafedd448bd00fa6d4886dc, type: 3}
       propertyPath: _inputField
       value: 
-      objectReference: {fileID: 1718095840}
+      objectReference: {fileID: 0}
     - target: {fileID: 4486144902727591531, guid: fa71c1519cafedd448bd00fa6d4886dc, type: 3}
       propertyPath: _sellInteraction
       value: 

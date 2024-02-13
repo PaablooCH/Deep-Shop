@@ -35,11 +35,11 @@ public class TradeUI : MonoBehaviour, IUIItem, IUIConfirmation, IUIReject
             text.text = _actualItem.ItemInfo.BuyPrice.ToString("0.0") + " G";
 
             // InputField init
-            int inventory = PlayerManager.instance.GetPlayerInventory().GetInventory(_actualItem.GetItemId());
-            _inputField.text = inventory > 0 ? "1" : "0";
-            InputNumberInteraction inputNumberInteraction = _inputField.GetComponent<InputNumberInteraction>();
-            inputNumberInteraction.UpperLimit = inventory;
-            inputNumberInteraction.LowerLimit = 0;
+            //int inventory = PlayerManager.instance.GetPlayerInventory().GetInventory(_actualItem.GetItemId());
+            //_inputField.text = inventory > 0 ? "1" : "0";
+            //InputNumberInteraction inputNumberInteraction = _inputField.GetComponent<InputNumberInteraction>();
+            //inputNumberInteraction.UpperLimit = inventory;
+            //inputNumberInteraction.LowerLimit = 0;
     }
 
     public void Exit()
@@ -51,7 +51,8 @@ public class TradeUI : MonoBehaviour, IUIItem, IUIConfirmation, IUIReject
     public void Confirm()
     {
         Slider tradeUISlider = _sliderAndText.transform.Find("Slider").gameObject.GetComponent<Slider>();
-        PlayerManager.instance.GetPlayerInventory().Trade(_actualItem, int.Parse(_inputField.text), tradeUISlider.value);
+        //PlayerManager.instance.GetPlayerInventory().Trade(_actualItem, int.Parse(_inputField.text), tradeUISlider.value);
+        PlayerManager.instance.GetPlayerInventory().Trade(_actualItem, 1, tradeUISlider.value);
         _actualItem = null;
         _sellInteraction.EndInteraction();
         UIManager.instance.FreeUI();
