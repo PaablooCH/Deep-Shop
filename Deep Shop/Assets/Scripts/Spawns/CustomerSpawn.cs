@@ -63,19 +63,9 @@ public class CustomerSpawn : MonoBehaviour
         _customers.Enqueue(go);
 
         // If we only have 1 customer send him to the shop
-        if (_customers.Count == 1)
-        {
-            NPCBehaviour npcBehaviour = go.GetComponent<NPCBehaviour>();
-            if (npcBehaviour)
-            {
-                npcBehaviour.SetPositions(_positionCorner, _positionStart, _positionExit);
-            }
-            else
-            {
-                Debug.LogWarning("NPCBehaviour doesn't exist in the gameObject");
-            }
-        }
-        else
+        NPCBehaviour npcBehaviour = go.GetComponent<NPCBehaviour>();
+        npcBehaviour.SetPositions(_positionCorner, _positionStart, _positionExit);
+        if (_customers.Count != 1)
         {
             go.SetActive(false);
         }
