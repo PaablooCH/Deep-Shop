@@ -42,7 +42,7 @@ public class ShopUI : MonoBehaviour, IUIGameObject, IUIConfirmation, IUIReject
                                                                                       // this class
 
                 _manageShopGrid.ModifyQuantity(idItem, vendorProduct.Quantity);
-                _manageShopGrid.ModifyPrice(idItem, vendorProduct.Item.ItemInfo.BuyPrice);
+                _manageShopGrid.ModifyPrice(idItem, vendorProduct.Quantity * vendorProduct.Item.ItemInfo.BuyPrice);
             }
         }
     }
@@ -80,7 +80,8 @@ public class ShopUI : MonoBehaviour, IUIGameObject, IUIConfirmation, IUIReject
     {
         if (!_cart.Contains(idItem))
         {
-            _moneyInCart += ItemsManager.instance.GetItemByID(idItem).ItemInfo.BuyPrice;
+            _moneyInCart += ItemsManager.instance.GetItemByID(idItem).ItemInfo.BuyPrice * 
+                _actualVendorProducts.SearchVendorProduct(idItem).Quantity;
             UpdateCostDependencies();
             _cart.Add(idItem);
             if (_button.interactable == false)

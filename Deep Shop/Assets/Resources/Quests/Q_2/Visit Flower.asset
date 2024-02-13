@@ -17,7 +17,7 @@ MonoBehaviour:
   _nameQuest: Visit Flower
   _startDialogueQuest: {fileID: 11400000, guid: 7b5a4cfce0445ae47a5b2bac30e260d9, type: 2}
   _finishDialogueQuest: {fileID: 11400000, guid: 4d45728aeacee3d448a803f46ff581de, type: 2}
-  _karma: 0
+  _karma: 1
   _questPrerequisites:
   - {fileID: 11400000, guid: f29915314c96eac41af6e5670f322e2b, type: 2}
   _segments:

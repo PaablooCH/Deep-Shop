@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5219c94352a2ffd428af3546f604bea0, type: 3}
-  m_Name: Craft Watermelon
+  m_Name: Craft some items
   m_EditorClassIdentifier: 
   _id: 3d0076d8-1266-4fb5-a7e9-ca3e4c2a1969
   _idQuest: Q_1
-  _nameQuest: Craft Watermelon
+  _nameQuest: Craft some items
   _startDialogueQuest: {fileID: 11400000, guid: 2f70916d4941fd3489a55e29653ae8cc, type: 2}
   _finishDialogueQuest: {fileID: 11400000, guid: 3cbebdda5e45b6243b790c0946ff503f, type: 2}
   _karma: 0

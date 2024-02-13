@@ -67,7 +67,7 @@ public class CraftUI : MonoBehaviour
             moneyNeeded.SetActive(false);
 
             moneyNeeded.transform.Find("Product Image").GetComponent<Image>().sprite =
-                UtilsLoadResource.LoadSprite("Sprites/coin");
+                UtilsLoadResource.LoadSprite("Sprites/Icons/Inventory/coin");
 
             TextMeshProUGUI textMeshPro = moneyNeeded.transform.Find("Text").GetComponent<TextMeshProUGUI>();
             textMeshPro.text = recipe.RecipeInfo.Money + " G";
