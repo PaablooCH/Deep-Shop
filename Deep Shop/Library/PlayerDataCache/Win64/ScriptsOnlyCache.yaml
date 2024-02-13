@@ -104,8 +104,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -175,15 +177,6 @@ ScriptsOnlyBuild:
     fullTypeName: ItemsAcquiredUI
     methodName: Confirm
   - assembly: Assembly-CSharp
-    fullTypeName: ShopUI
-    methodName: Reject
-  - assembly: Assembly-CSharp
-    fullTypeName: ShopUI
-    methodName: Confirm
-  - assembly: Assembly-CSharp
-    fullTypeName: ShopUI
-    methodName: Exit
-  - assembly: Assembly-CSharp
     fullTypeName: TradeUI
     methodName: Exit
   - assembly: Assembly-CSharp
@@ -208,14 +201,23 @@ ScriptsOnlyBuild:
     fullTypeName: QuitGameUI
     methodName: Quit
   - assembly: Assembly-CSharp
+    fullTypeName: ShopUI
+    methodName: Reject
+  - assembly: Assembly-CSharp
+    fullTypeName: ShopUI
+    methodName: Confirm
+  - assembly: Assembly-CSharp
+    fullTypeName: ShopUI
+    methodName: Exit
+  - assembly: Assembly-CSharp
+    fullTypeName: CraftAction
+    methodName: ClickButtonCraft
+  - assembly: Assembly-CSharp
     fullTypeName: SelectedShopItem
     methodName: ModifyCart
   - assembly: Assembly-CSharp
     fullTypeName: TurnOnOffComponent
     methodName: SwitchComponent
-  - assembly: Assembly-CSharp
-    fullTypeName: CraftAction
-    methodName: ClickButtonCraft
   sceneClasses:
     Assets/Scenes/Deep Shop.unity:
     - Class: 1
@@ -305,109 +307,109 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2990}
     - Class: 114
-      Script: {instanceID: 3058}
+      Script: {instanceID: 3014}
     - Class: 114
-      Script: {instanceID: 3066}
+      Script: {instanceID: 3060}
     - Class: 114
-      Script: {instanceID: 3092}
+      Script: {instanceID: 3068}
     - Class: 114
-      Script: {instanceID: 3124}
+      Script: {instanceID: 3094}
     - Class: 114
-      Script: {instanceID: 3150}
+      Script: {instanceID: 3126}
     - Class: 114
-      Script: {instanceID: 3236}
+      Script: {instanceID: 3152}
     - Class: 114
-      Script: {instanceID: 3578}
+      Script: {instanceID: 3238}
     - Class: 114
-      Script: {instanceID: 3602}
+      Script: {instanceID: 3360}
     - Class: 114
-      Script: {instanceID: 3812}
+      Script: {instanceID: 3582}
     - Class: 114
-      Script: {instanceID: 4068}
+      Script: {instanceID: 3606}
     - Class: 114
-      Script: {instanceID: 4104}
+      Script: {instanceID: 3816}
     - Class: 114
-      Script: {instanceID: 4578}
+      Script: {instanceID: 4072}
     - Class: 114
-      Script: {instanceID: 4610}
+      Script: {instanceID: 4108}
     - Class: 114
-      Script: {instanceID: 4740}
+      Script: {instanceID: 4582}
     - Class: 114
-      Script: {instanceID: 4774}
+      Script: {instanceID: 4614}
     - Class: 114
-      Script: {instanceID: 4880}
+      Script: {instanceID: 4744}
     - Class: 114
-      Script: {instanceID: 5074}
+      Script: {instanceID: 4778}
     - Class: 114
-      Script: {instanceID: 5114}
+      Script: {instanceID: 4884}
     - Class: 114
-      Script: {instanceID: 5204}
+      Script: {instanceID: 5078}
     - Class: 114
-      Script: {instanceID: 5506}
+      Script: {instanceID: 5118}
     - Class: 114
-      Script: {instanceID: 6094}
+      Script: {instanceID: 5208}
     - Class: 114
-      Script: {instanceID: 6140}
+      Script: {instanceID: 5510}
     - Class: 114
-      Script: {instanceID: 6242}
+      Script: {instanceID: 6098}
     - Class: 114
-      Script: {instanceID: 6412}
+      Script: {instanceID: 6144}
     - Class: 114
-      Script: {instanceID: 6646}
+      Script: {instanceID: 6246}
     - Class: 114
-      Script: {instanceID: 6842}
+      Script: {instanceID: 6416}
     - Class: 114
-      Script: {instanceID: 7056}
+      Script: {instanceID: 6650}
     - Class: 114
-      Script: {instanceID: 7264}
+      Script: {instanceID: 6846}
     - Class: 114
-      Script: {instanceID: 7436}
+      Script: {instanceID: 7060}
     - Class: 114
-      Script: {instanceID: 7464}
+      Script: {instanceID: 7268}
     - Class: 114
-      Script: {instanceID: 7474}
+      Script: {instanceID: 7440}
     - Class: 114
-      Script: {instanceID: 7626}
+      Script: {instanceID: 7468}
     - Class: 114
-      Script: {instanceID: 7882}
+      Script: {instanceID: 7478}
     - Class: 114
-      Script: {instanceID: 7996}
+      Script: {instanceID: 7630}
     - Class: 114
-      Script: {instanceID: 8064}
+      Script: {instanceID: 7886}
     - Class: 114
-      Script: {instanceID: 8210}
+      Script: {instanceID: 8000}
     - Class: 114
-      Script: {instanceID: 8294}
+      Script: {instanceID: 8068}
     - Class: 114
-      Script: {instanceID: 8388}
+      Script: {instanceID: 8214}
     - Class: 114
-      Script: {instanceID: 8458}
+      Script: {instanceID: 8298}
     - Class: 114
-      Script: {instanceID: 8490}
+      Script: {instanceID: 8392}
     - Class: 114
-      Script: {instanceID: 8576}
+      Script: {instanceID: 8462}
     - Class: 114
-      Script: {instanceID: 8750}
+      Script: {instanceID: 8494}
     - Class: 114
-      Script: {instanceID: 8788}
+      Script: {instanceID: 8580}
     - Class: 114
-      Script: {instanceID: 8824}
+      Script: {instanceID: 8754}
     - Class: 114
-      Script: {instanceID: 9198}
+      Script: {instanceID: 8792}
     - Class: 114
-      Script: {instanceID: 9218}
+      Script: {instanceID: 8828}
     - Class: 114
-      Script: {instanceID: 9394}
+      Script: {instanceID: 9202}
     - Class: 114
-      Script: {instanceID: 9400}
+      Script: {instanceID: 9222}
     - Class: 114
-      Script: {instanceID: 9494}
+      Script: {instanceID: 9398}
     - Class: 114
-      Script: {instanceID: 9750}
+      Script: {instanceID: 9404}
     - Class: 114
-      Script: {instanceID: 9860}
+      Script: {instanceID: 9498}
     - Class: 114
-      Script: {instanceID: 9864}
+      Script: {instanceID: 9754}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -743,6 +745,12 @@ ScriptsOnlyBuild:
     className: UnityOnCollisionEnterMessageListener
   - hash:
       serializedVersion: 2
+      Hash: e44eb5151bcc643d91d722bd1fd12897
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: TradeUI
+  - hash:
+      serializedVersion: 2
       Hash: 7e12302f66e3c8ed5bcfea4ce65fccea
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -849,6 +857,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
     className: TestResultRendererCallback
+  - hash:
+      serializedVersion: 2
+      Hash: 606981511141f43ee73b1e893af4f3cd
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: CalculateTotalPrice
   - hash:
       serializedVersion: 2
       Hash: b98001682cba83786775c9e415b89a61
@@ -1959,18 +1973,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: e44eb5151bcc643d91d722bd1fd12897
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: TradeUI
-  - hash:
-      serializedVersion: 2
-      Hash: 606981511141f43ee73b1e893af4f3cd
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: CalculateTotalPrice
   platform: 19
   scenePathNames:
   - Assets/Scenes/Deep Shop.unity
